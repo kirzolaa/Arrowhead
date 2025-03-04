@@ -1,0 +1,258 @@
+\section{Usage Examples}
+
+This section provides examples of how to use the Generalized Orthogonal Vectors Generator and Visualizer package. It includes examples of using the package as a Python module and as a command-line tool.
+
+\subsection{Basic Usage as a Python Module}
+
+The following example shows how to use the package as a Python module to generate and visualize orthogonal vectors with default parameters:
+
+\begin{lstlisting}[language=Python]
+import numpy as np
+from generalized import create_orthogonal_vectors, plot_vectors
+
+# Generate orthogonal vectors with default parameters
+# (origin at [0, 0, 0], d=1.0, theta=pi/4)
+vectors = create_orthogonal_vectors(origin=[0, 0, 0])
+
+# Plot the vectors in 3D
+plot_vectors(vectors, origin=[0, 0, 0])
+\end{lstlisting}
+
+\subsection{Customizing Vector Generation}
+
+The following example shows how to customize the vector generation by specifying the origin, distance parameter, and angle parameter:
+
+\begin{lstlisting}[language=Python]
+import numpy as np
+import math
+from generalized import create_orthogonal_vectors, plot_vectors
+
+# Generate orthogonal vectors with custom parameters
+origin = [1, 1, 1]
+d = 2.0
+theta = math.pi / 3
+
+vectors = create_orthogonal_vectors(origin=origin, d=d, theta=theta)
+
+# Plot the vectors in 3D
+plot_vectors(vectors, origin=origin, title=f"Orthogonal Vectors (Origin={origin}, d={d}, theta={theta})")
+\end{lstlisting}
+
+\subsection{Using the VectorConfig Class}
+
+The following example shows how to use the \texttt{VectorConfig} class to configure vector generation and visualization:
+
+\begin{lstlisting}[language=Python]
+import numpy as np
+import math
+from generalized import create_orthogonal_vectors, plot_vectors, VectorConfig
+
+# Create a configuration
+config = VectorConfig(
+    origin=[0, 0, 2],
+    d=1.5,
+    theta=math.pi / 6,
+    plot_type="2d",
+    title="Custom Configuration",
+    save_path="custom_config.png"
+)
+
+# Generate orthogonal vectors using the configuration
+vectors = create_orthogonal_vectors(
+    origin=config.origin,
+    d=config.d,
+    theta=config.theta
+)
+
+# Plot the vectors using the configuration
+plot_vectors(
+    vectors,
+    origin=config.origin,
+    plot_type=config.plot_type,
+    title=config.title,
+    show_plot=config.show_plot,
+    save_path=config.save_path
+)
+\end{lstlisting}
+
+\subsection{Saving and Loading Configurations}
+
+The following example shows how to save a configuration to a file and load it later:
+
+\begin{lstlisting}[language=Python]
+import numpy as np
+import math
+from generalized import VectorConfig, create_orthogonal_vectors, plot_vectors
+
+# Create a configuration
+config = VectorConfig(
+    origin=[0, 0, 2],
+    d=1.5,
+    theta=math.pi / 6,
+    plot_type="2d",
+    title="Custom Configuration"
+)
+
+# Save the configuration to a file
+config.save_to_file("config.json")
+
+# Later, load the configuration from the file
+loaded_config = VectorConfig.load_from_file("config.json")
+
+# Generate orthogonal vectors using the loaded configuration
+vectors = create_orthogonal_vectors(
+    origin=loaded_config.origin,
+    d=loaded_config.d,
+    theta=loaded_config.theta
+)
+
+# Plot the vectors using the loaded configuration
+plot_vectors(
+    vectors,
+    origin=loaded_config.origin,
+    plot_type=loaded_config.plot_type,
+    title=loaded_config.title,
+    show_plot=loaded_config.show_plot,
+    save_path=loaded_config.save_path
+)
+\end{lstlisting}
+
+\subsection{Checking Orthogonality}
+
+The following example shows how to check if a set of vectors is orthogonal:
+
+\begin{lstlisting}[language=Python]
+import numpy as np
+from generalized import create_orthogonal_vectors, check_orthogonality
+
+# Generate orthogonal vectors
+vectors = create_orthogonal_vectors(origin=[0, 0, 0])
+
+# Check if the vectors are orthogonal
+is_orthogonal = check_orthogonality(vectors, origin=[0, 0, 0])
+
+print(f"Vectors are orthogonal: {is_orthogonal}")
+\end{lstlisting}
+
+\subsection{Using the Command-line Interface}
+
+The following examples show how to use the command-line interface to generate and visualize orthogonal vectors:
+
+\subsubsection{Basic Usage}
+
+\begin{lstlisting}[language=bash]
+python -m generalized.main
+\end{lstlisting}
+
+This command generates and visualizes orthogonal vectors with default parameters (origin at [0, 0, 0], d=1.0, theta=pi/4).
+
+\subsubsection{Customizing Vector Generation}
+
+\begin{lstlisting}[language=bash]
+python -m generalized.main --origin 1 1 1 --d 2.0 --theta 1.047
+\end{lstlisting}
+
+This command generates and visualizes orthogonal vectors with custom parameters (origin at [1, 1, 1], d=2.0, theta=pi/3).
+
+\subsubsection{Customizing Visualization}
+
+\begin{lstlisting}[language=bash]
+python -m generalized.main --plot-type 2d --title "Custom Visualization" --save-path custom.png
+\end{lstlisting}
+
+This command generates orthogonal vectors with default parameters and visualizes them with custom visualization options (2D plot, custom title, save to file).
+
+\subsubsection{Using a Configuration File}
+
+\begin{lstlisting}[language=bash]
+python -m generalized.main --config config.json
+\end{lstlisting}
+
+This command loads a configuration from a file and uses it to generate and visualize orthogonal vectors.
+
+\subsubsection{Saving a Configuration File}
+
+\begin{lstlisting}[language=bash]
+python -m generalized.main --origin 1 1 1 --d 2.0 --theta 1.047 --save-config config.json
+\end{lstlisting}
+
+This command generates and visualizes orthogonal vectors with custom parameters and saves the configuration to a file.
+
+\subsection{Complete Example Script}
+
+The following is a complete example script that demonstrates various features of the package:
+
+\begin{lstlisting}[language=Python]
+import numpy as np
+import math
+import matplotlib.pyplot as plt
+from generalized import create_orthogonal_vectors, check_orthogonality, plot_vectors, VectorConfig
+
+def main():
+    # Create configurations for different examples
+    configs = [
+        VectorConfig(
+            origin=[0, 0, 0],
+            d=1.0,
+            theta=math.pi / 4,
+            plot_type="3d",
+            title="Default Configuration",
+            save_path="default.png"
+        ),
+        VectorConfig(
+            origin=[1, 1, 1],
+            d=2.0,
+            theta=math.pi / 3,
+            plot_type="3d",
+            title="Custom Configuration 1",
+            save_path="custom1.png"
+        ),
+        VectorConfig(
+            origin=[0, 0, 2],
+            d=1.5,
+            theta=math.pi / 6,
+            plot_type="2d",
+            title="Custom Configuration 2",
+            save_path="custom2.png"
+        )
+    ]
+    
+    # Process each configuration
+    for i, config in enumerate(configs):
+        print(f"Processing configuration {i+1}/{len(configs)}")
+        
+        # Generate orthogonal vectors
+        vectors = create_orthogonal_vectors(
+            origin=config.origin,
+            d=config.d,
+            theta=config.theta
+        )
+        
+        # Check orthogonality
+        is_orthogonal = check_orthogonality(vectors, origin=config.origin)
+        print(f"  Vectors are orthogonal: {is_orthogonal}")
+        
+        # Plot vectors
+        plot_vectors(
+            vectors,
+            origin=config.origin,
+            plot_type=config.plot_type,
+            title=config.title,
+            show_plot=False,
+            save_path=config.save_path
+        )
+        print(f"  Plot saved to {config.save_path}")
+        
+        # Save configuration
+        config_file = f"config{i+1}.json"
+        config.save_to_file(config_file)
+        print(f"  Configuration saved to {config_file}")
+    
+    # Show all plots
+    plt.show()
+
+if __name__ == "__main__":
+    main()
+\end{lstlisting}
+
+This script creates three different configurations, generates orthogonal vectors for each, checks their orthogonality, plots them, and saves both the plots and configurations to files. Finally, it displays all the plots.

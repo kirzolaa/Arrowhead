@@ -1,0 +1,13 @@
+create 3 orthogonal R vectors for R_0
+for example R_0 = (0, 0, 0)
+R_1 = R_0 + d * (cos(theta))*sqrt(2/3)
+R_2 = R_0 + d * (cos(theta)/sqrt(3) + sin(theta))/sqrt(2)
+R_3 = R_0 + d * (sin(theta) - cos(theta)/sqrt(3))/sqrt(2)
+
+since
+R_1 --> sqrt(2/3)(1,-1/2,-1/2)*cos(theta)
+R_2 --> (1,1,1)
+R_3 --> sqrt(2)(0,-1/2,1/2)*sin(theta)
+
+return R_1, R_2, R_3
+plot these on a 3D plot and create a 2d plot too, which can show the projection of these three vectors on a plane

@@ -1,0 +1,72 @@
+\section{Mathematical Formulation}
+
+This section describes the mathematical basis for generating three orthogonal vectors from a given origin point.
+
+\subsection{Definitions}
+
+Let $\vec{R}_0$ be the origin vector in three-dimensional space. We define three orthogonal vectors $\vec{R}_1$, $\vec{R}_2$, and $\vec{R}_3$ as follows:
+
+\begin{align}
+\vec{R}_1 &= \vec{R}_0 + d \cdot \cos(\theta) \cdot \sqrt{\frac{2}{3}} \cdot \begin{pmatrix} 1 \\ -\frac{1}{2} \\ -\frac{1}{2} \end{pmatrix} \\
+\vec{R}_2 &= \vec{R}_0 + d \cdot \frac{\cos(\theta)/\sqrt{3} + \sin(\theta)}{\sqrt{2}} \cdot \begin{pmatrix} 1 \\ 1 \\ 1 \end{pmatrix} \\
+\vec{R}_3 &= \vec{R}_0 + d \cdot \frac{\sin(\theta) - \cos(\theta)/\sqrt{3}}{\sqrt{2}} \cdot \sqrt{2} \cdot \begin{pmatrix} 0 \\ -\frac{1}{2} \\ \frac{1}{2} \end{pmatrix}
+\end{align}
+
+where:
+\begin{itemize}
+    \item $d$ is a distance parameter that scales the vectors
+    \item $\theta$ is an angle parameter that rotates the vectors
+\end{itemize}
+
+\subsection{Verification of Orthogonality}
+
+For vectors to be orthogonal, their dot product must be zero. Let's define the displacement vectors:
+
+\begin{align}
+\vec{v}_1 &= \vec{R}_1 - \vec{R}_0 = d \cdot \cos(\theta) \cdot \sqrt{\frac{2}{3}} \cdot \begin{pmatrix} 1 \\ -\frac{1}{2} \\ -\frac{1}{2} \end{pmatrix} \\
+\vec{v}_2 &= \vec{R}_2 - \vec{R}_0 = d \cdot \frac{\cos(\theta)/\sqrt{3} + \sin(\theta)}{\sqrt{2}} \cdot \begin{pmatrix} 1 \\ 1 \\ 1 \end{pmatrix} \\
+\vec{v}_3 &= \vec{R}_3 - \vec{R}_0 = d \cdot \frac{\sin(\theta) - \cos(\theta)/\sqrt{3}}{\sqrt{2}} \cdot \sqrt{2} \cdot \begin{pmatrix} 0 \\ -\frac{1}{2} \\ \frac{1}{2} \end{pmatrix}
+\end{align}
+
+Now, let's verify that these vectors are orthogonal by calculating their dot products:
+
+\begin{align}
+\vec{v}_1 \cdot \vec{v}_2 &= d \cdot \cos(\theta) \cdot \sqrt{\frac{2}{3}} \cdot d \cdot \frac{\cos(\theta)/\sqrt{3} + \sin(\theta)}{\sqrt{2}} \cdot \left(1 + \left(-\frac{1}{2}\right) + \left(-\frac{1}{2}\right)\right) \\
+&= d^2 \cdot \cos(\theta) \cdot \sqrt{\frac{2}{3}} \cdot \frac{\cos(\theta)/\sqrt{3} + \sin(\theta)}{\sqrt{2}} \cdot 0 \\
+&= 0
+\end{align}
+
+\begin{align}
+\vec{v}_1 \cdot \vec{v}_3 &= d \cdot \cos(\theta) \cdot \sqrt{\frac{2}{3}} \cdot d \cdot \frac{\sin(\theta) - \cos(\theta)/\sqrt{3}}{\sqrt{2}} \cdot \sqrt{2} \cdot \left(0 + \left(-\frac{1}{2}\right) \cdot \left(-\frac{1}{2}\right) + \left(-\frac{1}{2}\right) \cdot \frac{1}{2}\right) \\
+&= d^2 \cdot \cos(\theta) \cdot \sqrt{\frac{2}{3}} \cdot \frac{\sin(\theta) - \cos(\theta)/\sqrt{3}}{\sqrt{2}} \cdot \sqrt{2} \cdot \left(0 + \frac{1}{4} - \frac{1}{4}\right) \\
+&= 0
+\end{align}
+
+\begin{align}
+\vec{v}_2 \cdot \vec{v}_3 &= d \cdot \frac{\cos(\theta)/\sqrt{3} + \sin(\theta)}{\sqrt{2}} \cdot \begin{pmatrix} 1 \\ 1 \\ 1 \end{pmatrix} \cdot d \cdot \frac{\sin(\theta) - \cos(\theta)/\sqrt{3}}{\sqrt{2}} \cdot \sqrt{2} \cdot \begin{pmatrix} 0 \\ -\frac{1}{2} \\ \frac{1}{2} \end{pmatrix} \\
+&= d^2 \cdot \frac{\cos(\theta)/\sqrt{3} + \sin(\theta)}{\sqrt{2}} \cdot \frac{\sin(\theta) - \cos(\theta)/\sqrt{3}}{\sqrt{2}} \cdot \sqrt{2} \cdot \left(0 + 1 \cdot \left(-\frac{1}{2}\right) + 1 \cdot \frac{1}{2}\right) \\
+&= d^2 \cdot \frac{\cos(\theta)/\sqrt{3} + \sin(\theta)}{\sqrt{2}} \cdot \frac{\sin(\theta) - \cos(\theta)/\sqrt{3}}{\sqrt{2}} \cdot \sqrt{2} \cdot 0 \\
+&= 0
+\end{align}
+
+The dot products are all zero, confirming that the vectors are orthogonal. This orthogonality is maintained regardless of the values of $d$, $\theta$, or $\vec{R}_0$.
+
+\subsection{Mathematical Properties}
+
+\subsubsection{Invariance to Origin}
+
+The orthogonality of the vectors is preserved regardless of the origin point $\vec{R}_0$. This is because the orthogonality depends only on the displacement vectors $\vec{v}_1$, $\vec{v}_2$, and $\vec{v}_3$, which are independent of $\vec{R}_0$.
+
+\subsubsection{Invariance to Rotation}
+
+The orthogonality of the vectors is preserved regardless of the value of $\theta$. This means that the vectors can be rotated around the origin while maintaining their perpendicular relationship.
+
+\subsubsection{Scaling}
+
+The parameter $d$ scales all vectors equally, preserving their orthogonality. This allows for adjusting the size of the vector system without changing its geometric properties.
+
+\subsection{Geometric Interpretation}
+
+Geometrically, the vectors $\vec{R}_1$, $\vec{R}_2$, and $\vec{R}_3$ form a right-handed orthogonal coordinate system centered at $\vec{R}_0$. The parameter $d$ controls the scale of this coordinate system, while $\theta$ controls its orientation.
+
+The displacement vectors $\vec{v}_1$, $\vec{v}_2$, and $\vec{v}_3$ form a basis for three-dimensional space, meaning that any vector in three-dimensional space can be expressed as a linear combination of these vectors.

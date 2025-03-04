@@ -1,0 +1,441 @@
+\section{Source Code}
+
+This appendix contains the complete source code for the Generalized Orthogonal Vectors Generator and Visualizer package.
+
+\subsection{main.py}
+
+\begin{lstlisting}[language=Python]
+#!/usr/bin/env python3
+import numpy as np
+import matplotlib.pyplot as plt
+import argparse
+import math
+import os
+import sys
+
+from vector_utils import create_orthogonal_vectors, check_orthogonality
+from visualization import plot_vectors_3d, plot_vectors_2d_projection, plot_all_projections
+from config import VectorConfig, default_config
+
+def parse_arguments():
+    """
+    Parse command line arguments
+    
+    Returns:
+    argparse.Namespace: Parsed arguments
+    """
+    parser = argparse.ArgumentParser(description='Generate and visualize orthogonal vectors')
+    
+    # Vector parameters
+    parser.add_argument('--origin', '-R', type=float, nargs=3, default=[0, 0, 0],
+                        help='Origin vector R_0 (x y z)')
+    parser.add_argument('--distance', '-d', type=float, default=1,
+                        help='Distance parameter d')
+    parser.add_argument('--angle', '-a', type=float, default=math.pi/4,
+                        help='Angle parameter theta in radians')
+    
+    # Visualization parameters
+    parser.add_argument('--no-r0-plane', action='store_false', dest='show_r0_plane',
+                        help='Do not show the R_0 plane projection')
+    parser.add_argument('--no-legend', action='store_false', dest='show_legend',
+                        help='Do not show the legend')
+    parser.add_argument('--no-grid', action='store_false', dest='show_grid',
+                        help='Do not show the grid')
+    
+    # Output parameters
+    parser.add_argument('--save-plots', action='store_true',
+                        help='Save plots to files instead of displaying them')
+    parser.add_argument('--output-dir', type=str, default='plots',
+                        help='Directory to save plots to')
+    parser.add_argument('--config', type=str,
+                        help='Path to configuration file')
+    parser.add_argument('--save-config', type=str,
+                        help='Save configuration to file')
+    
+    return parser.parse_args()
+
+def display_help():
+    """
+    Display detailed help information
+    """
+    help_text = """
+    Orthogonal Vectors Generator and Visualizer
+    =======================================
+    
+    This tool generates and visualizes three orthogonal vectors from a given origin point.
+    
+    Basic Usage:
+    -----------
+    python main.py                              # Use default parameters
+    python main.py -R 1 1 1                    # Set origin to (1,1,1)
+    python main.py -R 0 0 2 -d 1.5 -a 0.5236   # Custom origin, distance and angle
+    python main.py --help                      # Show help
+    
+    Parameters:
+    ----------
+    -R, --origin X Y Z    : Set the origin vector R_0 coordinates (default: 0 0 0)
+    -d, --distance VALUE  : Set the distance parameter (default: 1)
+    -a, --angle VALUE     : Set the angle parameter in radians (default: \pi/4)
+    
+    Visualization Options:
+    --------------------
+    --no-r0-plane        : Do not show the R_0 plane projection
+    --no-legend          : Do not show the legend
+    --no-grid            : Do not show the grid
+    
+    Output Options:
+    --------------
+    --save-plots         : Save plots to files instead of displaying them
+    --output-dir DIR     : Directory to save plots to (default: 'plots')
+    
+    Configuration:
+    -------------
+    --config FILE        : Load configuration from a JSON file
+    --save-config FILE   : Save current configuration to a JSON file
+    
+    Examples:
+    --------
+    # Generate vectors with origin at (1,1,1), distance 2, and angle \pi/3
+    python main.py -R 1 1 1 -d 2 -a 1.047
+    
+    # Save plots to a custom directory
+    python main.py -R 0 0 2 --save-plots --output-dir my_plots
+    
+    # Load configuration from a file
+    python main.py --config my_config.json
+    """
+    print(help_text)
+    sys.exit(0)
+
+def main():
+    """
+    Main function
+    """
+    # Check for detailed help command
+    if len(sys.argv) > 1 and sys.argv[1] == 'help':
+        display_help()
+    
+    # Parse command line arguments
+    args = parse_arguments()
+    
+    # Load configuration
+    if args.config:
+        config = VectorConfig.load_from_file(args.config)
+    else:
+        # Create configuration from command line arguments
+        config = VectorConfig(
+            R_0=args.origin,
+            d=args.distance,
+            theta=args.angle,
+            show_r0_plane=args.show_r0_plane,
+            show_legend=args.show_legend,
+            show_grid=args.show_grid
+        )
+    
+    # Save configuration if requested
+    if args.save_config:
+        config.save_to_file(args.save_config)
+    
+    # Create the orthogonal vectors
+    R_0 = config.R_0
+    R_1, R_2, R_3 = create_orthogonal_vectors(R_0, config.d, config.theta)
+    
+    # Print vector information
+    print("R_0:", R_0)
+    print("R_1:", R_1)
+    print("R_2:", R_2)
+    print("R_3:", R_3)
+    
+    # Check orthogonality
+    orthogonality = check_orthogonality(R_0, R_1, R_2, R_3)
+    print("\nChecking orthogonality (dot products should be close to zero):")
+    for key, value in orthogonality.items():
+        print(f"{key}: {value}")
+    
+    # Plot the vectors
+    plots = plot_all_projections(
+        R_0, R_1, R_2, R_3,
+        show_r0_plane=config.show_r0_plane,
+        figsize_3d=config.figsize_3d,
+        figsize_2d=config.figsize_2d
+    )
+    
+    # Save or show the plots
+    if args.save_plots:
+        # Create output directory if it doesn't exist
+        os.makedirs(args.output_dir, exist_ok=True)
+        
+        # Save each plot
+        for name, (fig, _) in plots.items():
+            filename = os.path.join(args.output_dir, f"{name}.png")
+            fig.savefig(filename)
+            print(f"Saved plot to {filename}")
+    else:
+        # Show the plots
+        plt.show()
+
+if __name__ == "__main__":
+    main()
+\end{lstlisting}
+
+\subsection{vector\_utils.py}
+
+\begin{lstlisting}[language=Python]
+#!/usr/bin/env python3
+import numpy as np
+
+def create_orthogonal_vectors(R_0=(0, 0, 0), d=1, theta=0):
+    """
+    Create 3 orthogonal R vectors for R_0
+    
+    Parameters:
+    R_0 (tuple or numpy.ndarray): The origin vector, default is (0, 0, 0)
+    d (float): The distance parameter, default is 1
+    theta (float): The angle parameter in radians, default is 0
+    
+    Returns:
+    tuple: Three orthogonal vectors R_1, R_2, R_3
+    """
+    # Convert R_0 to numpy array for vector operations
+    R_0 = np.array(R_0)
+    
+    # Calculate R_1, R_2, R_3 according to the given formulas
+    # R_1 = R_0 + d * (cos(theta))*sqrt(2/3)
+    R_1 = R_0 + d * np.cos(theta) * np.sqrt(2/3) * np.array([1, -1/2, -1/2])
+    
+    # R_2 = R_0 + d * (cos(theta)/sqrt(3) + sin(theta))/sqrt(2)
+    R_2 = R_0 + d * (np.cos(theta)/np.sqrt(3) + np.sin(theta))/np.sqrt(2) * np.array([1, 1, 1])
+    
+    # R_3 = R_0 + d * (sin(theta) - cos(theta)/sqrt(3))/sqrt(2)
+    R_3 = R_0 + d * (np.sin(theta) - np.cos(theta)/np.sqrt(3))/np.sqrt(2) * np.array([0, -1/2, 1/2]) * np.sqrt(2)
+    
+    return R_1, R_2, R_3
+
+def check_orthogonality(R_0, R_1, R_2, R_3):
+    """
+    Check if the vectors R_1, R_2, R_3 are orthogonal with respect to R_0
+    
+    Parameters:
+    R_0, R_1, R_2, R_3 (numpy.ndarray): The vectors to check
+    
+    Returns:
+    dict: Dictionary containing the dot products between pairs of vectors
+    """
+    dot_1_2 = np.dot(R_1 - R_0, R_2 - R_0)
+    dot_1_3 = np.dot(R_1 - R_0, R_3 - R_0)
+    dot_2_3 = np.dot(R_2 - R_0, R_3 - R_0)
+    
+    return {
+        "R_1 $\cdot$ R_2": dot_1_2,
+        "R_1 $\cdot$ R_3": dot_1_3,
+        "R_2 $\cdot$ R_3": dot_2_3
+    }
+\end{lstlisting}
+
+\subsection{config.py}
+
+\begin{lstlisting}[language=Python]
+#!/usr/bin/env python3
+import numpy as np
+import math
+import json
+import os
+
+class VectorConfig:
+    """
+    Configuration class for orthogonal vector generation and visualization
+    """
+    def __init__(self, 
+                 R_0=(0, 0, 0), 
+                 d=1, 
+                 theta=math.pi/4,
+                 show_r0_plane=True,
+                 figsize_3d=(10, 8),
+                 figsize_2d=(8, 8),
+                 show_legend=True,
+                 show_grid=True):
+        """
+        Initialize the configuration
+        
+        Parameters:
+        R_0 (tuple or list): The origin vector
+        d (float): The distance parameter
+        theta (float): The angle parameter in radians
+        show_r0_plane (bool): Whether to show the R_0 plane projection
+        figsize_3d (tuple): Figure size for 3D plot
+        figsize_2d (tuple): Figure size for 2D plots
+        show_legend (bool): Whether to show the legend
+        show_grid (bool): Whether to show the grid
+        """
+        self.R_0 = np.array(R_0)
+        self.d = d
+        self.theta = theta
+        self.show_r0_plane = show_r0_plane
+        self.figsize_3d = figsize_3d
+        self.figsize_2d = figsize_2d
+        self.show_legend = show_legend
+        self.show_grid = show_grid
+    
+    def to_dict(self):
+        """
+        Convert the configuration to a dictionary
+        
+        Returns:
+        dict: Dictionary representation of the configuration
+        """
+        return {
+            'R_0': self.R_0.tolist(),
+            'd': self.d,
+            'theta': self.theta,
+            'show_r0_plane': self.show_r0_plane,
+            'figsize_3d': self.figsize_3d,
+            'figsize_2d': self.figsize_2d,
+            'show_legend': self.show_legend,
+            'show_grid': self.show_grid
+        }
+    
+    @classmethod
+    def from_dict(cls, config_dict):
+        """
+        Create a configuration from a dictionary
+        
+        Parameters:
+        config_dict (dict): Dictionary containing configuration parameters
+        
+        Returns:
+        VectorConfig: Configuration object
+        """
+        return cls(
+            R_0=config_dict.get('R_0', (0, 0, 0)),
+            d=config_dict.get('d', 1),
+            theta=config_dict.get('theta', math.pi/4),
+            show_r0_plane=config_dict.get('show_r0_plane', True),
+            figsize_3d=config_dict.get('figsize_3d', (10, 8)),
+            figsize_2d=config_dict.get('figsize_2d', (8, 8)),
+            show_legend=config_dict.get('show_legend', True),
+            show_grid=config_dict.get('show_grid', True)
+        )
+    
+    def save_to_file(self, filename):
+        """
+        Save the configuration to a JSON file
+        
+        Parameters:
+        filename (str): Path to the output file
+        """
+        with open(filename, 'w') as f:
+            json.dump(self.to_dict(), f, indent=4)
+    
+    @classmethod
+    def load_from_file(cls, filename):
+        """
+        Load a configuration from a JSON file
+        
+        Parameters:
+        filename (str): Path to the input file
+        
+        Returns:
+        VectorConfig: Configuration object
+        """
+        if not os.path.exists(filename):
+            print(f"Warning: Config file {filename} not found. Using default configuration.")
+            return cls()
+        
+        with open(filename, 'r') as f:
+            config_dict = json.load(f)
+        
+        return cls.from_dict(config_dict)
+
+# Default configuration
+default_config = VectorConfig()
+\end{lstlisting}
+
+\subsection{visualization.py}
+
+\begin{lstlisting}[language=Python]
+#!/usr/bin/env python3
+import numpy as np
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+
+def plot_vectors_3d(R_0, R_1, R_2, R_3, figsize=(10, 8), show_legend=True):
+    """
+    Plot the vectors in 3D
+    
+    Parameters:
+    R_0 (numpy.ndarray): The origin vector
+    R_1, R_2, R_3 (numpy.ndarray): The three orthogonal vectors
+    figsize (tuple): Figure size (width, height) in inches
+    show_legend (bool): Whether to show the legend
+    
+    Returns:
+    tuple: (fig, ax) matplotlib figure and axis objects
+    """
+    fig = plt.figure(figsize=figsize)
+    ax = fig.add_subplot(111, projection='3d')
+    
+    # Plot the origin
+    ax.scatter(R_0[0], R_0[1], R_0[2], color='black', s=100, label='R_0')
+    
+    # Plot the vectors as arrows from the origin
+    vectors = [R_1, R_2, R_3]
+    colors = ['r', 'g', 'b']
+    labels = ['R_1', 'R_2', 'R_3']
+    
+    for i, (vector, color, label) in enumerate(zip(vectors, colors, labels)):
+        ax.quiver(R_0[0], R_0[1], R_0[2], 
+                 vector[0]-R_0[0], vector[1]-R_0[1], vector[2]-R_0[2], 
+                 color=color, label=label, arrow_length_ratio=0.1)
+    
+    # Set labels and title
+    ax.set_xlabel('X')
+    ax.set_ylabel('Y')
+    ax.set_zlabel('Z')
+    ax.set_title('3D Plot of Orthogonal Vectors')
+    
+    # Set equal aspect ratio
+    max_range = np.array([
+        np.max([R_0[0], R_1[0], R_2[0], R_3[0]]) - np.min([R_0[0], R_1[0], R_2[0], R_3[0]]),
+        np.max([R_0[1], R_1[1], R_2[1], R_3[1]]) - np.min([R_0[1], R_1[1], R_2[1], R_3[1]]),
+        np.max([R_0[2], R_1[2], R_2[2], R_3[2]]) - np.min([R_0[2], R_1[2], R_2[2], R_3[2]])
+    ]).max() / 2.0
+    
+    mid_x = (np.max([R_0[0], R_1[0], R_2[0], R_3[0]]) + np.min([R_0[0], R_1[0], R_2[0], R_3[0]])) / 2
+    mid_y = (np.max([R_0[1], R_1[1], R_2[1], R_3[1]]) + np.min([R_0[1], R_1[1], R_2[1], R_3[1]])) / 2
+    mid_z = (np.max([R_0[2], R_1[2], R_2[2], R_3[2]]) + np.min([R_0[2], R_1[2], R_2[2], R_3[2]])) / 2
+    
+    ax.set_xlim(mid_x - max_range, mid_x + max_range)
+    ax.set_ylim(mid_y - max_range, mid_y + max_range)
+    ax.set_zlim(mid_z - max_range, mid_z + max_range)
+    
+    if show_legend:
+        ax.legend()
+    
+    return fig, ax
+
+# Note: This is a partial listing. The full visualization.py file contains additional functions
+# such as plot_vectors_2d_projection and plot_all_projections that are omitted here for brevity.
+\end{lstlisting}
+
+\subsection{\_\_init\_\_.py}
+
+\begin{lstlisting}[language=Python]
+# Generalized Orthogonal Vectors Generator and Visualizer
+# This package provides tools for generating and visualizing orthogonal vectors
+
+from .vector_utils import create_orthogonal_vectors, check_orthogonality
+from .visualization import plot_vectors_3d, plot_vectors_2d_projection, plot_all_projections
+from .config import VectorConfig, default_config
+
+__all__ = [
+    'create_orthogonal_vectors',
+    'check_orthogonality',
+    'plot_vectors_3d',
+    'plot_vectors_2d_projection',
+    'plot_all_projections',
+    'VectorConfig',
+    'default_config'
+]
+
+__version__ = '1.0.0'
+\end{lstlisting}

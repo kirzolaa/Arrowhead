@@ -1,0 +1,129 @@
+\section{Command-line Interface}
+
+The Generalized Orthogonal Vectors Generator and Visualizer package provides a command-line interface that allows users to generate and visualize orthogonal vectors without writing Python code. This section describes the command-line interface and its features.
+
+\subsection{Basic Usage}
+
+The command-line interface can be accessed by running the \texttt{main.py} module:
+
+\begin{lstlisting}[language=bash]
+python -m generalized.main
+\end{lstlisting}
+
+This command generates and visualizes orthogonal vectors with default parameters (origin at [0, 0, 0], d=1.0, theta=pi/4).
+
+You can also access detailed help information by running:
+
+\begin{lstlisting}[language=bash]
+python -m generalized.main help
+\end{lstlisting}
+
+This will display comprehensive information about all available commands, parameters, and usage examples.
+
+\subsection{Command-line Options}
+
+The command-line interface provides various options for configuring vector generation and visualization:
+
+\begin{itemize}
+    \item \texttt{--origin X Y Z}, \texttt{-R X Y Z}: Specifies the origin point as three space-separated values. Default: 0 0 0.
+    \item \texttt{--distance D}, \texttt{-d D}: Specifies the distance parameter. Default: 1.0.
+    \item \texttt{--angle THETA}, \texttt{-a THETA}: Specifies the angle parameter in radians. Default: 0.7853981633974483 (pi/4).
+    \item \texttt{--plot-type TYPE}: Specifies the type of plot, either "3d" or "2d". Default: "3d".
+    \item \texttt{--title TITLE}: Specifies the title of the plot. Default: None (uses a default title based on the plot type).
+    \item \texttt{--no-show}: Prevents the plot from being displayed interactively. Default: False (shows the plot).
+    \item \texttt{--save-path PATH}: Specifies the path to save the plot. Default: None (doesn't save the plot).
+    \item \texttt{--config FILE}: Specifies a configuration file to load. Default: None (uses command-line options).
+    \item \texttt{--save-config FILE}: Specifies a file to save the configuration to. Default: None (doesn't save the configuration).
+    \item \texttt{--check-orthogonality}: Checks if the generated vectors are orthogonal and prints the result. Default: False (doesn't check).
+    \item \texttt{--verbose}: Enables verbose output, including vector coordinates and dot products. Default: False (minimal output).
+    \item \texttt{--help}: Shows the help message and exits.
+\end{itemize}
+
+\subsection{Examples}
+
+\subsubsection{Customizing Vector Generation}
+
+\begin{lstlisting}[language=bash]
+python -m generalized.main -R 1 1 1 -d 2.0 -a 1.047
+\end{lstlisting}
+
+This command generates and visualizes orthogonal vectors with custom parameters (origin at [1, 1, 1], d=2.0, theta=pi/3). Note the use of shorter flags (-R, -d, -a) for more concise commands.
+
+\subsubsection{Customizing Visualization}
+
+\begin{lstlisting}[language=bash]
+python -m generalized.main --plot-type 2d --title "Custom Visualization" --save-path custom.png
+\end{lstlisting}
+
+This command generates orthogonal vectors with default parameters and visualizes them with custom visualization options (2D plot, custom title, save to file).
+
+\subsubsection{Using a Configuration File}
+
+\begin{lstlisting}[language=bash]
+python -m generalized.main --config config.json
+\end{lstlisting}
+
+This command loads a configuration from a file and uses it to generate and visualize orthogonal vectors.
+
+\subsubsection{Saving a Configuration File}
+
+\begin{lstlisting}[language=bash]
+python -m generalized.main --origin 1 1 1 --d 2.0 --theta 1.047 --save-config config.json
+\end{lstlisting}
+
+This command generates and visualizes orthogonal vectors with custom parameters and saves the configuration to a file.
+
+\subsubsection{Checking Orthogonality}
+
+\begin{lstlisting}[language=bash]
+python -m generalized.main --check-orthogonality
+\end{lstlisting}
+
+This command generates orthogonal vectors with default parameters, visualizes them, and checks if they are orthogonal.
+
+\subsubsection{Verbose Output}
+
+\begin{lstlisting}[language=bash]
+python -m generalized.main --verbose
+\end{lstlisting}
+
+This command generates orthogonal vectors with default parameters, visualizes them, and prints verbose output, including vector coordinates and dot products.
+
+\subsection{Implementation Details}
+
+The command-line interface is implemented in the \texttt{main.py} module using the \texttt{argparse} module from the Python standard library. The module defines a \texttt{main} function that parses command-line arguments, creates a configuration, generates orthogonal vectors, and visualizes them.
+
+The command-line interface follows these steps:
+
+\begin{enumerate}
+    \item Parse command-line arguments using \texttt{argparse}.
+    \item If a configuration file is specified, load the configuration from the file.
+    \item Override the configuration with any command-line options that are specified.
+    \item Generate orthogonal vectors using the configuration.
+    \item If requested, check if the vectors are orthogonal and print the result.
+    \item If verbose output is enabled, print vector coordinates and dot products.
+    \item Visualize the vectors using the configuration.
+    \item If requested, save the configuration to a file.
+\end{enumerate}
+
+\subsection{Error Handling}
+
+The command-line interface includes error handling for various scenarios, including:
+
+\begin{itemize}
+    \item Invalid command-line arguments (e.g., non-numeric values for numeric options).
+    \item Invalid configuration file (e.g., file not found, invalid JSON).
+    \item Invalid configuration parameters (e.g., negative distance parameter).
+\end{itemize}
+
+When an error occurs, the command-line interface prints an error message and exits with a non-zero exit code.
+
+\subsection{Help Message}
+
+The command-line interface provides a help message that can be displayed using the \texttt{--help} option:
+
+\begin{lstlisting}[language=bash]
+python -m generalized.main --help
+\end{lstlisting}
+
+The help message includes a description of the program, a list of all available options, and examples of how to use the program.
