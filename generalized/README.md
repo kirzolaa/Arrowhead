@@ -1,110 +1,138 @@
-# Generalized Orthogonal Vectors Generator and Visualizer
+# Orthogonal Vector Visualization System
 
-This is a generalized implementation of the orthogonal vectors generator and visualizer. It provides a modular and configurable approach to creating and visualizing three orthogonal vectors from a given origin point.
+A flexible Python tool for generating and visualizing complex orthogonal vector configurations with advanced plotting capabilities.
+
+## Overview
+
+This system generates a single R vector using scalar formulas and provides comprehensive visualization options for both single and multiple vectors. It supports various projection methods, parameter ranges, and visualization styles.
 
 ## Features
 
-- Modular architecture with separate components for vector calculations, visualization, and configuration
-- Command-line interface with various options for customization
-- Configuration management with JSON file support
-- Ability to save plots to files
-- Example scripts demonstrating different use cases
-- Enhanced R_0 plane projections with improved axis handling and visualization
-- Combined 3D and R_0 plane projection views
+- Single R vector generation using scalar formulas
+- Multiple vector generation with parameter ranges
+- Perfect orthogonal circle generation in the plane orthogonal to the x=y=z line
+- Enhanced 3D visualization with color-coded axes, coordinate labels, and data-driven scaling
+- 2D projection visualization with improved clarity
+- Endpoints-only plotting option
+- Configurable visualization parameters
+- Command-line interface with extensive options
+- Configuration file support
+- Circle/sphere pattern generation examples
+
+## Installation
+
+```bash
+# Clone the repository
+git clone <repository-url>
+cd arrowhead
+
+# Set up virtual environment
+python3 -m venv venv
+source venv/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
+```
 
 ## Usage
 
 ### Basic Usage
 
 ```bash
-python main.py
-```
+# Generate a single vector
+python generalized/main.py -R 1 1 1 -d 2 -a 1.047
 
-This will generate orthogonal vectors with default parameters and display the plots.
+# Generate multiple vectors with distance range
+python generalized/main.py -R 0 0 0 --d-range 1 5 3 -a 0.7854
+
+# Generate multiple vectors with angle range
+python generalized/main.py -R 0 0 0 -d 1.5 --theta-range 0 10 3.14159
+
+# Endpoints-only plotting
+python generalized/main.py --endpoints true
+```
 
 ### Command-line Options
 
-```bash
-python main.py --origin 1 1 1 --distance 2 --angle 1.047
 ```
-
-This will generate orthogonal vectors with the specified origin (1,1,1), distance (2), and angle (π/3 radians).
-
-### Saving Plots
-
-```bash
-python main.py --save-plots --output-dir my_plots
+-R, --origin X Y Z    : Set the origin vector R_0 coordinates (default: 0 0 0)
+-d, --distance VALUE  : Set the distance parameter (default: 1)
+--d-range START STEPS END : Generate multiple vectors with distance values from START to END with STEPS steps
+-a, --angle VALUE     : Set the angle parameter in radians (default: π/4)
+--theta-range START STEPS END : Generate multiple vectors with angle values from START to END with STEPS steps
+--endpoints true/false : Only plot the endpoints of vectors, not the arrows (default: false)
+--no-r0-plane        : Do not show the R_0 plane projection
+--no-legend          : Do not show the legend
+--no-grid            : Do not show the grid
+--save-plots         : Save plots to files instead of displaying them
+--output-dir DIR     : Directory to save plots to (default: 'plots')
+--config FILE        : Load configuration from a JSON file
+--save-config FILE   : Save current configuration to a JSON file
 ```
-
-This will save the plots to the `my_plots` directory instead of displaying them.
-
-### Configuration Files
-
-```bash
-# Save configuration to a file
-python main.py --save-config my_config.json
-
-# Load configuration from a file
-python main.py --config my_config.json
-```
-
-## Examples
-
-See `example.py` for examples of how to use the package programmatically.
 
 ## Package Structure
 
-- `__init__.py`: Package initialization and exports
-- `vector_utils.py`: Vector calculation utilities
-- `visualization.py`: Visualization functions
-- `config.py`: Configuration management
-- `main.py`: Command-line interface
-- `example.py`: Example usage
+- `vector_utils.py`: Vector generation and component calculation functions
+- `visualization.py`: Comprehensive visualization functions for 2D and 3D plotting
+- `config.py`: Configuration management and serialization
+- `main.py`: Command-line interface and main program logic
+- `example_circle.py`: Example generating a sphere-like pattern using orthogonal vectors
+- `example_circle_xy.py`: Example generating a traditional circle in the XY plane
+- `example_orthogonal_circle.py`: Example with improved visualization of orthogonal vectors
+- `CIRCLE_EXAMPLES.md`: Documentation for the circle examples
 
-## API Reference
+## Vector Generation
 
-### Vector Utilities
+The system generates a single R vector using the following scalar formulas:
 
-- `create_orthogonal_vectors(R_0=(0, 0, 0), d=1, theta=0)`: Create three orthogonal vectors from a given origin
-- `check_orthogonality(R_0, R_1, R_2, R_3)`: Check if the vectors are orthogonal
-
-### Visualization
-
-- `plot_vectors_3d(R_0, R_1, R_2, R_3, ...)`: Plot the vectors in 3D
-- `plot_vectors_2d_projection(R_0, R_1, R_2, R_3, plane='xy', ...)`: Plot a 2D projection of the vectors
-- `plot_all_projections(R_0, R_1, R_2, R_3, ...)`: Plot all projections of the vectors
-- `plot_r0_projections(R_0, R_1, R_2, R_3, ...)`: Plot the R_0 plane projections with enhanced visualization
-- `plot_combined_with_r0(R_0, R_1, R_2, R_3, ...)`: Plot both 3D vectors and R_0 plane projections in a single figure
-
-### Configuration
-
-- `VectorConfig`: Configuration class for vector generation and visualization
-- `default_config`: Default configuration instance
-
-## R_0 Plane Projection Scripts
-
-The package includes specialized scripts for generating R_0 plane projections, which provide a clear view of the orthogonality of the vectors in the plane perpendicular to the origin direction.
-
-### generate_r0_projections.py
-
-```bash
-python docs/generate_r0_projections.py
+```
+R_1 = R_0 + d * (cos(theta))*sqrt(2/3)
+R_2 = R_0 + d * (cos(theta)/sqrt(3) + sin(theta))/sqrt(2)
+R_3 = R_0 + d * (sin(theta) - cos(theta)/sqrt(3))/sqrt(2)
+R = R_1 + R_2 + R_3 - 2 * R_0
 ```
 
-Generates R_0 plane projections for various configurations with improved axis handling, symmetric axis limits, and better legend placement.
+Where:
+- `R_0` is the origin vector
+- `d` is the distance parameter
+- `theta` is the angle parameter in radians
+- `R_1`, `R_2`, `R_3` are component vectors
+- `R` is the resulting vector
 
-### generate_combined_views.py
+## Visualization
 
-```bash
-python docs/generate_combined_views.py
-```
+The system provides several visualization functions with enhanced features:
 
-Generates combined 3D and R_0 plane projection figures, showing both perspectives side by side.
+- `plot_vectors_3d`: Plot vectors in 3D space with color-coded axes and coordinate labels
+- `plot_vectors_2d_projection`: Plot 2D projections (xy, xz, yz, r0 planes)
+- `plot_all_projections`: Plot all projections of a single vector
+- `plot_multiple_vectors_3d`: Plot multiple vectors in 3D with optional endpoints-only mode
+- `plot_multiple_vectors_2d`: Plot 2D projections of multiple vectors
+- `plot_multiple_vectors`: Plot multiple vectors in all projections
 
-### generate_specific_r0_projections.py
+### Enhanced Visualization Features
 
-```bash
-python docs/generate_specific_r0_projections.py
-```
+The latest version includes several visualization enhancements for improved clarity and spatial understanding:
 
-Generates R_0 plane projections specifically for the three combined effect configurations (origins at (0,0,0), (1,1,1), and (0,0,2)).
+- **Color-coded Axes**: The X (red), Y (green), and Z (blue) axes are color-coded for easy identification
+- **Coordinate Labels**: Integer coordinate values are displayed along each axis, color-matched to the axis color
+- **Tick Marks**: Small tick marks along each axis for better spatial reference
+- **Data-driven Scaling**: The axis limits are dynamically adjusted based on the actual data points
+- **Equal Aspect Ratio**: The 3D plots maintain an equal aspect ratio for accurate spatial representation
+- **Buffer Zones**: Small buffer zones are added around the data points for better visibility
+
+These enhancements significantly improve the visual representation of the orthogonal vectors, making it easier to understand their spatial relationships and properties.
+
+## Circle Examples
+
+Three circle examples demonstrate different visualization approaches:
+
+1. `example_circle.py`: Generates points using orthogonal vector formulas, creating a sphere-like pattern
+2. `example_circle_xy.py`: Creates a traditional circle in the XY plane
+3. `example_orthogonal_circle.py`: Similar to the first example but with improved visualization
+
+See `CIRCLE_EXAMPLES.md` for detailed information about these examples.
+
+## Configuration
+
+The `VectorConfig` class provides configuration management with JSON serialization support. Use the `--save-config` and `--config` options to save and load configurations.

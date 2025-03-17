@@ -1,0 +1,51 @@
+Berry Phase Calculation Results
+==============================
+
+Parameters:
+  R_0: (0, 0, 0)
+  d: 1.0
+  theta_steps: 72
+  coupling_constant: 0.1
+  omega: 1.0
+  matrix_size: 4
+
+Theoretical Geometric Phase:
+  Perfect Circle: 3.141593 radians = 180.000000 degrees
+
+Berry Phase Results (Phase Method):
+  Eigenstate 0: 0.000000 radians = 0.000000 degrees
+  Eigenstate 1: 0.000000 radians = 0.000000 degrees
+  Eigenstate 2: 0.000000 radians = 0.000000 degrees
+  Eigenstate 3: 0.000000 radians = 0.000000 degrees
+
+Berry Phase Results (Connection Method):
+  Eigenstate 0: 0.101433 radians = 5.811665 degrees
+  Difference from theoretical: 3.040160 radians
+  Eigenstate 1: 2.225876 radians = 127.533282 degrees
+  Difference from theoretical: 0.915717 radians
+  Eigenstate 2: 2.045717 radians = 117.210931 degrees
+  Difference from theoretical: 1.095876 radians
+  Eigenstate 3: 0.497866 radians = 28.525612 degrees
+  Difference from theoretical: 2.643727 radians
+
+Eigenvalue Statistics:
+  Eigenstate 0:
+    Mean: 0.052966
+    Min: -0.054138
+    Max: 0.289226
+    Range: 0.343364
+  Eigenstate 1:
+    Mean: 0.477655
+    Min: 0.202870
+    Max: 0.833333
+    Range: 0.630463
+  Eigenstate 2:
+    Mean: 0.683742
+    Min: 0.500000
+    Max: 0.869748
+    Range: 0.369748
+  Eigenstate 3:
+    Mean: 0.952304
+    Min: 0.546316
+    Max: 1.657523
+    Range: 1.111207

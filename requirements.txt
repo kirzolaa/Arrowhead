@@ -1,2 +1,9 @@
 numpy>=1.20.0
 matplotlib>=3.5.0
+scipy>=1.7.0
+pycuda>=2022.1
+scikit-cuda>=0.5.3
+reikna>=0.7.5
+sympy>=1.10.1
+h5py>=3.7.0
+tqdm>=4.64.0

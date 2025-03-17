@@ -65,6 +65,8 @@ The generalized implementation provides a more modular and configurable approach
 ### Features
 
 - Modular architecture with separate components for vector calculations, visualization, and configuration
+- Enhanced visualization with color-coded axes, coordinate labels, and data-driven scaling
+- Perfect orthogonal circle generation in the plane orthogonal to the x=y=z line
 - Command-line interface with various options for customization
 - Configuration management with JSON file support
 - Ability to save plots to files
@@ -127,3 +129,21 @@ python main.py --config my_config.json
 ### Documentation
 
 For more detailed documentation, see the [generalized implementation documentation](generalized/docs/documentation.md).
+
+## Enhanced Visualization Features
+
+The latest version includes several visualization enhancements for improved clarity and spatial understanding:
+
+- **Color-coded Axes**: The X (red), Y (green), and Z (blue) axes are color-coded for easy identification
+- **Coordinate Labels**: Integer coordinate values are displayed along each axis, color-matched to the axis color
+- **Tick Marks**: Small tick marks along each axis for better spatial reference
+- **Data-driven Scaling**: The axis limits are dynamically adjusted based on the actual data points
+- **Equal Aspect Ratio**: The 3D plots maintain an equal aspect ratio for accurate spatial representation
+
+These enhancements significantly improve the visual representation of the orthogonal vectors, making it easier to understand their spatial relationships and properties.
+
+### Example of Enhanced Visualization
+
+![Enhanced Visualization](perfect_circle_distance_range.png)
+
+The image above shows multiple perfect orthogonal circles with different distances, demonstrating the enhanced visualization features including color-coded axes, coordinate labels, and data-driven scaling.

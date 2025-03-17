@@ -1,3 +1,4 @@
+\newpage
 \section{Configuration}
 
 The Generalized Orthogonal Vectors Generator and Visualizer package provides a flexible configuration system that allows users to customize all aspects of vector generation and visualization. This section describes the configuration system and its features.
@@ -14,6 +15,10 @@ The configuration system is implemented through the \texttt{VectorConfig} class,
     \item \texttt{title}: The title of the plot (default: None, which uses a default title based on the plot type).
     \item \texttt{show\_plot}: Whether to show the plot interactively (default: True).
     \item \texttt{save\_path}: The path to save the plot (default: None, which doesn't save the plot).
+    \item \texttt{enhanced\_visualization}: Whether to use enhanced visualization features (default: True).
+    \item \texttt{axis\_colors}: Custom colors for the X, Y, and Z axes (default: ['r', 'g', 'b']).
+    \item \texttt{show\_coordinate\_labels}: Whether to show coordinate labels on the axes (default: True).
+    \item \texttt{equal\_aspect\_ratio}: Whether to maintain an equal aspect ratio for 3D plots (default: True).
 \end{itemize}
 
 The class provides methods for initializing the configuration, saving it to a file, and loading it from a file.
@@ -32,9 +37,13 @@ config = VectorConfig(
     d=2.0,
     theta=math.pi / 3,
     plot_type="2d",
-    title="Custom Configuration",
+    title="Vector Configuration",
     show_plot=False,
-    save_path="custom.png"
+    save_path="custom.png",
+    enhanced_visualization=True,
+    axis_colors=['red', 'green', 'blue'],
+    show_coordinate_labels=True,
+    equal_aspect_ratio=True
 )
 \end{lstlisting}
 
@@ -109,6 +118,10 @@ The command-line interface provides options for configuring vector generation an
     \item \texttt{--save-path}: Specifies the path to save the plot.
     \item \texttt{--config}: Specifies a configuration file to load.
     \item \texttt{--save-config}: Specifies a file to save the configuration to.
+    \item \texttt{--no-enhanced-visualization}: Disables enhanced visualization features.
+    \item \texttt{--axis-colors}: Specifies custom colors for the X, Y, and Z axes as three space-separated values.
+    \item \texttt{--no-coordinate-labels}: Disables coordinate labels on the axes.
+    \item \texttt{--no-equal-aspect-ratio}: Disables equal aspect ratio for 3D plots.
 \end{itemize}
 
 These options allow users to customize the configuration without modifying the code.
@@ -125,7 +138,11 @@ The configuration file is a JSON file with the following structure:
     "plot_type": "3d" or "2d",
     "title": string or null,
     "show_plot": boolean,
-    "save_path": string or null
+    "save_path": string or null,
+    "enhanced_visualization": boolean,
+    "axis_colors": ["r", "g", "b"],
+    "show_coordinate_labels": boolean,
+    "equal_aspect_ratio": boolean
 }
 \end{lstlisting}
 
@@ -143,6 +160,10 @@ The default configuration is as follows:
     \item \texttt{title}: None (uses a default title based on the plot type)
     \item \texttt{show\_plot}: True
     \item \texttt{save\_path}: None (doesn't save the plot)
+    \item \texttt{enhanced\_visualization}: True
+    \item \texttt{axis\_colors}: ['r', 'g', 'b']
+    \item \texttt{show\_coordinate\_labels}: True
+    \item \texttt{equal\_aspect\_ratio}: True
 \end{itemize}
 
 This configuration generates three orthogonal vectors from the origin [0, 0, 0] with a distance parameter of 1.0 and an angle parameter of $\pi/4$, and visualizes them in 3D.

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.10.2)  4 MAR 2025 12:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.10.2)  10 MAR 2025 18:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -741,487 +741,945 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 77.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (./main.toc [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2])
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4])
 \tf@toc=\write5
 \openout5 = `main.toc'.
 
- [3]
-(./include/introduction.tex [4{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-sup
-er-ts1.enc}]) (./include/mathematical_formulation.tex [5])
-(./include/implementation.tex [6] [7]) (./include/api_reference.tex
-(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+ [5]
+(./include/introduction.tex [6{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-sup
+er-ts1.enc}]) (./include/mathematical_formulation.tex [7] [8] [9] [10])
+(./include/implementation.tex [11] [12] [13]) (./include/api_reference.tex
+[14] (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
-) [8] [9]
-[10] [11]) (./include/usage_examples.tex [12] [13]
+) [15]
+[16] [17] [18]) (./include/usage_examples.tex [19] [20] [21] [22]
+LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 
+237.
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmtt.fd
+File: ts1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
+)
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
 (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2023/02/27 1.9 listings language file
-) [14])
-(./include/visualization.tex [15]
-<figures/3d_plot.png, id=1040, 468.0687pt x 474.8139pt>
-File: figures/3d_plot.png Graphic file (type png)
-<use figures/3d_plot.png>
-Package pdftex.def Info: figures/3d_plot.png  used on input line 22.
-(pdftex.def)             Requested size: 362.37569pt x 367.60023pt.
- [16
+) [23] [24]
+[25] [26]) (./include/visualization_new.tex [27]
+<figures/orthogonal_3d.png, id=1841, 867.24pt x 722.7pt>
+File: figures/orthogonal_3d.png Graphic file (type png)
+<use figures/orthogonal_3d.png>
+Package pdftex.def Info: figures/orthogonal_3d.png  used on input line 23.
+(pdftex.def)             Requested size: 362.37569pt x 301.97705pt.
+ [28
 pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.40         \end{itemize}
-                           <./figures/3d_plot.png>]
-<figures/2d_projections.png, id=1048, 790.152pt x 858.8085pt>
-File: figures/2d_projections.png Graphic file (type png)
-<use figures/2d_projections.png>
-Package pdftex.def Info: figures/2d_projections.png  used on input line 58.
-(pdftex.def)             Requested size: 362.37569pt x 393.86421pt.
- [17
+l.37 \end{itemize}
+                   <./figures/orthogonal_3d.png>]
+<figures/orthogonal_xy.png, id=1849, 722.7pt x 722.7pt>
+File: figures/orthogonal_xy.png Graphic file (type png)
+<use figures/orthogonal_xy.png>
+Package pdftex.def Info: figures/orthogonal_xy.png  used on input line 54.
+(pdftex.def)             Requested size: 203.83417pt x 203.8323pt.
+<figures/orthogonal_xz.png, id=1850, 722.7pt x 722.7pt>
+File: figures/orthogonal_xz.png Graphic file (type png)
+<use figures/orthogonal_xz.png>
+Package pdftex.def Info: figures/orthogonal_xz.png  used on input line 55.
+(pdftex.def)             Requested size: 203.83417pt x 203.8323pt.
+<figures/orthogonal_yz.png, id=1851, 722.7pt x 722.7pt>
+File: figures/orthogonal_yz.png Graphic file (type png)
+<use figures/orthogonal_yz.png>
+Package pdftex.def Info: figures/orthogonal_yz.png  used on input line 56.
+(pdftex.def)             Requested size: 203.83417pt x 203.8323pt.
+<figures/orthogonal_r0.png, id=1852, 722.7pt x 722.7pt>
+File: figures/orthogonal_r0.png Graphic file (type png)
+<use figures/orthogonal_r0.png>
+Package pdftex.def Info: figures/orthogonal_r0.png  used on input line 57.
+(pdftex.def)             Requested size: 203.83417pt x 203.8323pt.
+ [29
 pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.71 \end{itemize}
-                   <./figures/2d_projections.png>]
-<figures/r0_projections_combined_effect_R0_0_0_0.png, id=1055, 754.7397pt x 711
-.8595pt>
-File: figures/r0_projections_combined_effect_R0_0_0_0.png Graphic file (type pn
-g)
-<use figures/r0_projections_combined_effect_R0_0_0_0.png>
-Package pdftex.def Info: figures/r0_projections_combined_effect_R0_0_0_0.png  u
-sed on input line 95.
-(pdftex.def)             Requested size: 362.37569pt x 341.78644pt.
- [18
+l.67     \item I
+                n 3D visualization, the endpoints are shown as colored dots. <.
+/figures/orthogonal_xy.png> <./figures/orthogonal_xz.png> <./figures/orthogonal
+_yz.png> <./figures/orthogonal_r0.png>]
+<figures/circle_3d.png, id=1862, 867.24pt x 722.7pt>
+File: figures/circle_3d.png Graphic file (type png)
+<use figures/circle_3d.png>
+Package pdftex.def Info: figures/circle_3d.png  used on input line 76.
+(pdftex.def)             Requested size: 362.37569pt x 301.97705pt.
+ [30
 pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.104 T
-       he vectors are plotted using Matplotlib's \texttt{quiver} function, w...
- <./figures/r0_projections_combined_effect_R0_0_0_0.png>])
-(./include/configuration.tex [19] [20]) (./include/command_line.tex [21]
-[22] [23]) (./include/example_results.tex
-<figures/default_3d.png, id=1165, 722.7pt x 578.16pt>
-File: figures/default_3d.png Graphic file (type png)
-<use figures/default_3d.png>
-Package pdftex.def Info: figures/default_3d.png  used on input line 35.
-(pdftex.def)             Requested size: 362.37569pt x 289.89973pt.
- [24]
-File: figures/2d_projections.png Graphic file (type png)
-<use figures/2d_projections.png>
-Package pdftex.def Info: figures/2d_projections.png  used on input line 44.
-(pdftex.def)             Requested size: 362.37569pt x 393.86421pt.
- [25
+l.100     \item \texttt
+                       {example\_circle\_xy.py}: Creates a traditional circl...
+ <./figures/circle_3d.png>]
+<figures/circle_xy.png, id=1869, 722.7pt x 722.7pt>
+File: figures/circle_xy.png Graphic file (type png)
+<use figures/circle_xy.png>
+Package pdftex.def Info: figures/circle_xy.png  used on input line 110.
+(pdftex.def)             Requested size: 217.42265pt x 217.41818pt.
+<figures/xy_circle.png, id=1870, 722.7pt x 722.7pt>
+File: figures/xy_circle.png Graphic file (type png)
+<use figures/xy_circle.png>
+Package pdftex.def Info: figures/xy_circle.png  used on input line 116.
+(pdftex.def)             Requested size: 217.42265pt x 217.41818pt.
+<figures/3d_xy_circle.png, id=1871, 867.24pt x 722.7pt>
+File: figures/3d_xy_circle.png Graphic file (type png)
+<use figures/3d_xy_circle.png>
+Package pdftex.def Info: figures/3d_xy_circle.png  used on input line 124.
+(pdftex.def)             Requested size: 362.37569pt x 301.97705pt.
+ [31
 pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.48 
-      <./figures/default_3d.png>] [26
+l.128 
+      
 pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.67 \begin{align}
-                  ]
-<figures/custom1_3d.png, id=1193, 722.7pt x 578.16pt>
-File: figures/custom1_3d.png Graphic file (type png)
-<use figures/custom1_3d.png>
-Package pdftex.def Info: figures/custom1_3d.png  used on input line 79.
-(pdftex.def)             Requested size: 362.37569pt x 289.89973pt.
-<figures/custom1_xy.png, id=1194, 578.16pt x 578.16pt>
-File: figures/custom1_xy.png Graphic file (type png)
-<use figures/custom1_xy.png>
-Package pdftex.def Info: figures/custom1_xy.png  used on input line 90.
-(pdftex.def)             Requested size: 217.42265pt x 217.41818pt.
-<figures/custom1_xz.png, id=1195, 578.16pt x 578.16pt>
-File: figures/custom1_xz.png Graphic file (type png)
-<use figures/custom1_xz.png>
-Package pdftex.def Info: figures/custom1_xz.png  used on input line 95.
-(pdftex.def)             Requested size: 217.42265pt x 217.41818pt.
-<figures/custom1_yz.png, id=1196, 578.16pt x 578.16pt>
-File: figures/custom1_yz.png Graphic file (type png)
-<use figures/custom1_yz.png>
-Package pdftex.def Info: figures/custom1_yz.png  used on input line 101.
-(pdftex.def)             Requested size: 217.42265pt x 217.41818pt.
-<figures/custom1_r0.png, id=1197, 578.16pt x 578.16pt>
-File: figures/custom1_r0.png Graphic file (type png)
-<use figures/custom1_r0.png>
-Package pdftex.def Info: figures/custom1_r0.png  used on input line 106.
-(pdftex.def)             Requested size: 217.42265pt x 217.41818pt.
- [27
+l.128 
+       <./figures/circle_xy.png> <./figures/xy_circle.png>])
+(./include/configuration.tex [32
 pdfTeX warning (ext4): destination with the same identifier (name{figure.6}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.112 
-       <./figures/custom1_3d.png>] [28
+l.1 \newpage
+             <./figures/3d_xy_circle.png>] [33] [34])
+(./include/command_line.tex [35]
+Overfull \hbox (49.38306pt too wide) in paragraph at lines 37--38
+[]\OT1/cmtt/m/n/10 -a VALUE\OT1/cmr/m/n/10 , \OT1/cmtt/m/n/10 --angle VALUE\OT1
+/cmr/m/n/10 , \OT1/cmtt/m/n/10 --theta VALUE\OT1/cmr/m/n/10 : Sets the an-gle p
+a-ram-e-ter in ra-di-ans. De-fault: 0.7853981633974483
+ []
+
+[36] [37] [38] [39] [40]) (./include/example_results.tex [41]
+File: figures/circle_3d.png Graphic file (type png)
+<use figures/circle_3d.png>
+Package pdftex.def Info: figures/circle_3d.png  used on input line 25.
+(pdftex.def)             Requested size: 362.37569pt x 301.97705pt.
+File: figures/circle_xy.png Graphic file (type png)
+<use figures/circle_xy.png>
+Package pdftex.def Info: figures/circle_xy.png  used on input line 34.
+(pdftex.def)             Requested size: 203.83417pt x 203.8323pt.
+<figures/circle_xz.png, id=2078, 722.7pt x 722.7pt>
+File: figures/circle_xz.png Graphic file (type png)
+<use figures/circle_xz.png>
+Package pdftex.def Info: figures/circle_xz.png  used on input line 35.
+(pdftex.def)             Requested size: 203.83417pt x 203.8323pt.
+<figures/circle_yz.png, id=2079, 722.7pt x 722.7pt>
+File: figures/circle_yz.png Graphic file (type png)
+<use figures/circle_yz.png>
+Package pdftex.def Info: figures/circle_yz.png  used on input line 36.
+(pdftex.def)             Requested size: 203.83417pt x 203.8323pt.
+<figures/circle_r0.png, id=2080, 722.7pt x 722.7pt>
+File: figures/circle_r0.png Graphic file (type png)
+<use figures/circle_r0.png>
+Package pdftex.def Info: figures/circle_r0.png  used on input line 37.
+(pdftex.def)             Requested size: 203.83417pt x 203.8323pt.
+ [42
 pdfTeX warning (ext4): destination with the same identifier (name{figure.7}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.125 \end{align}
-                 
+l.41 
+     ] [43
 pdfTeX warning (ext4): destination with the same identifier (name{figure.8}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.125 \end{align}
-                 
+l.65 
+      <./figures/circle_xz.png> <./figures/circle_yz.png> <./figures/circle_r0.
+png>]
+<figures/../../../circle_plots/circle_3d.png, id=2100, 867.24pt x 722.7pt>
+File: figures/../../../circle_plots/circle_3d.png Graphic file (type png)
+<use figures/../../../circle_plots/circle_3d.png>
+Package pdftex.def Info: figures/../../../circle_plots/circle_3d.png  used on i
+nput line 76.
+(pdftex.def)             Requested size: 362.37569pt x 301.97705pt.
+<figures/../../../circle_plots/circle_xy.png, id=2101, 722.7pt x 722.7pt>
+File: figures/../../../circle_plots/circle_xy.png Graphic file (type png)
+<use figures/../../../circle_plots/circle_xy.png>
+Package pdftex.def Info: figures/../../../circle_plots/circle_xy.png  used on i
+nput line 85.
+(pdftex.def)             Requested size: 217.42265pt x 217.41818pt.
+<figures/../../../circle_plots/circle_xz.png, id=2102, 722.7pt x 722.7pt>
+File: figures/../../../circle_plots/circle_xz.png Graphic file (type png)
+<use figures/../../../circle_plots/circle_xz.png>
+Package pdftex.def Info: figures/../../../circle_plots/circle_xz.png  used on i
+nput line 91.
+(pdftex.def)             Requested size: 217.42265pt x 217.41818pt.
+ [44
 pdfTeX warning (ext4): destination with the same identifier (name{figure.9}) ha
 s been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.125 \end{align}
-                 
+l.96 
+      <./figures/../../../circle_plots/circle_3d.png>]
+<figures/../../../circle_plots/circle_yz.png, id=2111, 722.7pt x 722.7pt>
+File: figures/../../../circle_plots/circle_yz.png Graphic file (type png)
+<use figures/../../../circle_plots/circle_yz.png>
+Package pdftex.def Info: figures/../../../circle_plots/circle_yz.png  used on i
+nput line 101.
+(pdftex.def)             Requested size: 217.42265pt x 217.41818pt.
+<figures/../../../circle_plots/circle_r0.png, id=2112, 722.7pt x 722.7pt>
+File: figures/../../../circle_plots/circle_r0.png Graphic file (type png)
+<use figures/../../../circle_plots/circle_r0.png>
+Package pdftex.def Info: figures/../../../circle_plots/circle_r0.png  used on i
+nput line 107.
+(pdftex.def)             Requested size: 217.42265pt x 217.41818pt.
+File: figures/xy_circle.png Graphic file (type png)
+<use figures/xy_circle.png>
+Package pdftex.def Info: figures/xy_circle.png  used on input line 123.
+(pdftex.def)             Requested size: 362.37569pt x 362.37466pt.
+ [45
 pdfTeX warning (ext4): destination with the same identifier (name{figure.10}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.125 \end{align}
-                 
+l.127 
+      
 pdfTeX warning (ext4): destination with the same identifier (name{figure.11}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.125 \end{align}
-                  <./figures/custom1_xy.png> <./figures/custom1_xz.png> <./figu
-res/custom1_yz.png> <./figures/custom1_r0.png>]
-<figures/custom2_3d.png, id=1221, 722.7pt x 578.16pt>
-File: figures/custom2_3d.png Graphic file (type png)
-<use figures/custom2_3d.png>
-Package pdftex.def Info: figures/custom2_3d.png  used on input line 143.
-(pdftex.def)             Requested size: 362.37569pt x 289.89973pt.
-<figures/custom2_xy.png, id=1222, 578.16pt x 578.16pt>
-File: figures/custom2_xy.png Graphic file (type png)
-<use figures/custom2_xy.png>
-Package pdftex.def Info: figures/custom2_xy.png  used on input line 154.
-(pdftex.def)             Requested size: 217.42265pt x 217.41818pt.
-<figures/custom2_xz.png, id=1223, 578.16pt x 578.16pt>
-File: figures/custom2_xz.png Graphic file (type png)
-<use figures/custom2_xz.png>
-Package pdftex.def Info: figures/custom2_xz.png  used on input line 159.
-(pdftex.def)             Requested size: 217.42265pt x 217.41818pt.
-<figures/custom2_yz.png, id=1224, 578.16pt x 578.16pt>
-File: figures/custom2_yz.png Graphic file (type png)
-<use figures/custom2_yz.png>
-Package pdftex.def Info: figures/custom2_yz.png  used on input line 165.
-(pdftex.def)             Requested size: 217.42265pt x 217.41818pt.
-<figures/custom2_r0.png, id=1225, 578.16pt x 578.16pt>
-File: figures/custom2_r0.png Graphic file (type png)
-<use figures/custom2_r0.png>
-Package pdftex.def Info: figures/custom2_r0.png  used on input line 170.
-(pdftex.def)             Requested size: 217.42265pt x 217.41818pt.
- [29
+l.127 
+      
 pdfTeX warning (ext4): destination with the same identifier (name{figure.12}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.176 
-       <./figures/custom2_3d.png>]
-<figures/d_effect_R0_0_0_0.png, id=1238, 738.8403pt x 718.8456pt>
-File: figures/d_effect_R0_0_0_0.png Graphic file (type png)
-<use figures/d_effect_R0_0_0_0.png>
-Package pdftex.def Info: figures/d_effect_R0_0_0_0.png  used on input line 183.
-
-(pdftex.def)             Requested size: 407.66833pt x 396.64963pt.
- [30
+l.127 
+      
 pdfTeX warning (ext4): destination with the same identifier (name{figure.13}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.187 
-      
+l.127 
+       <./figures/../../../circle_plots/circle_xy.png> <./figures/../../../circ
+le_plots/circle_xz.png> <./figures/../../../circle_plots/circle_yz.png> <./figu
+res/../../../circle_plots/circle_r0.png>]
+<figures/../../../circle_plots/3d_xy_circle.png, id=2128, 867.24pt x 722.7pt>
+File: figures/../../../circle_plots/3d_xy_circle.png Graphic file (type png)
+<use figures/../../../circle_plots/3d_xy_circle.png>
+Package pdftex.def Info: figures/../../../circle_plots/3d_xy_circle.png  used o
+n input line 130.
+(pdftex.def)             Requested size: 362.37569pt x 301.97705pt.
+ [46
 pdfTeX warning (ext4): destination with the same identifier (name{figure.14}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.187 
-      
+l.134 
+      ]
+<figures/../../../circle_plots/orthogonal_3d.png, id=2134, 867.24pt x 722.7pt>
+File: figures/../../../circle_plots/orthogonal_3d.png Graphic file (type png)
+<use figures/../../../circle_plots/orthogonal_3d.png>
+Package pdftex.def Info: figures/../../../circle_plots/orthogonal_3d.png  used 
+on input line 145.
+(pdftex.def)             Requested size: 362.37569pt x 301.97705pt.
+ [47
 pdfTeX warning (ext4): destination with the same identifier (name{figure.15}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.187 
-      
+l.149 
+       <./figures/../../../circle_plots/3d_xy_circle.png>]
+<figures/../../../circle_plots/orthogonal_xy.png, id=2143, 722.7pt x 722.7pt>
+File: figures/../../../circle_plots/orthogonal_xy.png Graphic file (type png)
+<use figures/../../../circle_plots/orthogonal_xy.png>
+Package pdftex.def Info: figures/../../../circle_plots/orthogonal_xy.png  used 
+on input line 154.
+(pdftex.def)             Requested size: 217.42265pt x 217.41818pt.
+<figures/../../../circle_plots/orthogonal_xz.png, id=2144, 722.7pt x 722.7pt>
+File: figures/../../../circle_plots/orthogonal_xz.png Graphic file (type png)
+<use figures/../../../circle_plots/orthogonal_xz.png>
+Package pdftex.def Info: figures/../../../circle_plots/orthogonal_xz.png  used 
+on input line 160.
+(pdftex.def)             Requested size: 217.42265pt x 217.41818pt.
+<figures/../../../circle_plots/orthogonal_yz.png, id=2145, 722.7pt x 722.7pt>
+File: figures/../../../circle_plots/orthogonal_yz.png Graphic file (type png)
+<use figures/../../../circle_plots/orthogonal_yz.png>
+Package pdftex.def Info: figures/../../../circle_plots/orthogonal_yz.png  used 
+on input line 170.
+(pdftex.def)             Requested size: 217.42265pt x 217.41818pt.
+<figures/../../../circle_plots/orthogonal_r0.png, id=2146, 722.7pt x 722.7pt>
+File: figures/../../../circle_plots/orthogonal_r0.png Graphic file (type png)
+<use figures/../../../circle_plots/orthogonal_r0.png>
+Package pdftex.def Info: figures/../../../circle_plots/orthogonal_r0.png  used 
+on input line 176.
+(pdftex.def)             Requested size: 217.42265pt x 217.41818pt.
+ [48
 pdfTeX warning (ext4): destination with the same identifier (name{figure.16}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.187 
+l.181 
       
 pdfTeX warning (ext4): destination with the same identifier (name{figure.17}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.187 
-       <./figures/custom2_xy.png> <./figures/custom2_xz.png> <./figures/custom2
-_yz.png> <./figures/custom2_r0.png>]
-<figures/d_effect_R0_1_1_1.png, id=1252, 738.8403pt x 718.8456pt>
-File: figures/d_effect_R0_1_1_1.png Graphic file (type png)
-<use figures/d_effect_R0_1_1_1.png>
-Package pdftex.def Info: figures/d_effect_R0_1_1_1.png  used on input line 190.
-
-(pdftex.def)             Requested size: 407.66833pt x 396.64963pt.
- [31
+l.181 
+      
 pdfTeX warning (ext4): destination with the same identifier (name{figure.18}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.194 
-       <./figures/d_effect_R0_0_0_0.png>]
-<figures/d_effect_R0_0_0_2.png, id=1260, 738.8403pt x 718.8456pt>
-File: figures/d_effect_R0_0_0_2.png Graphic file (type png)
-<use figures/d_effect_R0_0_0_2.png>
-Package pdftex.def Info: figures/d_effect_R0_0_0_2.png  used on input line 197.
-
-(pdftex.def)             Requested size: 407.66833pt x 396.64963pt.
- [32
+l.181 
+       <./figures/../../../circle_plots/orthogonal_3d.png> <./figures/../../../
+circle_plots/orthogonal_xy.png> <./figures/../../../circle_plots/orthogonal_xz.
+png>]
+<figures/../../../perfect_circle_output/perfect_circle_3d.png, id=2157, 459.396
+3pt x 480.1137pt>
+File: figures/../../../perfect_circle_output/perfect_circle_3d.png Graphic file
+ (type png)
+<use figures/../../../perfect_circle_output/perfect_circle_3d.png>
+Package pdftex.def Info: figures/../../../perfect_circle_output/perfect_circle_
+3d.png  used on input line 230.
+(pdftex.def)             Requested size: 362.37569pt x 378.72888pt.
+ [49
 pdfTeX warning (ext4): destination with the same identifier (name{figure.19}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.201 
-       <./figures/d_effect_R0_1_1_1.png>]
-<figures/theta_effect_R0_0_0_0.png, id=1267, 735.9495pt x 715.9548pt>
-File: figures/theta_effect_R0_0_0_0.png Graphic file (type png)
-<use figures/theta_effect_R0_0_0_0.png>
-Package pdftex.def Info: figures/theta_effect_R0_0_0_0.png  used on input line 
-210.
-(pdftex.def)             Requested size: 407.66833pt x 396.59491pt.
- [33
+l.234 
+      
 pdfTeX warning (ext4): destination with the same identifier (name{figure.20}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.214 
-       <./figures/d_effect_R0_0_0_2.png>]
-<figures/theta_effect_R0_1_1_1.png, id=1274, 735.9495pt x 715.9548pt>
-File: figures/theta_effect_R0_1_1_1.png Graphic file (type png)
-<use figures/theta_effect_R0_1_1_1.png>
-Package pdftex.def Info: figures/theta_effect_R0_1_1_1.png  used on input line 
-217.
-(pdftex.def)             Requested size: 407.66833pt x 396.59491pt.
- [34
+l.234 
+       <./figures/../../../circle_plots/orthogonal_yz.png> <./figures/../../../
+circle_plots/orthogonal_r0.png>]
+<figures/../../../perfect_circle_output/perfect_circle_projections.png, id=2168
+, 775.698pt x 714.5094pt>
+File: figures/../../../perfect_circle_output/perfect_circle_projections.png Gra
+phic file (type png)
+<use figures/../../../perfect_circle_output/perfect_circle_projections.png>
+Package pdftex.def Info: figures/../../../perfect_circle_output/perfect_circle_
+projections.png  used on input line 237.
+(pdftex.def)             Requested size: 362.37569pt x 333.7916pt.
+ [50
 pdfTeX warning (ext4): destination with the same identifier (name{figure.21}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.221 
-       <./figures/theta_effect_R0_0_0_0.png>]
-<figures/theta_effect_R0_0_0_2.png, id=1281, 735.9495pt x 715.9548pt>
-File: figures/theta_effect_R0_0_0_2.png Graphic file (type png)
-<use figures/theta_effect_R0_0_0_2.png>
-Package pdftex.def Info: figures/theta_effect_R0_0_0_2.png  used on input line 
-224.
-(pdftex.def)             Requested size: 407.66833pt x 396.59491pt.
- [35
+l.241 
+       <./figures/../../../perfect_circle_output/perfect_circle_3d.png>]
+<figures/../../../perfect_circle_output/perfect_circle_orthogonal_plane.png, id
+=2175, 514.3215pt x 505.89pt>
+File: figures/../../../perfect_circle_output/perfect_circle_orthogonal_plane.pn
+g Graphic file (type png)
+<use figures/../../../perfect_circle_output/perfect_circle_orthogonal_plane.png
+>
+Package pdftex.def Info: figures/../../../perfect_circle_output/perfect_circle_
+orthogonal_plane.png  used on input line 244.
+(pdftex.def)             Requested size: 362.37569pt x 356.43634pt.
+
+[51
 pdfTeX warning (ext4): destination with the same identifier (name{figure.22}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.228 
-       <./figures/theta_effect_R0_1_1_1.png>]
-<figures/combined_effect_R0_0_0_0.png, id=1288, 739.0812pt x 714.7503pt>
-File: figures/combined_effect_R0_0_0_0.png Graphic file (type png)
-<use figures/combined_effect_R0_0_0_0.png>
-Package pdftex.def Info: figures/combined_effect_R0_0_0_0.png  used on input li
-ne 239.
-(pdftex.def)             Requested size: 407.66833pt x 394.24812pt.
- [36
+l.248 
+       <./figures/../../../perfect_circle_output/perfect_circle_projections.png
+>]
+<figures/orthogonality_test/orthogonality_test_3d.png, id=2182, 460.8417pt x 47
+4.8139pt>
+File: figures/orthogonality_test/orthogonality_test_3d.png Graphic file (type p
+ng)
+<use figures/orthogonality_test/orthogonality_test_3d.png>
+Package pdftex.def Info: figures/orthogonality_test/orthogonality_test_3d.png  
+used on input line 266.
+(pdftex.def)             Requested size: 362.37569pt x 373.38179pt.
+ [52
 pdfTeX warning (ext4): destination with the same identifier (name{figure.23}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.243 
-       <./figures/theta_effect_R0_0_0_2.png>]
-<figures/combined_effect_R0_1_1_1.png, id=1295, 739.0812pt x 714.7503pt>
-File: figures/combined_effect_R0_1_1_1.png Graphic file (type png)
-<use figures/combined_effect_R0_1_1_1.png>
-Package pdftex.def Info: figures/combined_effect_R0_1_1_1.png  used on input li
-ne 246.
-(pdftex.def)             Requested size: 407.66833pt x 394.24812pt.
- [37
+l.270 
+       <./figures/../../../perfect_circle_output/perfect_circle_orthogonal_plan
+e.png>]
+<figures/orthogonality_test/orthogonality_test_2d.png, id=2189, 611.6451pt x 14
+2.6128pt>
+File: figures/orthogonality_test/orthogonality_test_2d.png Graphic file (type p
+ng)
+<use figures/orthogonality_test/orthogonality_test_2d.png>
+Package pdftex.def Info: figures/orthogonality_test/orthogonality_test_2d.png  
+used on input line 273.
+(pdftex.def)             Requested size: 362.37569pt x 84.49333pt.
+<figures/orthogonality_test/orthogonality_circle_3d.png, id=2190, 460.8417pt x 
+474.8139pt>
+File: figures/orthogonality_test/orthogonality_circle_3d.png Graphic file (type
+ png)
+<use figures/orthogonality_test/orthogonality_circle_3d.png>
+Package pdftex.def Info: figures/orthogonality_test/orthogonality_circle_3d.png
+  used on input line 284.
+(pdftex.def)             Requested size: 362.37569pt x 373.38179pt.
+ [53
 pdfTeX warning (ext4): destination with the same identifier (name{figure.24}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.250 
-       <./figures/combined_effect_R0_0_0_0.png>]
-<figures/combined_effect_R0_0_0_2.png, id=1303, 739.0812pt x 714.7503pt>
-File: figures/combined_effect_R0_0_0_2.png Graphic file (type png)
-<use figures/combined_effect_R0_0_0_2.png>
-Package pdftex.def Info: figures/combined_effect_R0_0_0_2.png  used on input li
-ne 253.
-(pdftex.def)             Requested size: 407.66833pt x 394.24812pt.
- [38
+l.288 
+      
 pdfTeX warning (ext4): destination with the same identifier (name{figure.25}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.257 
-       <./figures/combined_effect_R0_1_1_1.png>]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 258.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 258.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 258.
-
-File: figures/r0_projections_combined_effect_R0_0_0_0.png Graphic file (type pn
+l.288 
+       <./figures/orthogonality_test/orthogonality_test_3d.png> <./figures/orth
+ogonality_test/orthogonality_test_2d.png>]
+<figures/orthogonality_test/orthogonality_circle_2d.png, id=2199, 619.8357pt x 
+324.7332pt>
+File: figures/orthogonality_test/orthogonality_circle_2d.png Graphic file (type
+ png)
+<use figures/orthogonality_test/orthogonality_circle_2d.png>
+Package pdftex.def Info: figures/orthogonality_test/orthogonality_circle_2d.png
+  used on input line 291.
+(pdftex.def)             Requested size: 362.37569pt x 189.85172pt.
+<figures/orthogonality_test/orthogonal_circle_3d.png, id=2200, 460.8417pt x 474
+.8139pt>
+File: figures/orthogonality_test/orthogonal_circle_3d.png Graphic file (type pn
 g)
-<use figures/r0_projections_combined_effect_R0_0_0_0.png>
-Package pdftex.def Info: figures/r0_projections_combined_effect_R0_0_0_0.png  u
-sed on input line 277.
-(pdftex.def)             Requested size: 407.66833pt x 384.50702pt.
-[39
+<use figures/orthogonality_test/orthogonal_circle_3d.png>
+Package pdftex.def Info: figures/orthogonality_test/orthogonal_circle_3d.png  u
+sed on input line 302.
+(pdftex.def)             Requested size: 362.37569pt x 373.38179pt.
+ [54
 pdfTeX warning (ext4): destination with the same identifier (name{figure.26}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.281 
-       <./figures/combined_effect_R0_0_0_2.png>]
-<figures/r0_projections_combined_effect_R0_1_1_1.png, id=1316, 763.8939pt x 711
-.8595pt>
-File: figures/r0_projections_combined_effect_R0_1_1_1.png Graphic file (type pn
-g)
-<use figures/r0_projections_combined_effect_R0_1_1_1.png>
-Package pdftex.def Info: figures/r0_projections_combined_effect_R0_1_1_1.png  u
-sed on input line 284.
-(pdftex.def)             Requested size: 407.66833pt x 379.9015pt.
- [40
+l.306 
+      
 pdfTeX warning (ext4): destination with the same identifier (name{figure.27}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.288 
-      ]
-<figures/r0_projections_combined_effect_R0_0_0_2.png, id=1322, 750.8853pt x 711
-.8595pt>
-File: figures/r0_projections_combined_effect_R0_0_0_2.png Graphic file (type pn
-g)
-<use figures/r0_projections_combined_effect_R0_0_0_2.png>
-Package pdftex.def Info: figures/r0_projections_combined_effect_R0_0_0_2.png  u
-sed on input line 291.
-(pdftex.def)             Requested size: 407.66833pt x 386.48392pt.
- [41
+l.306 
+       <./figures/orthogonality_test/orthogonality_circle_3d.png> <./figures/or
+thogonality_test/orthogonality_circle_2d.png>]
+<figures/orthogonality_test/orthogonal_circle_projections.png, id=2209, 860.013
+pt x 714.5094pt>
+File: figures/orthogonality_test/orthogonal_circle_projections.png Graphic file
+ (type png)
+<use figures/orthogonality_test/orthogonal_circle_projections.png>
+Package pdftex.def Info: figures/orthogonality_test/orthogonal_circle_projectio
+ns.png  used on input line 309.
+(pdftex.def)             Requested size: 362.37569pt x 301.06223pt.
+ [55
 pdfTeX warning (ext4): destination with the same identifier (name{figure.28}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.295 
-       <./figures/r0_projections_combined_effect_R0_1_1_1.png>]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 296.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 296.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 296.
-
-<figures/combined_view_R0_0_0_0_d_1p5_theta_0p79.png, id=1329, 1149.093pt x 604
-.659pt>
-File: figures/combined_view_R0_0_0_0_d_1p5_theta_0p79.png Graphic file (type pn
-g)
-<use figures/combined_view_R0_0_0_0_d_1p5_theta_0p79.png>
-Package pdftex.def Info: figures/combined_view_R0_0_0_0_d_1p5_theta_0p79.png  u
-sed on input line 302.
-(pdftex.def)             Requested size: 407.66833pt x 214.52165pt.
-[42
+l.313 
+       <./figures/orthogonality_test/orthogonal_circle_3d.png>] [56
 pdfTeX warning (ext4): destination with the same identifier (name{figure.29}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.306 
-       <./figures/r0_projections_combined_effect_R0_0_0_2.png>]
-<figures/combined_view_R0_1_1_1_d_1p5_theta_0p79.png, id=1336, 1149.093pt x 599
-.841pt>
-File: figures/combined_view_R0_1_1_1_d_1p5_theta_0p79.png Graphic file (type pn
-g)
-<use figures/combined_view_R0_1_1_1_d_1p5_theta_0p79.png>
-Package pdftex.def Info: figures/combined_view_R0_1_1_1_d_1p5_theta_0p79.png  u
-sed on input line 309.
-(pdftex.def)             Requested size: 407.66833pt x 212.81232pt.
-<figures/combined_view_R0_0_0_2_d_1p5_theta_0p79.png, id=1337, 1149.093pt x 599
-.841pt>
-File: figures/combined_view_R0_0_0_2_d_1p5_theta_0p79.png Graphic file (type pn
-g)
-<use figures/combined_view_R0_0_0_2_d_1p5_theta_0p79.png>
-Package pdftex.def Info: figures/combined_view_R0_0_0_2_d_1p5_theta_0p79.png  u
-sed on input line 316.
-(pdftex.def)             Requested size: 407.66833pt x 212.81232pt.
- [43
+l.344 
+       <./figures/orthogonality_test/orthogonal_circle_projections.png>]
+<figures/../../../perfect_circle_distance_range.png, id=2225, 570.933pt x 586.1
+097pt>
+File: figures/../../../perfect_circle_distance_range.png Graphic file (type png
+)
+<use figures/../../../perfect_circle_distance_range.png>
+Package pdftex.def Info: figures/../../../perfect_circle_distance_range.png  us
+ed on input line 351.
+(pdftex.def)             Requested size: 362.37569pt x 372.02348pt.
+<figures/../../../perfect_circle_distance_range_projections.png, id=2226, 907.4
+703pt x 858.8085pt>
+File: figures/../../../perfect_circle_distance_range_projections.png Graphic fi
+le (type png)
+<use figures/../../../perfect_circle_distance_range_projections.png>
+Package pdftex.def Info: figures/../../../perfect_circle_distance_range_project
+ions.png  used on input line 358.
+(pdftex.def)             Requested size: 362.37569pt x 342.95383pt.
+
+[57
 pdfTeX warning (ext4): destination with the same identifier (name{figure.30}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.320 
-      
+l.362 
+       <./figures/../../../perfect_circle_distance_range.png>] [58
 pdfTeX warning (ext4): destination with the same identifier (name{figure.31}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.320 
-       <./figures/combined_view_R0_0_0_0_d_1p5_theta_0p79.png> <./figures/combi
-ned_view_R0_1_1_1_d_1p5_theta_0p79.png>]) (./include/conclusion.tex [44
+l.381 
+       <./figures/../../../perfect_circle_distance_range_projections.png>]
+<figures/../../../perfect_circle_tests.png, id=2239, 722.7pt x 578.16pt>
+File: figures/../../../perfect_circle_tests.png Graphic file (type png)
+<use figures/../../../perfect_circle_tests.png>
+Package pdftex.def Info: figures/../../../perfect_circle_tests.png  used on inp
+ut line 430.
+(pdftex.def)             Requested size: 362.37569pt x 289.89973pt.
+
+[59
+pdfTeX warning (ext4): destination with the same identifier (name{table.1}) has
+ been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.434 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{table.2}) has
+ been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.434 
+      ]) (./include/arrowhead.tex [60
 pdfTeX warning (ext4): destination with the same identifier (name{figure.32}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
-l.21 
-      <./figures/combined_view_R0_0_0_2_d_1p5_theta_0p79.png>])
-(./include/appendix_code.tex [45] [46] [47] [48]
-LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 
-229.
+l.1 \newpage
+            \section{Arrowhead Matrix Visualization} <./figures/../../../perfec
+t_circle_tests.png>]
+<../example_use/arrowhead_matrix/results/plots/all_eigenvalues_2d.png, id=2253,
+ 723.6636pt x 505.89pt>
+File: ../example_use/arrowhead_matrix/results/plots/all_eigenvalues_2d.png Grap
+hic file (type png)
+<use ../example_use/arrowhead_matrix/results/plots/all_eigenvalues_2d.png>
+Package pdftex.def Info: ../example_use/arrowhead_matrix/results/plots/all_eige
+nvalues_2d.png  used on input line 68.
+(pdftex.def)             Requested size: 362.37569pt x 253.32262pt.
+ [61]
+<../example_use/arrowhead_matrix/results/plots/eigenvalue_0_2d.png, id=2272, 62
+6.34pt x 394.5942pt>
+File: ../example_use/arrowhead_matrix/results/plots/eigenvalue_0_2d.png Graphic
+ file (type png)
+<use ../example_use/arrowhead_matrix/results/plots/eigenvalue_0_2d.png>
+Package pdftex.def Info: ../example_use/arrowhead_matrix/results/plots/eigenval
+ue_0_2d.png  used on input line 77.
+(pdftex.def)             Requested size: 362.37569pt x 228.30482pt.
+<../example_use/arrowhead_matrix/results/plots/eigenvalue_1_2d.png, id=2273, 61
+7.9085pt x 394.5942pt>
+File: ../example_use/arrowhead_matrix/results/plots/eigenvalue_1_2d.png Graphic
+ file (type png)
+<use ../example_use/arrowhead_matrix/results/plots/eigenvalue_1_2d.png>
+Package pdftex.def Info: ../example_use/arrowhead_matrix/results/plots/eigenval
+ue_1_2d.png  used on input line 84.
+(pdftex.def)             Requested size: 362.37569pt x 231.41167pt.
+ [62
+pdfTeX warning (ext4): destination with the same identifier (name{figure.33}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.88 
+     
+pdfTeX warning (ext4): destination with the same identifier (name{figure.34}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.88 
+      <../example_use/arrowhead_matrix/results/plots/all_eigenvalues_2d.png> <.
+./example_use/arrowhead_matrix/results/plots/eigenvalue_0_2d.png>]
+<../example_use/arrowhead_matrix/results/plots/eigenvalue_2_2d.png, id=2283, 61
+7.9085pt x 394.5942pt>
+File: ../example_use/arrowhead_matrix/results/plots/eigenvalue_2_2d.png Graphic
+ file (type png)
+<use ../example_use/arrowhead_matrix/results/plots/eigenvalue_2_2d.png>
+Package pdftex.def Info: ../example_use/arrowhead_matrix/results/plots/eigenval
+ue_2_2d.png  used on input line 91.
+(pdftex.def)             Requested size: 362.37569pt x 231.41167pt.
+<../example_use/arrowhead_matrix/results/plots/eigenvalue_3_2d.png, id=2284, 61
+1.6451pt x 394.5942pt>
+File: ../example_use/arrowhead_matrix/results/plots/eigenvalue_3_2d.png Graphic
+ file (type png)
+<use ../example_use/arrowhead_matrix/results/plots/eigenvalue_3_2d.png>
+Package pdftex.def Info: ../example_use/arrowhead_matrix/results/plots/eigenval
+ue_3_2d.png  used on input line 98.
+(pdftex.def)             Requested size: 362.37569pt x 233.78395pt.
+ [63
+pdfTeX warning (ext4): destination with the same identifier (name{figure.35}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.102 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{figure.36}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.102 
+       <../example_use/arrowhead_matrix/results/plots/eigenvalue_1_2d.png> <../
+example_use/arrowhead_matrix/results/plots/eigenvalue_2_2d.png>]
+<../example_use/arrowhead_matrix/results/plots/eigenvectors_no_labels.png, id=2
+294, 744.6219pt x 659.3433pt>
+File: ../example_use/arrowhead_matrix/results/plots/eigenvectors_no_labels.png 
+Graphic file (type png)
+<use ../example_use/arrowhead_matrix/results/plots/eigenvectors_no_labels.png>
+Package pdftex.def Info: ../example_use/arrowhead_matrix/results/plots/eigenvec
+tors_no_labels.png  used on input line 113.
+(pdftex.def)             Requested size: 362.37569pt x 320.87773pt.
+<../example_use/arrowhead_matrix/results/plots/eigenvector_0_no_labels.png, id=
+2297, 543.4704pt x 476.982pt>
+File: ../example_use/arrowhead_matrix/results/plots/eigenvector_0_no_labels.png
+ Graphic file (type png)
+<use ../example_use/arrowhead_matrix/results/plots/eigenvector_0_no_labels.png>
 
-(/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmtt.fd
-File: ts1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
-) [49] [50] [51])
-[52] (./main.aux)
+Package pdftex.def Info: ../example_use/arrowhead_matrix/results/plots/eigenvec
+tor_0_no_labels.png  used on input line 126.
+(pdftex.def)             Requested size: 362.37569pt x 318.04057pt.
+ [64
+pdfTeX warning (ext4): destination with the same identifier (name{figure.37}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.129 \end{figure}
+                  
+pdfTeX warning (ext4): destination with the same identifier (name{figure.38}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.129 \end{figure}
+                   <../example_use/arrowhead_matrix/results/plots/eigenvalue_3_
+2d.png> <../example_use/arrowhead_matrix/results/plots/eigenvectors_no_labels.p
+ng>]
+<../example_use/arrowhead_matrix/results/plots/eigenvector_1_no_labels.png, id=
+2305, 543.4704pt x 483.7272pt>
+File: ../example_use/arrowhead_matrix/results/plots/eigenvector_1_no_labels.png
+ Graphic file (type png)
+<use ../example_use/arrowhead_matrix/results/plots/eigenvector_1_no_labels.png>
+
+Package pdftex.def Info: ../example_use/arrowhead_matrix/results/plots/eigenvec
+tor_1_no_labels.png  used on input line 133.
+(pdftex.def)             Requested size: 362.37569pt x 322.53813pt.
+ [65
+pdfTeX warning (ext4): destination with the same identifier (name{figure.39}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.137 
+       <../example_use/arrowhead_matrix/results/plots/eigenvector_0_no_labels.p
+ng>]
+<../example_use/arrowhead_matrix/results/plots/eigenvector_2_no_labels.png, id=
+2313, 543.4704pt x 483.0045pt>
+File: ../example_use/arrowhead_matrix/results/plots/eigenvector_2_no_labels.png
+ Graphic file (type png)
+<use ../example_use/arrowhead_matrix/results/plots/eigenvector_2_no_labels.png>
+
+Package pdftex.def Info: ../example_use/arrowhead_matrix/results/plots/eigenvec
+tor_2_no_labels.png  used on input line 140.
+(pdftex.def)             Requested size: 362.37569pt x 322.05624pt.
+ [66
+pdfTeX warning (ext4): destination with the same identifier (name{figure.40}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.144 
+       <../example_use/arrowhead_matrix/results/plots/eigenvector_1_no_labels.p
+ng>]
+<../example_use/arrowhead_matrix/results/plots/eigenvector_3_no_labels.png, id=
+2320, 543.4704pt x 482.5227pt>
+File: ../example_use/arrowhead_matrix/results/plots/eigenvector_3_no_labels.png
+ Graphic file (type png)
+<use ../example_use/arrowhead_matrix/results/plots/eigenvector_3_no_labels.png>
+
+Package pdftex.def Info: ../example_use/arrowhead_matrix/results/plots/eigenvec
+tor_3_no_labels.png  used on input line 147.
+(pdftex.def)             Requested size: 362.37569pt x 321.735pt.
+ [67
+pdfTeX warning (ext4): destination with the same identifier (name{figure.41}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.151 
+       <../example_use/arrowhead_matrix/results/plots/eigenvector_2_no_labels.p
+ng>]
+<../example_use/arrowhead_matrix/results/plots/r_vectors_3d.png, id=2329, 466.3
+824pt x 474.8139pt>
+File: ../example_use/arrowhead_matrix/results/plots/r_vectors_3d.png Graphic fi
+le (type png)
+<use ../example_use/arrowhead_matrix/results/plots/r_vectors_3d.png>
+Package pdftex.def Info: ../example_use/arrowhead_matrix/results/plots/r_vector
+s_3d.png  used on input line 158.
+(pdftex.def)             Requested size: 362.37569pt x 368.92607pt.
+ [68
+pdfTeX warning (ext4): destination with the same identifier (name{figure.42}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.162 
+       <../example_use/arrowhead_matrix/results/plots/eigenvector_3_no_labels.p
+ng>]) (./include/arrowhead_generalized.tex [69
+pdfTeX warning (ext4): destination with the same identifier (name{figure.43}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.2 \newpage
+             <../example_use/arrowhead_matrix/results/plots/r_vectors_3d.png>]
+[70] [71]
+File: ../example_use/arrowhead_matrix/results/plots/all_eigenvalues_2d.png Grap
+hic file (type png)
+<use ../example_use/arrowhead_matrix/results/plots/all_eigenvalues_2d.png>
+Package pdftex.def Info: ../example_use/arrowhead_matrix/results/plots/all_eige
+nvalues_2d.png  used on input line 150.
+(pdftex.def)             Requested size: 362.37569pt x 253.32262pt.
+ [72]
+File: ../example_use/arrowhead_matrix/results/plots/eigenvalue_0_2d.png Graphic
+ file (type png)
+<use ../example_use/arrowhead_matrix/results/plots/eigenvalue_0_2d.png>
+Package pdftex.def Info: ../example_use/arrowhead_matrix/results/plots/eigenval
+ue_0_2d.png  used on input line 159.
+(pdftex.def)             Requested size: 362.37569pt x 228.30482pt.
+File: ../example_use/arrowhead_matrix/results/plots/eigenvalue_1_2d.png Graphic
+ file (type png)
+<use ../example_use/arrowhead_matrix/results/plots/eigenvalue_1_2d.png>
+Package pdftex.def Info: ../example_use/arrowhead_matrix/results/plots/eigenval
+ue_1_2d.png  used on input line 166.
+(pdftex.def)             Requested size: 362.37569pt x 231.41167pt.
+ [73
+pdfTeX warning (ext4): destination with the same identifier (name{figure.44}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.170 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{figure.45}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.170 
+      ]
+File: ../example_use/arrowhead_matrix/results/plots/eigenvalue_2_2d.png Graphic
+ file (type png)
+<use ../example_use/arrowhead_matrix/results/plots/eigenvalue_2_2d.png>
+Package pdftex.def Info: ../example_use/arrowhead_matrix/results/plots/eigenval
+ue_2_2d.png  used on input line 173.
+(pdftex.def)             Requested size: 362.37569pt x 231.41167pt.
+File: ../example_use/arrowhead_matrix/results/plots/eigenvalue_3_2d.png Graphic
+ file (type png)
+<use ../example_use/arrowhead_matrix/results/plots/eigenvalue_3_2d.png>
+Package pdftex.def Info: ../example_use/arrowhead_matrix/results/plots/eigenval
+ue_3_2d.png  used on input line 180.
+(pdftex.def)             Requested size: 362.37569pt x 233.78395pt.
+ [74
+pdfTeX warning (ext4): destination with the same identifier (name{figure.46}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.184 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{figure.47}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.184 
+      ]
+File: ../example_use/arrowhead_matrix/results/plots/eigenvectors_no_labels.png 
+Graphic file (type png)
+<use ../example_use/arrowhead_matrix/results/plots/eigenvectors_no_labels.png>
+Package pdftex.def Info: ../example_use/arrowhead_matrix/results/plots/eigenvec
+tors_no_labels.png  used on input line 191.
+(pdftex.def)             Requested size: 362.37569pt x 320.87773pt.
+File: ../example_use/arrowhead_matrix/results/plots/eigenvector_0_no_labels.png
+ Graphic file (type png)
+<use ../example_use/arrowhead_matrix/results/plots/eigenvector_0_no_labels.png>
+
+Package pdftex.def Info: ../example_use/arrowhead_matrix/results/plots/eigenvec
+tor_0_no_labels.png  used on input line 200.
+(pdftex.def)             Requested size: 362.37569pt x 318.04057pt.
+ [75
+pdfTeX warning (ext4): destination with the same identifier (name{figure.48}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.204 
+      
+pdfTeX warning (ext4): destination with the same identifier (name{figure.49}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.204 
+      ]
+File: ../example_use/arrowhead_matrix/results/plots/eigenvector_1_no_labels.png
+ Graphic file (type png)
+<use ../example_use/arrowhead_matrix/results/plots/eigenvector_1_no_labels.png>
+
+Package pdftex.def Info: ../example_use/arrowhead_matrix/results/plots/eigenvec
+tor_1_no_labels.png  used on input line 207.
+(pdftex.def)             Requested size: 362.37569pt x 322.53813pt.
+ [76
+pdfTeX warning (ext4): destination with the same identifier (name{figure.50}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.211 
+      ]
+File: ../example_use/arrowhead_matrix/results/plots/eigenvector_2_no_labels.png
+ Graphic file (type png)
+<use ../example_use/arrowhead_matrix/results/plots/eigenvector_2_no_labels.png>
+
+Package pdftex.def Info: ../example_use/arrowhead_matrix/results/plots/eigenvec
+tor_2_no_labels.png  used on input line 214.
+(pdftex.def)             Requested size: 362.37569pt x 322.05624pt.
+ [77
+pdfTeX warning (ext4): destination with the same identifier (name{figure.51}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.218 
+      ]
+File: ../example_use/arrowhead_matrix/results/plots/eigenvector_3_no_labels.png
+ Graphic file (type png)
+<use ../example_use/arrowhead_matrix/results/plots/eigenvector_3_no_labels.png>
+
+Package pdftex.def Info: ../example_use/arrowhead_matrix/results/plots/eigenvec
+tor_3_no_labels.png  used on input line 221.
+(pdftex.def)             Requested size: 362.37569pt x 321.735pt.
+ [78
+pdfTeX warning (ext4): destination with the same identifier (name{figure.52}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.225 
+      ]
+File: ../example_use/arrowhead_matrix/results/plots/r_vectors_3d.png Graphic fi
+le (type png)
+<use ../example_use/arrowhead_matrix/results/plots/r_vectors_3d.png>
+Package pdftex.def Info: ../example_use/arrowhead_matrix/results/plots/r_vector
+s_3d.png  used on input line 232.
+(pdftex.def)             Requested size: 362.37569pt x 368.92607pt.
+ [79
+pdfTeX warning (ext4): destination with the same identifier (name{figure.53}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.236 
+      ] [80
+pdfTeX warning (ext4): destination with the same identifier (name{figure.54}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.343 \end{verbatim}
+                    ] [81]
+Overfull \hbox (2.42401pt too wide) in paragraph at lines 345--346
+[]\OT1/cmr/m/n/10 The full im-ple-men-ta-tion can be found in the \OT1/cmtt/m/n
+/10 arrowhead.py \OT1/cmr/m/n/10 file in the \OT1/cmtt/m/n/10 example[]use/arro
+whead[]matrix
+ []
+
+) (./include/conclusion.tex [82] [83]) (./include/appendix_code.tex [84]
+[85] [86] [87] [88] [89] [90] [91] [92] [93] [94] [95] [96] [97] [98] [99]
+[100] [101] [102] [103] [104] [105] [106] [107] [108] [109])
+(./include/appendix_example_application.tex [110] [111] [112] [113] [114]
+[115] [116] [117] [118]) (./include/appendix_arrowhead_generalized.tex [119]
+[120
+pdfTeX warning (ext4): destination with the same identifier (name{table.3}) has
+ been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.93 \end{verbatim}
+                   ] [121] [122] [123] [124]
+<../example_use/arrowhead_matrix/testing/plots/all_eigenvalues_2d.png, id=5150,
+ 723.6636pt x 505.89pt>
+File: ../example_use/arrowhead_matrix/testing/plots/all_eigenvalues_2d.png Grap
+hic file (type png)
+<use ../example_use/arrowhead_matrix/testing/plots/all_eigenvalues_2d.png>
+Package pdftex.def Info: ../example_use/arrowhead_matrix/testing/plots/all_eige
+nvalues_2d.png  used on input line 354.
+(pdftex.def)             Requested size: 362.37569pt x 253.32262pt.
+<../example_use/arrowhead_matrix/testing/plots/eigenvectors_no_labels.png, id=5
+151, 744.6219pt x 659.3433pt>
+File: ../example_use/arrowhead_matrix/testing/plots/eigenvectors_no_labels.png 
+Graphic file (type png)
+<use ../example_use/arrowhead_matrix/testing/plots/eigenvectors_no_labels.png>
+Package pdftex.def Info: ../example_use/arrowhead_matrix/testing/plots/eigenvec
+tors_no_labels.png  used on input line 361.
+(pdftex.def)             Requested size: 362.37569pt x 320.87773pt.
+ [125
+pdfTeX warning (ext4): destination with the same identifier (name{figure.55}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.365 
+       <../example_use/arrowhead_matrix/testing/plots/all_eigenvalues_2d.png>]
+<../example_use/arrowhead_matrix/testing/plots/r_vectors_3d.png, id=5164, 466.3
+824pt x 474.8139pt>
+File: ../example_use/arrowhead_matrix/testing/plots/r_vectors_3d.png Graphic fi
+le (type png)
+<use ../example_use/arrowhead_matrix/testing/plots/r_vectors_3d.png>
+Package pdftex.def Info: ../example_use/arrowhead_matrix/testing/plots/r_vector
+s_3d.png  used on input line 368.
+(pdftex.def)             Requested size: 362.37569pt x 368.92607pt.
+) (./include/appendix_berry_phase.tex [126
+pdfTeX warning (ext4): destination with the same identifier (name{figure.56}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.1 \section
+            {Berry Phase Calculation in Quantum Systems} <../example_use/arrowh
+ead_matrix/testing/plots/eigenvectors_no_labels.png>] [127
+pdfTeX warning (ext4): destination with the same identifier (name{figure.57}) h
+as been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.24 \end{equation}
+                    <../example_use/arrowhead_matrix/testing/plots/r_vectors_3d
+.png>]
+Overfull \hbox (10.53294pt too wide) in paragraph at lines 70--80
+ [][] 
+ []
+
+[128
+pdfTeX warning (ext4): destination with the same identifier (name{table.4}) has
+ been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.87 
+     ] [129]) [130] (./main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 42EE934749A57AAF3A7043F29BF57908;18587.
+(rerunfilecheck)             Checksum: 673F7E2DED26164B8C8B3C2C6AEA6611;37475.
  ) 
 Here is how much of TeX's memory you used:
- 24369 strings out of 474222
- 437680 string characters out of 5748733
- 2464975 words of memory out of 5000000
- 45134 multiletter control sequences out of 15000+600000
- 567507 words of font info for 73 fonts, out of 8000000 for 9000
+ 27677 strings out of 474222
+ 502187 string characters out of 5748733
+ 2830975 words of memory out of 5000000
+ 45729 multiletter control sequences out of 15000+600000
+ 568126 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,14n,87p,598b,2101s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,12n,87p,1069b,2099s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texli
-ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/tex
-mf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/
-public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
-amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9
-.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/s
-hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/share/te
-xmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/publ
-ic/cm-super/sftt0800.pfb>
-Output written on main.pdf (52 pages, 12712412 bytes).
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+r5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/sha
+re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/share/texlive/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/font
+s/type1/public/amsfonts/cm/cmtt8.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf/fonts/type1/public/cm-sup
+er/sfrm1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt0800.pfb>
+Output written on main.pdf (130 pages, 10862606 bytes).
 PDF statistics:
- 2106 PDF objects out of 2487 (max. 8388607)
- 1944 compressed objects within 20 object streams
- 1091 named destinations out of 1200 (max. 500000)
- 1073 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 6079 PDF objects out of 6186 (max. 8388607)
+ 5749 compressed objects within 58 object streams
+ 3787 named destinations out of 4296 (max. 500000)
+ 1914 words of extra memory for PDF output out of 10000 (max. 10000000)
 

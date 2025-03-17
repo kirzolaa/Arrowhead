@@ -1,56 +1,99 @@
+\newpage
 \section{Implementation}
 
-The generalized implementation of the Orthogonal Vectors Generator and Visualizer is designed to be modular, configurable, and easy to use. This section describes the implementation details of the package.
+The Orthogonal Vector Visualization System is designed to be flexible, configurable, and easy to use. This section describes the implementation details of the system.
 
 \subsection{Modular Architecture}
 
-The package is organized into the following modules:
+The system is organized into the following modules:
 
 \begin{itemize}
-    \item \texttt{vector\_utils.py}: Contains functions for vector calculations.
-    \item \texttt{visualization.py}: Provides functions for visualizing vectors.
-    \item \texttt{config.py}: Implements a configuration management system.
-    \item \texttt{main.py}: Provides a command-line interface.
-    \item \texttt{example.py}: Contains example scripts.
-    \item \texttt{\_\_init\_\_.py}: Package initialization and exports.
+    \item \texttt{vector\_utils.py}: Vector generation and component calculation functions.
+    \item \texttt{visualization.py}: Comprehensive visualization functions for 2D and 3D plotting.
+    \item \texttt{config.py}: Configuration management and serialization.
+    \item \texttt{main.py}: Command-line interface and main program logic.
+    \item \texttt{example\_circle.py}: Example generating a sphere-like pattern using orthogonal vectors.
+    \item \texttt{example\_circle\_xy.py}: Example generating a traditional circle in the XY plane.
+    \item \texttt{example\_orthogonal\_circle.py}: Example with improved visualization of orthogonal vectors.
 \end{itemize}
 
 This modular architecture allows for easy maintenance, extension, and reuse of the code.
 
-\subsection{Vector Utilities}
+\subsection{Vector Generation}
 
-The \texttt{vector\_utils.py} module provides functions for vector calculations, including:
+The \texttt{vector\_utils.py} module provides functions for vector generation and component calculation, including:
 
 \begin{itemize}
-    \item \texttt{create\_orthogonal\_vectors}: Creates three orthogonal vectors from a given origin point.
-    \item \texttt{check\_orthogonality}: Checks if a set of vectors is orthogonal.
+    \item \texttt{create\_orthogonal\_vectors}: Generates vectors orthogonal to the x=y=z line from a given origin point, with options for standard or perfect circle generation.
+    \item \texttt{create\_perfect\_orthogonal\_vectors}: Generates a single vector using the perfect orthogonal circle method.
+    \item \texttt{create\_perfect\_orthogonal\_circle}: Generates multiple vectors forming a perfect circle in the plane orthogonal to the x=y=z line.
+    \item \texttt{check\_orthogonality}: Checks if the component vectors are orthogonal.
     \item \texttt{calculate\_displacement\_vectors}: Calculates the displacement vectors from the origin.
     \item \texttt{calculate\_dot\_products}: Calculates the dot products between vectors.
 \end{itemize}
 
-The \texttt{create\_orthogonal\_vectors} function implements the mathematical formulation described in the previous section. It takes the origin point, distance parameter, and angle parameter as inputs and returns the three orthogonal vectors.
+The \texttt{create\_orthogonal\_vectors} function has been enhanced to support both the original scalar formula method and the new perfect circle generation method. When the \texttt{perfect} parameter is set to \texttt{True}, it uses the \texttt{create\_perfect\_orthogonal\_circle} function to generate a perfect circle in the plane orthogonal to the x=y=z line.
+
+\subsection{Perfect Orthogonal Circle Implementation}
+
+The perfect orthogonal circle implementation uses normalized basis vectors to ensure that all points are exactly at the specified distance from the origin and perfectly orthogonal to the (1,1,1) direction. The implementation includes:
+
+\begin{itemize}
+    \item \texttt{create\_perfect\_orthogonal\_vectors}: Generates a single vector at a specific angle using normalized basis vectors.
+    \item \texttt{create\_perfect\_orthogonal\_circle}: Generates multiple vectors forming a perfect circle or circle segment by varying the angle parameter.
+\end{itemize}
+
+The perfect orthogonal circle method has several advantages over the original method:
+
+\begin{itemize}
+    \item \textbf{Exact Distance}: All points are exactly at the specified distance from the origin, with zero numerical error.
+    \item \textbf{Perfect Orthogonality}: All points are perfectly orthogonal to the (1,1,1) direction, with dot products effectively zero.
+    \item \textbf{Circle Segments}: The method supports generating partial circles by specifying start and end angles.
+    \item \textbf{Arbitrary Origin}: The method supports an arbitrary origin point, not just the origin at (0,0,0).
+\end{itemize}
+
+The implementation has been thoroughly tested and verified to ensure that it meets these criteria.
 
 \subsection{Visualization}
 
-The \texttt{visualization.py} module provides functions for visualizing vectors, including:
+The \texttt{visualization.py} module provides comprehensive functions for visualizing vectors, including:
 
 \begin{itemize}
-    \item \texttt{plot\_vectors\_3d}: Plots vectors in 3D space.
-    \item \texttt{plot\_vectors\_2d}: Plots vectors in various 2D projections.
-    \item \texttt{plot\_vectors}: A high-level function that plots vectors in either 3D or 2D, depending on the configuration.
+    \item \texttt{plot\_vectors\_3d}: Plots vectors in 3D space with enhanced axis representation.
+    \item \texttt{plot\_vectors\_2d\_projection}: Plots 2D projections (xy, xz, yz, r0 planes).
+    \item \texttt{plot\_all\_projections}: Plots all projections of a single vector.
+    \item \texttt{plot\_multiple\_vectors\_3d}: Plots multiple vectors in 3D with optional endpoints-only mode.
+    \item \texttt{plot\_multiple\_vectors\_2d}: Plots 2D projections of multiple vectors.
+    \item \texttt{plot\_multiple\_vectors}: Plots multiple vectors in all projections.
 \end{itemize}
 
-The visualization functions use Matplotlib to create the plots. The 3D visualization shows the vectors in three-dimensional space, while the 2D visualizations show projections onto the XY, XZ, and YZ planes, as well as a projection onto the plane containing the origin point.
+The visualization functions use Matplotlib to create the plots. The 3D visualization shows the vectors in three-dimensional space, while the 2D visualizations show projections onto the XY, XZ, and YZ planes. The endpoints-only option allows for clearer visualization of point patterns by only plotting the endpoints of vectors rather than the full arrows.
+
+\subsubsection{Enhanced Visualization Features}
+
+The visualization module has been enhanced with several features to improve clarity and spatial understanding:
+
+\begin{itemize}
+    \item \textbf{Color-coded Axes}: The X (red), Y (green), and Z (blue) axes are color-coded for easy identification.
+    \item \textbf{Coordinate Labels}: Integer coordinate values are displayed along each axis, color-matched to the axis color.
+    \item \textbf{Tick Marks}: Small tick marks along each axis for better spatial reference.
+    \item \textbf{Data-driven Scaling}: The axis limits are dynamically adjusted based on the actual data points.
+    \item \textbf{Equal Aspect Ratio}: The 3D plots maintain an equal aspect ratio for accurate spatial representation.
+    \item \textbf{Buffer Zones}: Small buffer zones are added around the data points for better visibility.
+\end{itemize}
+
+These enhancements significantly improve the visual representation of the orthogonal vectors, making it easier to understand their spatial relationships and properties. The implementation includes careful consideration of color choices, label placement, and scaling to ensure optimal visualization regardless of the specific vector configuration being displayed.
 
 \subsection{Configuration Management}
 
 The \texttt{config.py} module implements a configuration management system with the \texttt{VectorConfig} class. This class provides a unified way to configure all aspects of vector generation and visualization, including:
 
 \begin{itemize}
-    \item Origin point
-    \item Distance parameter
-    \item Angle parameter
-    \item Visualization type (3D or 2D)
+    \item Origin vector (R\_0)
+    \item Distance parameter (d)
+    \item Angle parameter (theta)
+    \item Distance and angle ranges for multiple vector generation
+    \item Endpoints-only plotting option
     \item Plot title and labels
     \item Plot saving options
 \end{itemize}
@@ -59,19 +102,34 @@ The \texttt{VectorConfig} class also provides methods for saving configurations 
 
 \subsection{Command-line Interface}
 
-The \texttt{main.py} module provides a command-line interface for the package. This interface allows users to generate and visualize orthogonal vectors without writing Python code. The command-line interface supports all the configuration options provided by the \texttt{VectorConfig} class, as well as additional options for controlling the behavior of the program.
+The \texttt{main.py} module provides a comprehensive command-line interface for the system. This interface allows users to generate and visualize orthogonal vectors with extensive options, including:
 
-\subsection{Package Initialization}
+\begin{itemize}
+    \item Setting the origin vector with -R or --origin
+    \item Setting the distance parameter with -d or --distance
+    \item Setting the angle parameter with -a or --angle
+    \item Generating multiple vectors with --d-range and --theta-range
+    \item Enabling endpoints-only plotting with --endpoints
+    \item Controlling visualization options with --no-r0-plane, --no-legend, and --no-grid
+    \item Saving plots with --save-plots and --output-dir
+    \item Managing configurations with --config and --save-config
+\end{itemize}
 
-The \texttt{\_\_init\_\_.py} module initializes the package and exports the key functions and classes, making them available when the package is imported. This makes it easy to use the package in other Python projects.
+\subsection{Circle Examples}
 
-\subsection{Example Scripts}
+The system includes three example scripts demonstrating different approaches to generating and visualizing circle and sphere-like patterns:
 
-The \texttt{example.py} module contains example scripts demonstrating different use cases of the package. These examples serve as a starting point for users who want to use the package in their own projects.
+\begin{itemize}
+    \item \texttt{example\_circle.py}: Generates points using orthogonal vector formulas, creating a sphere-like pattern.
+    \item \texttt{example\_circle\_xy.py}: Creates a traditional circle in the XY plane.
+    \item \texttt{example\_orthogonal\_circle.py}: Similar to the first example but with improved visualization.
+\end{itemize}
+
+These examples generate 73 points (from 0 to 360 degrees in 5-degree increments) and plot only the endpoints of the vectors, providing a clear visualization of the patterns formed.
 
 \subsection{Dependencies}
 
-The package depends on the following Python libraries:
+The system depends on the following Python libraries:
 
 \begin{itemize}
     \item \texttt{numpy}: For numerical computations
@@ -80,4 +138,4 @@ The package depends on the following Python libraries:
     \item \texttt{argparse}: For command-line interface
 \end{itemize}
 
-These dependencies are specified in the \texttt{requirements.txt} file, making it easy to install them using pip.
+These dependencies are specified in the \texttt{requirements.txt} file, making it easy to install them using pip and a virtual environment.
