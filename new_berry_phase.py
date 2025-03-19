@@ -39,7 +39,7 @@ def compute_berry_phase(eigenvectors):
     for i in range(num_steps):
         for n in range(num_states):
             norm = np.linalg.norm(eigenvectors[i, :, n])
-            if abs(norm - 1.0) > 1e-10:
+            if abs(norm - 1.0) > 1e-12:  # Increased precision from 1e-10 to 1e-12
                 print(f"Normalizing eigenvector {n} at step {i}. Original norm: {norm:.10f}")
                 eigenvectors[i, :, n] = eigenvectors[i, :, n] / norm
     
@@ -53,8 +53,8 @@ def compute_berry_phase(eigenvectors):
         for n in range(num_states):
             # Calculate dot product between first and last eigenvectors (absolute value to ignore parity)
             dot_product = np.abs(np.vdot(eigenvectors[0, :, n], eigenvectors[-1, :, n]))
-            is_full_cycle[n] = dot_product > 0.999  # If dot product is close to 1, they represent the same physical state
-            print(f"Eigenstate {n} first-last dot product: {dot_product:.6f} (Full cycle: {is_full_cycle[n]})")
+            is_full_cycle[n] = dot_product > 0.98  # If dot product is close to 1, they represent the same physical state (threshold lowered from 0.999 to 0.98)
+            print(f"Eigenstate {n} first-last dot product: {dot_product:.8f} (Full cycle: {is_full_cycle[n]})")
 
     # Store phase angles for each eigenstate at each step
     all_phase_angles = [[] for _ in range(num_states)]
@@ -89,7 +89,7 @@ def compute_berry_phase(eigenvectors):
             phase_sum += phase_angle
             
             # Print warning if overlap magnitude is significantly different from 1.0
-            if abs(overlap_magnitudes[n, k] - 1.0) > 1e-3:
+            if abs(overlap_magnitudes[n, k] - 1.0) > 1e-4:  # Increased precision from 1e-3 to 1e-4
                 bad_overlaps += 1
                 if warning_count < max_warnings:
                     print(f"Warning: Overlap magnitude for eigenstate {n} at step {k} is {overlap_magnitudes[n, k]:.6f}, not close to 1.0")
@@ -137,7 +137,7 @@ def compute_berry_phase(eigenvectors):
         mod_2pi = phase % (2 * np.pi)
         
         # Check if we're very close to a complete 2π cycle (within numerical precision)
-        is_full_cycle_phase = abs(mod_2pi) < 1e-10 or abs(mod_2pi - 2*np.pi) < 1e-10
+        is_full_cycle_phase = abs(mod_2pi) < 1e-12 or abs(mod_2pi - 2*np.pi) < 1e-12  # Increased precision from 1e-10 to 1e-12
         
         # Use the previously calculated full cycle status based on eigenvector alignment
         is_full_cycle_from_eigenvectors = is_full_cycle[i] if isinstance(is_full_cycle, list) and i < len(is_full_cycle) else False

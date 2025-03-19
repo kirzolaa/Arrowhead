@@ -1,10 +1,12 @@
-
+#https://github.com/kirzolaa/Arrowhead
+#cd /home/zoli/arrowhead/Arrowhead && python3 new_berry_phase.py --input_dir generalized/example_use/arrowhead_matrix/results --save_plots > log.txt
 Loading eigenvectors from: generalized/example_use/arrowhead_matrix/results
 Loaded 73 eigenvector files. Shape: (73, 4, 4)
-Eigenstate 0 first-last dot product: 0.999748 (Full cycle: True)
-Eigenstate 1 first-last dot product: 0.997880 (Full cycle: False)
-Eigenstate 2 first-last dot product: 0.987289 (Full cycle: False)
-Eigenstate 3 first-last dot product: 0.989085 (Full cycle: False)
+Eigenstate 0 first-last dot product: 0.99974760 (Full cycle: True)
+Eigenstate 1 first-last dot product: 0.99787979 (Full cycle: True)
+Eigenstate 2 first-last dot product: 0.98728940 (Full cycle: True)
+Eigenstate 3 first-last dot product: 0.98908472 (Full cycle: True)
+Warning: Overlap magnitude for eigenstate 0 at step 1 is 0.999700, not close to 1.0
 Warning: Overlap magnitude for eigenstate 0 at step 11 is 0.998360, not close to 1.0
 Warning: Overlap magnitude for eigenstate 0 at step 12 is 0.998151, not close to 1.0
 Warning: Overlap magnitude for eigenstate 0 at step 22 is 0.996195, not close to 1.0
@@ -15,24 +17,23 @@ Warning: Overlap magnitude for eigenstate 0 at step 44 is 0.993890, not close to
 Warning: Overlap magnitude for eigenstate 0 at step 45 is 0.994172, not close to 1.0
 Warning: Overlap magnitude for eigenstate 0 at step 55 is 0.997817, not close to 1.0
 Warning: Overlap magnitude for eigenstate 0 at step 56 is 0.998174, not close to 1.0
-Eigenstate 0 had 10/72 problematic overlaps
+Warning: Overlap magnitude for eigenstate 0 at step 66 is 0.999751, not close to 1.0
+Warning: Overlap magnitude for eigenstate 0 at step 67 is 0.999797, not close to 1.0
+Warning: Overlap magnitude for eigenstate 0 at step 70 is 0.999813, not close to 1.0
+Eigenstate 0 had 14/72 problematic overlaps
 Eigenstate 0 had 0 parity flips during the cycle
 Warning: Overlap magnitude for eigenstate 1 at step 1 is 0.996887, not close to 1.0
+Warning: Overlap magnitude for eigenstate 1 at step 2 is 0.999758, not close to 1.0
+Warning: Overlap magnitude for eigenstate 1 at step 3 is 0.999607, not close to 1.0
+Warning: Overlap magnitude for eigenstate 1 at step 4 is 0.999337, not close to 1.0
 Warning: Overlap magnitude for eigenstate 1 at step 5 is 0.998834, not close to 1.0
 Warning: Overlap magnitude for eigenstate 1 at step 6 is 0.997870, not close to 1.0
-Warning: Overlap magnitude for eigenstate 1 at step 7 is 0.996043, not close to 1.0
-Warning: Overlap magnitude for eigenstate 1 at step 8 is 0.992971, not close to 1.0
-Warning: Overlap magnitude for eigenstate 1 at step 9 is 0.989389, not close to 1.0
-Warning: Overlap magnitude for eigenstate 1 at step 10 is 0.988132, not close to 1.0
-Warning: Overlap magnitude for eigenstate 1 at step 11 is 0.711432, not close to 1.0
-Warning: Overlap magnitude for eigenstate 1 at step 12 is 0.609133, not close to 1.0
-Warning: Overlap magnitude for eigenstate 1 at step 13 is 0.994016, not close to 1.0
 Too many warnings, suppressing further overlap warnings...
-Eigenstate 1 had 41/72 problematic overlaps
+Eigenstate 1 had 56/72 problematic overlaps
 Eigenstate 1 had 65 parity flips during the cycle
-Eigenstate 2 had 55/72 problematic overlaps
+Eigenstate 2 had 69/72 problematic overlaps
 Eigenstate 2 had 46 parity flips during the cycle
-Eigenstate 3 had 43/72 problematic overlaps
+Eigenstate 3 had 56/72 problematic overlaps
 Eigenstate 3 had 4 parity flips during the cycle
 
 Berry Phase Analysis:
