@@ -29,8 +29,8 @@ class ArrowheadMatrix4x4:
     Class to generate and manipulate a 4x4 arrowhead matrix based on a single orthogonal vector.
     """
     
-    def __init__(self, R_0=(0, 0, 0), d=0.05, theta=0, 
-                 coupling_constant=0.1, omega=0.01, perfect=True):
+    def __init__(self, R_0=(0, 0, 0), d=0.02, theta=0, 
+                 coupling_constant=0.1, omega=0.005, perfect=True):
         """
         Initialize the ArrowheadMatrix4x4 generator for a single theta value.
         
@@ -81,7 +81,7 @@ class ArrowheadMatrix4x4:
             Potential value at position R
         """
         # Parabolic potential with reduced curvature to create smoother landscape
-        a = 0.1  # Reduced from 0.5 to create a gentler parabola
+        a = 0.05  # Modified curvature parameter for VX
         b = 0
         c = 0
         
@@ -104,9 +104,9 @@ class ArrowheadMatrix4x4:
         float
             Potential value at position R
         """
-        a = 0.1  # Same curvature as VX
-        x_shift = 3.5  # Modified x-shift value
-        y_shift = 2.0  # Modified y-shift value
+        a = 0.2  # Modified curvature parameter for VA
+        x_shift = 100.0  # Modified x-shift value
+        y_shift = 1000.0  # Modified y-shift value
         c = 0  # Same vertical shift as VX
         
         # Create a shifted version of VX

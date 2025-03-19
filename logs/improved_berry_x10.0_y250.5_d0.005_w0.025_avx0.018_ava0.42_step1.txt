@@ -1,0 +1,86 @@
+Loaded 361 eigenvector files. Shape: (361, 4, 4)
+Loaded 361 eigenvalue files. Shape: (361, 4)
+
+Tracking eigenstates by maximum overlap...
+  Step 30, Eigenstate 0: Tracked to index 0 (Overlap: 1.000000)
+  Step 30, Eigenstate 1: Tracked to index 2 (Overlap: 1.000000)
+  Step 30, Eigenstate 2: Tracked to index 1 (Overlap: 1.000000)
+  Step 30, Eigenstate 3: Tracked to index 3 (Overlap: 1.000000)
+  Step 60, Eigenstate 0: Tracked to index 0 (Overlap: 1.000000)
+  Step 60, Eigenstate 1: Tracked to index 3 (Overlap: 1.000000)
+  Step 60, Eigenstate 2: Tracked to index 2 (Overlap: 1.000000)
+  Step 60, Eigenstate 3: Tracked to index 1 (Overlap: 1.000000)
+  Step 90, Eigenstate 0: Tracked to index 0 (Overlap: 1.000000)
+  Step 90, Eigenstate 1: Tracked to index 1 (Overlap: 1.000000)
+  Step 90, Eigenstate 2: Tracked to index 2 (Overlap: 1.000000)
+  Step 90, Eigenstate 3: Tracked to index 3 (Overlap: 1.000000)
+  Step 120, Eigenstate 0: Tracked to index 0 (Overlap: 1.000000)
+  Step 120, Eigenstate 1: Tracked to index 3 (Overlap: 1.000000)
+  Step 120, Eigenstate 2: Tracked to index 2 (Overlap: 1.000000)
+  Step 120, Eigenstate 3: Tracked to index 1 (Overlap: 1.000000)
+  Step 150, Eigenstate 0: Tracked to index 0 (Overlap: 1.000000)
+  Step 150, Eigenstate 1: Tracked to index 3 (Overlap: 1.000000)
+  Step 150, Eigenstate 2: Tracked to index 2 (Overlap: 1.000000)
+  Step 150, Eigenstate 3: Tracked to index 1 (Overlap: 1.000000)
+  Step 180, Eigenstate 0: Tracked to index 0 (Overlap: 1.000000)
+  Step 180, Eigenstate 1: Tracked to index 3 (Overlap: 1.000000)
+  Step 180, Eigenstate 2: Tracked to index 2 (Overlap: 1.000000)
+  Step 180, Eigenstate 3: Tracked to index 1 (Overlap: 1.000000)
+  Step 210, Eigenstate 0: Tracked to index 0 (Overlap: 1.000000)
+  Step 210, Eigenstate 1: Tracked to index 2 (Overlap: 1.000000)
+  Step 210, Eigenstate 2: Tracked to index 3 (Overlap: 1.000000)
+  Step 210, Eigenstate 3: Tracked to index 1 (Overlap: 1.000000)
+  Step 240, Eigenstate 0: Tracked to index 0 (Overlap: 1.000000)
+  Step 240, Eigenstate 1: Tracked to index 2 (Overlap: 1.000000)
+  Step 240, Eigenstate 2: Tracked to index 3 (Overlap: 1.000000)
+  Step 240, Eigenstate 3: Tracked to index 1 (Overlap: 1.000000)
+  Step 270, Eigenstate 0: Tracked to index 0 (Overlap: 1.000000)
+  Step 270, Eigenstate 1: Tracked to index 1 (Overlap: 1.000000)
+  Step 270, Eigenstate 2: Tracked to index 2 (Overlap: 1.000000)
+  Step 270, Eigenstate 3: Tracked to index 3 (Overlap: 1.000000)
+  Step 300, Eigenstate 0: Tracked to index 0 (Overlap: 1.000000)
+  Step 300, Eigenstate 1: Tracked to index 1 (Overlap: 1.000000)
+  Step 300, Eigenstate 2: Tracked to index 2 (Overlap: 1.000000)
+  Step 300, Eigenstate 3: Tracked to index 3 (Overlap: 1.000000)
+  Step 330, Eigenstate 0: Tracked to index 0 (Overlap: 1.000000)
+  Step 330, Eigenstate 1: Tracked to index 1 (Overlap: 1.000000)
+  Step 330, Eigenstate 2: Tracked to index 2 (Overlap: 1.000000)
+  Step 330, Eigenstate 3: Tracked to index 3 (Overlap: 1.000000)
+  Step 360, Eigenstate 0: Tracked to index 0 (Overlap: 1.000000)
+  Step 360, Eigenstate 1: Tracked to index 2 (Overlap: 1.000000)
+  Step 360, Eigenstate 2: Tracked to index 1 (Overlap: 1.000000)
+  Step 360, Eigenstate 3: Tracked to index 3 (Overlap: 1.000000)
+Total eigenstate reorderings: 540 (out of 1444 possible)
+Eigenstate 0 first-last dot product: 1.00000000 (Full cycle: True)
+Eigenstate 1 first-last dot product: 1.00000000 (Full cycle: True)
+Eigenstate 2 first-last dot product: 1.00000000 (Full cycle: True)
+Eigenstate 3 first-last dot product: 1.00000000 (Full cycle: True)
+Eigenstate 0 had 0/360 problematic overlaps
+Eigenstate 0 had 0 parity flips during the cycle
+Eigenstate 1 had 0/360 problematic overlaps
+Eigenstate 1 had 15 parity flips during the cycle
+Eigenstate 2 had 0/360 problematic overlaps
+Eigenstate 2 had 116 parity flips during the cycle
+Eigenstate 3 had 0/360 problematic overlaps
+Eigenstate 3 had 3 parity flips during the cycle
+
+Berry Phase Analysis:
+------------------------------------------------------------------------------------------------------------------------
+Eigenstate Raw Phase (rad) Winding Number  Mod 2π Phase    Normalized      Quantized       Error      Full Cycle     
+------------------------------------------------------------------------------------------------------------------------
+0          0.000000        0               0.000000        0.000000        0.000000        0.000000   True           
+1          0.000000        0               0.000000        0.000000        0.000000        0.000000   True           
+2          0.000000        0               3.141593        -3.141593       -3.141593       0.000000   True           
+3          0.000000        0               0.000000        0.000000        0.000000        0.000000   True           
+Saved eigenvalue evolution plot to improved_berry_phase_plots_x10.0_y250.5_d0.005_w0.025_avx0.018_ava0.42/eigenvalue_evolution.png
+Saved phase contributions plot to improved_berry_phase_plots_x10.0_y250.5_d0.005_w0.025_avx0.018_ava0.42/phase_contributions.png
+Saved cumulative phase plot to improved_berry_phase_plots_x10.0_y250.5_d0.005_w0.025_avx0.018_ava0.42/cumulative_phase.png
+Saved parity flips plot to improved_berry_phase_plots_x10.0_y250.5_d0.005_w0.025_avx0.018_ava0.42/parity_flips.png
+Saved overlap magnitudes plot to improved_berry_phase_plots_x10.0_y250.5_d0.005_w0.025_avx0.018_ava0.42/overlap_magnitudes.png
+Saved eigenstate tracking plot to improved_berry_phase_plots_x10.0_y250.5_d0.005_w0.025_avx0.018_ava0.42/eigenstate_tracking.png
+All visualizations created and saved to improved_berry_phase_plots_x10.0_y250.5_d0.005_w0.025_avx0.018_ava0.42
+Results saved to improved_berry_phase_results/improved_berry_phase_summary.txt
+
+Improved Berry phase calculation complete!
+Results saved to improved_berry_phase_results
+Plots saved to improved_berry_phase_plots
