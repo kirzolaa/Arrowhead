@@ -72,13 +72,6 @@ Eigenstate Raw Phase (rad) Winding Number  Mod 2π Phase    Normalized      Quan
 1          0.000000        0               0.000000        0.000000        0.000000        0.000000   True           
 2          0.000000        0               3.141593        -3.141593       -3.141593       0.000000   True           
 3          0.000000        0               0.000000        0.000000        0.000000        0.000000   True           
-Saved eigenvalue evolution plot to improved_berry_phase_plots_x22.5_y547.7222222222222_d0.005_w0.025_avx0.018_ava0.42/eigenvalue_evolution.png
-Saved phase contributions plot to improved_berry_phase_plots_x22.5_y547.7222222222222_d0.005_w0.025_avx0.018_ava0.42/phase_contributions.png
-Saved cumulative phase plot to improved_berry_phase_plots_x22.5_y547.7222222222222_d0.005_w0.025_avx0.018_ava0.42/cumulative_phase.png
-Saved parity flips plot to improved_berry_phase_plots_x22.5_y547.7222222222222_d0.005_w0.025_avx0.018_ava0.42/parity_flips.png
-Saved overlap magnitudes plot to improved_berry_phase_plots_x22.5_y547.7222222222222_d0.005_w0.025_avx0.018_ava0.42/overlap_magnitudes.png
-Saved eigenstate tracking plot to improved_berry_phase_plots_x22.5_y547.7222222222222_d0.005_w0.025_avx0.018_ava0.42/eigenstate_tracking.png
-All visualizations created and saved to improved_berry_phase_plots_x22.5_y547.7222222222222_d0.005_w0.025_avx0.018_ava0.42
 Results saved to improved_berry_phase_results/improved_berry_phase_summary.txt
 
 Improved Berry phase calculation complete!

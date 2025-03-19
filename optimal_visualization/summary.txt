@@ -1,0 +1,22 @@
+Optimal Configuration Analysis (0 Parity Flips in Eigenstate 3)
+==========================================================
+
+Parameters:
+  x_shift: 22.5
+  y_shift: 547.7222222222222
+  d_param: 0.005
+  omega: 0.025
+  a_vx: 0.018
+  a_va: 0.42
+
+Berry Phases:
+
+Parity Flips:
+
+Total Parity Flips: 0
+Eigenstate 3 Parity Flips: N/A (Target: 0)
+
+Files:
+  Results: ./parameter_analysis/results/improved_berry_phase_summary_x22.5_y525.5_d0.005_w0.025_avx0.018_ava0.42.txt
+  Plots: optimal_visualization/plots/
+  Summary: optimal_visualization/summary.txt

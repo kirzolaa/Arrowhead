@@ -13,8 +13,12 @@ import matplotlib.pyplot as plt
 import os
 import argparse
 import glob
-from improved_berry_phase import load_eigenvectors_from_directory, compute_improved_berry_phase
-from berry_phase_visualization import create_all_visualizations
+import sys
+
+# Add berry directory to path
+sys.path.append(os.path.join(os.path.dirname(__file__), 'berry'))
+from berry.improved_berry_phase import load_eigenvectors_from_directory, compute_improved_berry_phase
+from berry.berry_phase_visualization import create_all_visualizations
 
 def extract_theta_values(file_paths):
     """Extract theta values from file names."""
@@ -24,11 +28,8 @@ def extract_theta_values(file_paths):
         filename = os.path.basename(file_path)
         theta_str = filename.split('_')[-1].split('.')[0]
         try:
-            # Convert to float and then to radians if needed
+            # Convert to float - these are always in degrees in the filename
             theta = float(theta_str)
-            # Check if theta is in degrees (assuming values > 6.28 are degrees)
-            if theta > 6.28:
-                theta = np.radians(theta)
             theta_values.append(theta)
         except ValueError:
             print(f"Warning: Could not extract theta value from {filename}")
@@ -122,6 +123,13 @@ def main():
         print("Warning: Could not extract theta values from filenames. Using evenly spaced values.")
         theta_values = np.linspace(0, 2*np.pi, eigenvectors.shape[0])
     
+    # Print debugging information about theta values and eigenvalues
+    print(f"\nDebugging Information:")
+    print(f"Theta values shape: {theta_values.shape}")
+    print(f"Theta values range: {np.min(theta_values)} to {np.max(theta_values)}")
+    print(f"Eigenvalues shape: {eigenvalues.shape}")
+    print(f"Sample theta values: {theta_values[:5]} ... {theta_values[-5:]}")
+    
     # Compute improved Berry phases
     results = compute_improved_berry_phase(eigenvectors, eigenvalues, theta_values)
     
@@ -140,9 +148,9 @@ def main():
             plot_dir_with_params += f"_ava{args.a_va}"
             
         os.makedirs(plot_dir_with_params, exist_ok=True)
-        create_all_visualizations(results, theta_values, eigenvalues, plot_dir_with_params)
+        create_all_visualizations(results, plot_dir_with_params, theta_values, eigenvalues)
     else:
-        create_all_visualizations(results, theta_values, eigenvalues, args.plot_dir)
+        create_all_visualizations(results, args.plot_dir, theta_values, eigenvalues)
     
     # Save results to file with all parameters in filename if provided
     if args.x_shift is not None and args.y_shift is not None:
