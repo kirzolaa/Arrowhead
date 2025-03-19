@@ -1,0 +1,2 @@
+Loaded 361 eigenvector files. Shape: (361, 4, 4)
+Plots saved to parity_plots/ directory.

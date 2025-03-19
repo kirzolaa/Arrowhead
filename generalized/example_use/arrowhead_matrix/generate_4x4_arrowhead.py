@@ -105,8 +105,8 @@ class ArrowheadMatrix4x4:
             Potential value at position R
         """
         a = 0.1  # Same curvature as VX
-        x_shift = 1.5  # Increased shift along the x-axis (from 1.0 to 1.5)
-        y_shift = 1.5  # Increased shift along the y-axis (from 1.0 to 1.5)
+        x_shift = 3.5  # Modified x-shift value
+        y_shift = 2.0  # Modified y-shift value
         c = 0  # Same vertical shift as VX
         
         # Create a shifted version of VX
@@ -497,7 +497,7 @@ def main():
     d = 0.5
     theta_start = 0
     theta_end = 360  # Degrees
-    theta_step = 5   # 5-degree steps
+    theta_step = 1   # Modified theta step
     coupling_constant = 0.1
     omega = 1.0
     
