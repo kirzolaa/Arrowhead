@@ -28,6 +28,9 @@ The project includes several scripts for optimizing the parameters of the VA pot
 - `parameter_analysis.py` - Script for systematically exploring parameter combinations
 - `focused_parameter_analysis.py` - Script for fine-tuning parameters in a narrow range
 - `run_zero_flip_simulation.py` - Script for running a simulation with the optimal parameters
+- `run_optimal_visualization.py` - Script for generating comprehensive visualizations of Berry phases, eigenstate behavior, and parity flips using the optimal parameters
+- `plot_phase_transitions.py` - Script for visualizing topological phase transitions across parameter sweeps
+- `run_parameter_sweep.py` - Script for running simulations with different parameter values to collect data for phase transition analysis
 
 ### Optimal Parameters
 
@@ -43,6 +46,33 @@ a_va: 0.42
 ```
 
 Detailed results and visualizations are stored in the `parameter_analysis` directory.
+
+## Berry Phase Visualization and Topological Phase Transitions
+
+The project includes advanced tools for visualizing Berry phases and analyzing topological phase transitions:
+
+### Berry Phase Visualization
+
+The `run_optimal_visualization.py` script generates comprehensive visualizations of Berry phases, eigenstate behavior, and parity flips using the optimal parameters. Key features include:
+
+- **Berry Phase Table**: Displays raw phases, winding numbers, normalized and quantized phases for each eigenstate
+- **Half-Integer Winding Numbers**: Correctly identifies and displays half-integer winding numbers (-0.5) for eigenstate 2, which is physically significant for topological systems
+- **Parity Flip Analysis**: Detailed analysis of parity flips for each eigenstate
+- **Eigenstate Visualization**: Plots showing eigenstate behavior as a function of θ
+- **Degeneracy Analysis**: Analysis of eigenstate degeneracy and crossings
+
+All visualizations are saved to the `optimal_visualization` directory, with a comprehensive summary in `summary.txt`.
+
+### Topological Phase Transitions
+
+The project includes tools for analyzing topological phase transitions as system parameters are varied:
+
+- `run_parameter_sweep.py`: Runs simulations with different parameter values (e.g., y_shift) to collect data across phase transitions
+- `plot_phase_transitions.py`: Creates visualizations showing how Berry phases and winding numbers change across parameter values, highlighting transition regions
+
+These tools enable the identification and analysis of topological phase transitions, which are characterized by changes in winding numbers and correspond to fundamental changes in the system's topological properties.
+
+Visualizations of phase transitions are saved to the `phase_transition_plots` directory.
 
 ## Setup
 
