@@ -30,14 +30,14 @@ Quantized Berry Phases (multiples of π):
   Eigenstate 3: 0.000000 rad = 0π (Quantization error: 0.000000, Theoretical diff: 3.141593)
 
 Overlap Analysis:
-  Eigenstate 0: 0/72 problematic overlaps
-    Min overlap: 0.999999, Max overlap: 1.000000, Mean: 1.000000
+  Eigenstate 0: 10/72 problematic overlaps
+    Min overlap: 0.993706, Max overlap: 0.999997, Mean: 0.999429
   Eigenstate 1: 41/72 problematic overlaps
-    Min overlap: 0.000000, Max overlap: 1.000000, Mean: 0.821369
-  Eigenstate 2: 41/72 problematic overlaps
-    Min overlap: 0.000000, Max overlap: 1.000000, Mean: 0.821290
-  Eigenstate 3: 2/72 problematic overlaps
-    Min overlap: 0.998329, Max overlap: 1.000000, Mean: 0.999843
+    Min overlap: 0.063386, Max overlap: 0.999987, Mean: 0.904144
+  Eigenstate 2: 55/72 problematic overlaps
+    Min overlap: 0.309215, Max overlap: 0.999924, Mean: 0.943120
+  Eigenstate 3: 43/72 problematic overlaps
+    Min overlap: 0.248039, Max overlap: 0.999994, Mean: 0.925444
 
 Interpretation of Berry Phase Results:
 -----------------------------------

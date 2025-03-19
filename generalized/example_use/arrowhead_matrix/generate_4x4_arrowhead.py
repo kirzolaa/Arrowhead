@@ -29,7 +29,7 @@ class ArrowheadMatrix4x4:
     Class to generate and manipulate a 4x4 arrowhead matrix based on a single orthogonal vector.
     """
     
-    def __init__(self, R_0=(0, 0, 0), d=0.1, theta=0, 
+    def __init__(self, R_0=(0, 0, 0), d=0.05, theta=0, 
                  coupling_constant=0.1, omega=0.01, perfect=True):
         """
         Initialize the ArrowheadMatrix4x4 generator for a single theta value.
@@ -39,7 +39,7 @@ class ArrowheadMatrix4x4:
         R_0 : tuple
             Origin vector (x, y, z)
         d : float
-            Distance parameter
+            Distance parameter (lowered from 0.1 to 0.05 to make potentials more separate)
         theta : float
             Theta value in radians
         coupling_constant : float
@@ -92,8 +92,7 @@ class ArrowheadMatrix4x4:
     def potential_va(self, R):
         """
         Calculate the VA potential at position R.
-        This is a shifted parabolic potential with a gentler curvature
-        and a smaller shift to reduce rapid phase accumulation
+        This is exactly like the VX potential but shifted on both x and y axes
         
         Parameters:
         -----------
@@ -105,20 +104,20 @@ class ArrowheadMatrix4x4:
         float
             Potential value at position R
         """
-        a = 0.2  # Reduced from 0.5 to create a gentler parabola
-        b = 0.0  # Linear term coefficient
-        x0 = 0.1  # Reduced shift from 0.3 to create less dramatic shifts
-        c = 0.5   # Reduced vertical shift from 1.0
+        a = 0.1  # Same curvature as VX
+        x_shift = 1.5  # Increased shift along the x-axis (from 1.0 to 1.5)
+        y_shift = 1.5  # Increased shift along the y-axis (from 1.0 to 1.5)
+        c = 0  # Same vertical shift as VX
         
-        # Use a weighted combination of components for a smoother potential
-        r_mag = np.linalg.norm(R)
-        if r_mag > 1e-10:
-            # Create a smoother potential that depends on the magnitude and direction
-            # This helps reduce the rapid phase accumulation
-            return a * (r_mag - x0)**2 + b * (r_mag - x0) + c
+        # Create a shifted version of VX
+        # We shift the input coordinates before calculating the potential
+        x, y, z = R
+        shifted_R = np.array([x - x_shift, y - y_shift, z])
         
-        # If all components are zero
-        return c
+        # Calculate the potential using the same formula as VX
+        r_mag = np.linalg.norm(shifted_R)
+        return a * r_mag**2 + c
+        
     
     def generate_matrix(self):
         """
