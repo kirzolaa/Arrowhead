@@ -138,13 +138,13 @@ where $\bm{R}_{\text{shift}} = (x_{\text{shift}}, x_{\text{shift}}, x_{\text{shi
 
 \subsection{Analytical Berry Connection and Phase}
 
-Even though our Hamiltonian does not have explicit $\theta$-dependent phase factors, the Berry connection can still be calculated analytically based on the system's eigenstates. In our implementation, we use the following formula for the Berry connection:
+Even though our Hamiltonian does not have explicit $\theta$-dependent phase factors, the Berry connection can still be calculated analytically based on the system's eigenstates. In our implementation with parabolic potentials, we use the following formula for the Berry connection:
 
 \begin{equation}
 A_n(\theta) = \begin{cases}
 0 & \text{for } n = 0, 3 \\
--\frac{1}{4} & \text{for } n = 1 \\
-\frac{1}{4} & \text{for } n = 2
+-\frac{1}{2} & \text{for } n = 1 \\
+-\frac{1}{2} & \text{for } n = 2
 \end{cases}
 \end{equation}
 
@@ -155,6 +155,26 @@ The Berry phase is then calculated by integrating the Berry connection around th
 \end{equation}
 
 This gives the quantized Berry phases:
+
+\begin{equation}
+\gamma_n = \begin{cases}
+0 & \text{for } n = 0, 3 \\
+-\pi & \text{for } n = 1 \\
+-\pi & \text{for } n = 2
+\end{cases}
+\end{equation}
+
+For comparison, in the original implementation with the optimal parameter set, the Berry connection was:
+
+\begin{equation}
+A_n(\theta) = \begin{cases}
+0 & \text{for } n = 0, 3 \\
+-\frac{1}{4} & \text{for } n = 1 \\
+\frac{1}{4} & \text{for } n = 2
+\end{cases}
+\end{equation}
+
+Which gave the Berry phases:
 
 \begin{equation}
 \gamma_n = \begin{cases}
