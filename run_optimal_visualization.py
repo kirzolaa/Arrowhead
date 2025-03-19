@@ -12,6 +12,7 @@ import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
 import re
 import time
+import shutil
 import glob
 
 # Add berry directory to path
@@ -151,6 +152,17 @@ def parse_results_file():
                 if os.path.exists(results_filename):
                     break
             
+            # If still not found, try to look in the logs directory for berry phase logs
+            if not os.path.exists(results_filename):
+                print("Looking for berry phase logs in the logs directory...")
+                logs_dir = "logs"
+                if os.path.exists(logs_dir):
+                    for filename in os.listdir(logs_dir):
+                        if ("berry_phase" in filename or "improved_berry" in filename) and filename.endswith(".txt"):
+                            results_filename = os.path.join(logs_dir, filename)
+                            print(f"Using log file: {results_filename}")
+                            break
+            
             if not os.path.exists(results_filename):
                 print("No results files found.")
                 return None
@@ -169,8 +181,16 @@ def parse_results_file():
     
     # Extract parity flips
     parity_flips = {}
+    # Try the standard format first
     parity_pattern = r"Eigenstate (\d+) parity flips: (\d+)"
-    for match in re.finditer(parity_pattern, content):
+    matches = list(re.finditer(parity_pattern, content))
+    
+    # If no matches found, try the alternative format from the log file
+    if not matches:
+        parity_pattern = r"Eigenstate (\d+) had (\d+) parity flips during the cycle"
+        matches = list(re.finditer(parity_pattern, content))
+    
+    for match in matches:
         eigenstate = int(match.group(1))
         flips = int(match.group(2))
         parity_flips[eigenstate] = flips
@@ -341,14 +361,28 @@ def create_comprehensive_infographic(results, eigenstate_data=None):
     
     # 4. Plot eigenstate vs theta (if available)
     if eigenstate_data:
-        ax4 = fig.add_subplot(gs[2, :])
+        # Create normalized data
+        normalized_data = {}
+        all_values = np.concatenate([data[:, 1] for data in eigenstate_data.values()])
+        global_min = np.min(all_values)
+        global_max = np.max(all_values)
+        global_range = global_max - global_min
+        
         for eigenstate, data in eigenstate_data.items():
             theta = data[:, 0]
             values = data[:, 1]
+            normalized_values = (values - global_min) / global_range
+            normalized_data[eigenstate] = np.column_stack((theta, normalized_values))
+        
+        # Plot normalized values instead of original
+        ax4 = fig.add_subplot(gs[2, :])
+        for eigenstate, data in normalized_data.items():
+            theta = data[:, 0]
+            values = data[:, 1]
             ax4.plot(theta, values, label=f'Eigenstate {eigenstate}')
-        ax4.set_xlabel('Theta')
-        ax4.set_ylabel('Eigenstate Value')
-        ax4.set_title('Eigenstate vs Theta')
+        ax4.set_xlabel('Theta (degrees)')
+        ax4.set_ylabel('Eigenstate Value (normalized 0-1)')
+        ax4.set_title('Eigenstate vs Theta (Normalized to 0-1 Range)')
         ax4.legend()
         ax4.grid(True, alpha=0.3)
         
@@ -391,6 +425,28 @@ def create_summary_file(results, degeneracy_data=None):
     
     summary_filename = f"{OUTPUT_DIR}/summary.txt"
     
+    # Get normalization parameters if available
+    norm_params = {}
+    
+    # First try to get normalization parameters from degeneracy data
+    if degeneracy_data and "1-2" in degeneracy_data and "normalization" in degeneracy_data["1-2"]:
+        norm_data = degeneracy_data["1-2"]["normalization"]
+        norm_params['global_min'] = norm_data["global_min"]
+        norm_params['global_max'] = norm_data["global_max"]
+        norm_params['global_range'] = norm_data["global_range"]
+    else:
+        # Otherwise try to read from file
+        norm_params_file = f"{OUTPUT_DIR}/plots/normalization_params.txt"
+        if os.path.exists(norm_params_file):
+            with open(norm_params_file, 'r') as f_norm:
+                for line in f_norm:
+                    if line.startswith("Global minimum eigenvalue:"):
+                        norm_params['global_min'] = float(line.split(":")[1].strip())
+                    elif line.startswith("Global maximum eigenvalue:"):
+                        norm_params['global_max'] = float(line.split(":")[1].strip())
+                    elif line.startswith("Global range:"):
+                        norm_params['global_range'] = float(line.split(":")[1].strip())
+    
     with open(summary_filename, 'w') as f:
         f.write("Optimal Configuration Analysis (0 Parity Flips in Eigenstate 3)\n")
         f.write("==========================================================\n\n")
@@ -413,6 +469,15 @@ def create_summary_file(results, degeneracy_data=None):
         f.write(f"Total Parity Flips: {sum(results['parity_flips'].values())}\n")
         f.write(f"Eigenstate 3 Parity Flips: {results['parity_flips'].get(3, 'N/A')} (Target: 0)\n\n")
         
+        # Add eigenvalue normalization information if available
+        if norm_params:
+            f.write("Eigenvalue Normalization:\n")
+            f.write(f"  Global Minimum: {norm_params['global_min']:.6f}\n")
+            f.write(f"  Global Maximum: {norm_params['global_max']:.6f}\n")
+            f.write(f"  Global Range: {norm_params['global_range']:.6f}\n")
+            f.write(f"  Normalization Formula: normalized = (original - {norm_params['global_min']:.6f}) / {norm_params['global_range']:.6f}\n\n")
+            f.write("  Note: All eigenstate plots and degeneracy analyses use normalized (0-1 range) values.\n\n")
+        
         # Add degeneracy information if available
         if degeneracy_data and "1-2" in degeneracy_data:
             f.write("Eigenstate Degeneracy Analysis:\n")
@@ -421,7 +486,34 @@ def create_summary_file(results, degeneracy_data=None):
             f.write(f"    Mean Difference: {data['mean']:.6f}\n")
             f.write(f"    Min Difference: {data['min']:.6f}\n")
             f.write(f"    Max Difference: {data['max']:.6f}\n")
-            f.write(f"    Std Deviation: {data['std']:.6f}\n\n")
+            f.write(f"    Std Deviation: {data['std']:.6f}\n")
+            
+            # Add more detailed analysis for the 1-2 pair (always using normalized values)
+            if data['mean'] < 0.0005:  # 0.05% of the full range
+                f.write(f"    Degeneracy Status: EXCELLENT - Mean difference is less than 0.0005 (normalized scale)\n")
+            elif data['mean'] < 0.001:  # 0.1% of the full range
+                f.write(f"    Degeneracy Status: GOOD - Mean difference is less than 0.001 (normalized scale)\n")
+            elif data['mean'] < 0.005:  # 0.5% of the full range
+                f.write(f"    Degeneracy Status: ACCEPTABLE - Mean difference is less than 0.005 (normalized scale)\n")
+            else:
+                f.write(f"    Degeneracy Status: POOR - Mean difference is greater than 0.005 (normalized scale)\n")
+                
+            # Add percentage of points with difference less than a threshold
+            if 'differences' in data:
+                # Always use normalized threshold
+                threshold = 0.0002  # 0.02% of range for normalized values
+                degenerate_points = sum(1 for diff in data['differences'] if diff < threshold)
+                total_points = len(data['differences'])
+                percentage = (degenerate_points / total_points) * 100 if total_points > 0 else 0
+                f.write(f"    Points with difference < {threshold}: {degenerate_points}/{total_points} ({percentage:.2f}%)\n")
+                
+                # Add information about where degeneracy is strongest/weakest
+                if 'theta_values' in data and len(data['theta_values']) == len(data['differences']):
+                    min_diff_idx = np.argmin(data['differences'])
+                    max_diff_idx = np.argmax(data['differences'])
+                    f.write(f"    Strongest Degeneracy: At theta = {data['theta_values'][min_diff_idx]:.1f}° (diff = {data['differences'][min_diff_idx]:.6f})\n")
+                    f.write(f"    Weakest Degeneracy: At theta = {data['theta_values'][max_diff_idx]:.1f}° (diff = {data['differences'][max_diff_idx]:.6f})\n")
+            f.write("\n")
             
             # Add information about other pairs for comparison
             f.write("  Other Eigenstate Pairs (Should NOT be degenerate):\n")
@@ -429,12 +521,25 @@ def create_summary_file(results, degeneracy_data=None):
                 if pair != "1-2":
                     f.write(f"    Eigenstates {pair}:\n")
                     f.write(f"      Mean Difference: {data['mean']:.6f}\n")
+                    f.write(f"      Min Difference: {data['min']:.6f}\n")
+                    f.write(f"      Max Difference: {data['max']:.6f}\n")
+                    f.write(f"      Std Deviation: {data['std']:.6f}\n")
+                    
+                    # Add degeneracy status for comparison (always using normalized values)
+                    if data['mean'] > 0.5:  # 50% of the full range
+                        f.write(f"      Degeneracy Status: GOOD - Mean difference is large (> 0.5, normalized scale)\n")
+                    elif data['mean'] > 0.1:  # 10% of the full range
+                        f.write(f"      Degeneracy Status: ACCEPTABLE - Mean difference is moderate (> 0.1, normalized scale)\n")
+                    else:
+                        f.write(f"      Degeneracy Status: CONCERN - Mean difference is small (< 0.1, normalized scale)\n")
             f.write("\n")
         
         f.write("Files:\n")
         f.write(f"  Results: {results['filename']}\n")
         f.write(f"  Plots: {OUTPUT_DIR}/plots/\n")
         f.write(f"  Summary: {summary_filename}\n")
+        if norm_params:
+            f.write(f"  Normalized Data: {OUTPUT_DIR}/plots/eigenstate*_vs_theta_normalized.txt\n")
     
     print(f"Summary file created: {summary_filename}")
 
@@ -535,6 +640,12 @@ def analyze_eigenstate_degeneracy(eigenstate_data):
     
     print("Analyzing eigenstate degeneracy...")
     
+    # Find global min and max across all eigenstates for normalization
+    all_values = np.concatenate([data[:, 1] for data in eigenstate_data.values()])
+    global_min = np.min(all_values)
+    global_max = np.max(all_values)
+    global_range = global_max - global_min
+    
     # Calculate the difference between eigenstate 1 and 2 at each theta
     data1 = eigenstate_data[1]
     data2 = eigenstate_data[2]
@@ -551,11 +662,14 @@ def analyze_eigenstate_degeneracy(eigenstate_data):
     # Calculate the absolute difference
     diff_12 = np.abs(values1 - values2)
     
-    # Calculate statistics
-    mean_diff = np.mean(diff_12)
-    max_diff = np.max(diff_12)
-    min_diff = np.min(diff_12)
-    std_diff = np.std(diff_12)
+    # Normalize the difference to 0-1 range
+    normalized_diff_12 = diff_12 / global_range
+    
+    # Calculate statistics on the normalized differences
+    mean_diff = np.mean(normalized_diff_12)
+    max_diff = np.max(normalized_diff_12)
+    min_diff = np.min(normalized_diff_12)
+    std_diff = np.std(normalized_diff_12)
     
     # Calculate differences for other eigenstate pairs for comparison
     degeneracy_data = {
@@ -564,8 +678,13 @@ def analyze_eigenstate_degeneracy(eigenstate_data):
             "max": max_diff,
             "min": min_diff,
             "std": std_diff,
-            "theta": theta,
-            "diff": diff_12
+            "theta_values": theta,  # Store theta values for detailed analysis
+            "differences": normalized_diff_12,  # Store normalized differences for detailed analysis
+            "normalization": {
+                "global_min": global_min,
+                "global_max": global_max,
+                "global_range": global_range
+            }
         }
     }
     
@@ -582,13 +701,21 @@ def analyze_eigenstate_degeneracy(eigenstate_data):
                 values_j = data_j[:, 1]
                 diff = np.abs(values_i - values_j)
                 
+                # Normalize the difference using the same global range
+                normalized_diff = diff / global_range
+                
                 degeneracy_data[f"{i}-{j}"] = {
-                    "mean": np.mean(diff),
-                    "max": np.max(diff),
-                    "min": np.min(diff),
-                    "std": np.std(diff),
-                    "theta": data_i[:, 0],
-                    "diff": diff
+                    "mean": np.mean(normalized_diff),
+                    "max": np.max(normalized_diff),
+                    "min": np.min(normalized_diff),
+                    "std": np.std(normalized_diff),
+                    "theta_values": data_i[:, 0],
+                    "differences": normalized_diff,
+                    "normalization": {
+                        "global_min": global_min,
+                        "global_max": global_max,
+                        "global_range": global_range
+                    }
                 }
     
     return degeneracy_data
@@ -600,17 +727,46 @@ def plot_eigenstate_theta(eigenstate_data):
     
     print("Plotting eigenstate vs theta...")
     
-    # Create figure
+    # Create normalized data by scaling to 0-1 range
+    normalized_data = {}
+    
+    # First find global min and max across all eigenstates for consistent scaling
+    all_values = np.concatenate([data[:, 1] for data in eigenstate_data.values()])
+    global_min = np.min(all_values)
+    global_max = np.max(all_values)
+    global_range = global_max - global_min
+    
+    # Save the normalization parameters to a file for reference
+    os.makedirs(f"{OUTPUT_DIR}/plots", exist_ok=True)
+    with open(f"{OUTPUT_DIR}/plots/normalization_params.txt", 'w') as f:
+        f.write(f"Global minimum eigenvalue: {global_min}\n")
+        f.write(f"Global maximum eigenvalue: {global_max}\n")
+        f.write(f"Global range: {global_range}\n")
+        f.write(f"Normalization formula: normalized = (original - {global_min}) / {global_range}\n")
+    
+    for eigenstate, data in eigenstate_data.items():
+        theta = data[:, 0]
+        values = data[:, 1]
+        
+        # Normalize the values to 0-1 range
+        normalized_values = (values - global_min) / global_range
+        
+        normalized_data[eigenstate] = np.column_stack((theta, normalized_values))
+        
+        # Save the normalized data to files
+        np.savetxt(f"{OUTPUT_DIR}/plots/eigenstate{eigenstate}_vs_theta_normalized.txt", normalized_data[eigenstate])
+    
+    # Create original plot
     plt.figure(figsize=(12, 8))
     
-    # Plot each eigenstate
+    # Plot each eigenstate (original values)
     for eigenstate, data in eigenstate_data.items():
         theta = data[:, 0]
         values = data[:, 1]
         plt.plot(theta, values, label=f'Eigenstate {eigenstate}')
     
     # Add labels and title
-    plt.xlabel('Theta')
+    plt.xlabel('Theta (degrees)')
     plt.ylabel('Eigenstate Value')
     plt.title('Eigenstate vs Theta (Optimal Configuration)')
     plt.legend()
@@ -621,7 +777,42 @@ def plot_eigenstate_theta(eigenstate_data):
     plt.savefig(f"{OUTPUT_DIR}/plots/eigenstate_vs_theta.png", dpi=300)
     plt.close()
     
-    # Also create individual plots for each eigenstate
+    # Create normalized plot
+    plt.figure(figsize=(12, 8))
+    
+    # Plot each eigenstate (normalized values)
+    for eigenstate, data in normalized_data.items():
+        theta = data[:, 0]
+        values = data[:, 1]
+        plt.plot(theta, values, label=f'Eigenstate {eigenstate}')
+    
+    # Add labels and title
+    plt.xlabel('Theta (degrees)')
+    plt.ylabel('Eigenstate Value (normalized 0-1)')
+    plt.title('Eigenstate vs Theta (Normalized to 0-1 Range)')
+    plt.legend()
+    plt.grid(True, alpha=0.3)
+    
+    # Add info text
+    info_text = (
+        "This plot shows the eigenvalues of the system\n"
+        "as a function of the parameter θ (theta).\n"
+        "Values are normalized to a 0-1 range for better visualization.\n"
+        "Original values are around 60,000.\n\n"
+        "Key features to observe:\n"
+        "- Crossing/avoided crossing points\n"
+        "- Periodicity of eigenvalues\n"
+        "- Symmetry around specific θ values"
+    )
+    plt.figtext(0.02, 0.02, info_text, fontsize=10,
+               bbox=dict(facecolor='white', alpha=0.8, boxstyle='round,pad=0.5'))
+    
+    # Save figure
+    plt.tight_layout()
+    plt.savefig(f"{OUTPUT_DIR}/plots/eigenstate_vs_theta_normalized.png", dpi=300)
+    plt.close()
+    
+    # Also create individual plots for each eigenstate (original values)
     for eigenstate, data in eigenstate_data.items():
         plt.figure(figsize=(10, 6))
         
@@ -629,7 +820,7 @@ def plot_eigenstate_theta(eigenstate_data):
         values = data[:, 1]
         plt.plot(theta, values, label=f'Eigenstate {eigenstate}')
         
-        plt.xlabel('Theta')
+        plt.xlabel('Theta (degrees)')
         plt.ylabel('Eigenstate Value')
         plt.title(f'Eigenstate {eigenstate} vs Theta (Optimal Configuration)')
         plt.legend()
@@ -637,6 +828,24 @@ def plot_eigenstate_theta(eigenstate_data):
         
         plt.tight_layout()
         plt.savefig(f"{OUTPUT_DIR}/plots/eigenstate{eigenstate}_vs_theta.png", dpi=300)
+        plt.close()
+    
+    # Also create individual plots for each eigenstate (normalized values)
+    for eigenstate, data in normalized_data.items():
+        plt.figure(figsize=(10, 6))
+        
+        theta = data[:, 0]
+        values = data[:, 1]
+        plt.plot(theta, values, label=f'Eigenstate {eigenstate}')
+        
+        plt.xlabel('Theta (degrees)')
+        plt.ylabel('Eigenstate Value (normalized 0-1)')
+        plt.title(f'Eigenstate {eigenstate} vs Theta (Normalized to 0-1 Range)')
+        plt.legend()
+        plt.grid(True, alpha=0.3)
+        
+        plt.tight_layout()
+        plt.savefig(f"{OUTPUT_DIR}/plots/eigenstate{eigenstate}_vs_theta_normalized.png", dpi=300)
         plt.close()
 
 def plot_eigenstate_degeneracy(degeneracy_data):
@@ -651,18 +860,18 @@ def plot_eigenstate_degeneracy(degeneracy_data):
     
     # Plot the difference for each pair
     for pair, data in degeneracy_data.items():
-        plt.plot(data["theta"], data["diff"], label=f'Eigenstates {pair}')
+        plt.plot(data["theta_values"], data["differences"], label=f'Eigenstates {pair}')
     
     # Add labels and title
-    plt.xlabel('Theta')
-    plt.ylabel('Absolute Difference')
-    plt.title('Eigenstate Degeneracy Analysis (Optimal Configuration)')
+    plt.xlabel('Theta (degrees)')
+    plt.ylabel('Normalized Absolute Difference (0-1 scale)')
+    plt.title('Eigenstate Degeneracy Analysis - Normalized Differences (Optimal Configuration)')
     plt.legend()
     plt.grid(True, alpha=0.3)
     
     # Save figure
     plt.tight_layout()
-    plt.savefig(f"{OUTPUT_DIR}/plots/eigenstate_degeneracy.png", dpi=300)
+    plt.savefig(f"{OUTPUT_DIR}/plots/eigenstate_degeneracy_normalized.png", dpi=300)
     plt.close()
     
     # Create a special figure focusing on the 1-2 pair
@@ -670,10 +879,10 @@ def plot_eigenstate_degeneracy(degeneracy_data):
         plt.figure(figsize=(10, 6))
         
         data = degeneracy_data["1-2"]
-        plt.plot(data["theta"], data["diff"], 'g-', linewidth=2)
+        plt.plot(data["theta_values"], data["differences"], 'g-', linewidth=2)
         
-        plt.xlabel('Theta')
-        plt.ylabel('Absolute Difference')
+        plt.xlabel('Theta (degrees)')
+        plt.ylabel('Normalized Absolute Difference (0-1 scale)')
         plt.title('Degeneracy Between Eigenstates 1 and 2 (Should be Degenerate)')
         plt.grid(True, alpha=0.3)
         
@@ -713,6 +922,67 @@ def plot_eigenstate_degeneracy(degeneracy_data):
     plt.tight_layout()
     plt.savefig(f"{OUTPUT_DIR}/plots/eigenstate_degeneracy_means.png", dpi=300)
     plt.close()
+
+def copy_logs_to_output_dir():
+    """Copy relevant log files to the output directory."""
+    print("Copying log files to output directory...")
+    
+    # Create logs directory in the output directory
+    logs_dir = f"{OUTPUT_DIR}/logs"
+    os.makedirs(logs_dir, exist_ok=True)
+    
+    # Find all relevant log files
+    source_logs_dir = "logs"
+    if os.path.exists(source_logs_dir):
+        # Get the exact parameter string for current run
+        current_param_str = f'x{OPTIMAL_PARAMS["x_shift"]}_y{OPTIMAL_PARAMS["y_shift"]}_d{OPTIMAL_PARAMS["d_param"]}_w{OPTIMAL_PARAMS["omega"]}_avx{OPTIMAL_PARAMS["a_vx"]}_ava{OPTIMAL_PARAMS["a_va"]}'
+        simple_param_str = f'x{OPTIMAL_PARAMS["x_shift"]}_y{OPTIMAL_PARAMS["y_shift"]}'
+        
+        # Copy all relevant log files
+        copied_files = 0
+        
+        # First, copy the exact current run logs (highest priority)
+        current_run_files = []
+        for filename in os.listdir(source_logs_dir):
+            if filename.endswith(".txt") and current_param_str in filename:
+                source_path = os.path.join(source_logs_dir, filename)
+                dest_path = os.path.join(logs_dir, filename)
+                shutil.copy2(source_path, dest_path)
+                copied_files += 1
+                current_run_files.append(filename)
+                print(f"Copied current run log file: {filename}")
+        
+        # Then copy other logs with the same x,y coordinates
+        for filename in os.listdir(source_logs_dir):
+            if filename.endswith(".txt") and simple_param_str in filename and filename not in current_run_files:
+                source_path = os.path.join(source_logs_dir, filename)
+                dest_path = os.path.join(logs_dir, filename)
+                shutil.copy2(source_path, dest_path)
+                copied_files += 1
+                print(f"Copied related log file: {filename}")
+        
+        # Finally, copy a limited number of other berry phase logs for reference
+        other_files = []
+        for filename in os.listdir(source_logs_dir):
+            if filename.endswith(".txt") and (
+                ("berry" in filename.lower() or "improved_berry" in filename.lower()) and 
+                filename not in current_run_files and 
+                simple_param_str not in filename
+            ):
+                other_files.append(filename)
+        
+        # Sort by modification time (newest first) and take the 10 most recent
+        other_files.sort(key=lambda f: os.path.getmtime(os.path.join(source_logs_dir, f)), reverse=True)
+        for filename in other_files[:10]:  # Only copy the 10 most recent files
+            source_path = os.path.join(source_logs_dir, filename)
+            dest_path = os.path.join(logs_dir, filename)
+            shutil.copy2(source_path, dest_path)
+            copied_files += 1
+            print(f"Copied reference log file: {filename}")
+        
+        print(f"Copied {copied_files} log files to {logs_dir}")
+    else:
+        print(f"Source logs directory not found: {source_logs_dir}")
 
 def main():
     """Main function to run the optimal visualization."""
@@ -755,6 +1025,9 @@ def main():
     
     # Create summary file
     create_summary_file(results, degeneracy_data)
+    
+    # Copy log files to output directory
+    copy_logs_to_output_dir()
     
     elapsed_time = time.time() - start_time
     print(f"\nOptimal visualization completed in {elapsed_time:.2f} seconds.")

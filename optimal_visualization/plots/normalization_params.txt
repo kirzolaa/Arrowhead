@@ -1,0 +1,4 @@
+Global minimum eigenvalue: 0.012499500598763976
+Global maximum eigenvalue: 60190.65670772453
+Global range: 60190.64420822393
+Normalization formula: normalized = (original - 0.012499500598763976) / 60190.64420822393
