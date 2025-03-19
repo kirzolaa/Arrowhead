@@ -76,12 +76,111 @@ def plot_eigenstate_vs_theta(eigenstate_data, output_dir):
     if not eigenstate_data:
         return
     
+    # Create normalized data by scaling to 0-1 range
+    normalized_data = {}
+    
+    # First find global min and max across all eigenstates for consistent scaling
+    all_values = np.concatenate([data[:, 1] for data in eigenstate_data.values()])
+    global_min = np.min(all_values)
+    global_max = np.max(all_values)
+    global_range = global_max - global_min
+    
+    # Save the normalization parameters to a file for reference
+    os.makedirs(output_dir, exist_ok=True)
+    with open(f"{output_dir}/normalization_params.txt", 'w') as f:
+        f.write(f"Global minimum eigenvalue: {global_min}\n")
+        f.write(f"Global maximum eigenvalue: {global_max}\n")
+        f.write(f"Global range: {global_range}\n")
+        f.write(f"Normalization formula: normalized = (original - {global_min}) / {global_range}\n")
+    
+    for eigenstate, data in eigenstate_data.items():
+        theta = data[:, 0]
+        values = data[:, 1]
+        
+        # Normalize the values to 0-1 range
+        normalized_values = (values - global_min) / global_range
+        
+        normalized_data[eigenstate] = np.column_stack((theta, normalized_values))
+        
+        # Save the normalized data to files
+        np.savetxt(f"{output_dir}/eigenstate{eigenstate}_vs_theta_normalized.txt", normalized_data[eigenstate])
+    
     # Create combined plot with cleaner visualization
     plt.figure(figsize=(12, 8))
     
     # Use distinct colors for each eigenstate
     colors = ['blue', 'red', 'green', 'purple']
     linestyles = ['-', '--', '-.', ':']
+    
+    # Plot the normalized data
+    for eigenstate, data in sorted(normalized_data.items()):
+        theta = data[:, 0]
+        values = data[:, 1]
+        color_idx = eigenstate % len(colors)
+        style_idx = eigenstate % len(linestyles)
+        plt.plot(theta, values, 
+                 color=colors[color_idx], 
+                 linestyle=linestyles[style_idx],
+                 linewidth=2,
+                 label=f'Eigenstate {eigenstate}')
+    
+    plt.xlabel('Theta (degrees)', fontsize=12)
+    plt.ylabel('Eigenvalue (normalized 0-1)', fontsize=12)
+    plt.title('Eigenvalues vs Theta (Normalized to 0-1 Range)', fontsize=14, fontweight='bold')
+    plt.legend(fontsize=10)
+    plt.grid(True, alpha=0.3)
+    plt.xlim(0, 360)
+    
+    # Add vertical lines at 90, 180, 270 degrees
+    for angle in [90, 180, 270]:
+        plt.axvline(x=angle, color='gray', linestyle='--', alpha=0.5)
+    
+    # Add a text box with information about the plot
+    info_text = (
+        "This plot shows the eigenvalues of the system\n"
+        "as a function of the parameter θ (theta).\n"
+        "Values are normalized to a 0-1 range for better visualization.\n"
+        "Original values are around 60,000.\n\n"
+        "Key features to observe:\n"
+        "- Crossing/avoided crossing points\n"
+        "- Periodicity of eigenvalues\n"
+        "- Symmetry around specific θ values"
+    )
+    plt.figtext(0.02, 0.02, info_text, fontsize=10,
+               bbox=dict(facecolor='white', alpha=0.8, boxstyle='round,pad=0.5'))
+    
+    os.makedirs(output_dir, exist_ok=True)
+    plt.tight_layout()
+    plt.savefig(f"{output_dir}/eigenvalues_vs_theta_normalized.png", dpi=300)
+    plt.close()
+    
+    # Also create individual plots for each eigenstate (normalized)
+    for eigenstate, data in sorted(normalized_data.items()):
+        plt.figure(figsize=(10, 6))
+        theta = data[:, 0]
+        values = data[:, 1]
+        color_idx = eigenstate % len(colors)
+        
+        plt.plot(theta, values, 
+                 color=colors[color_idx],
+                 linewidth=2)
+        
+        plt.xlabel('Theta (degrees)', fontsize=12)
+        plt.ylabel('Eigenvalue (normalized 0-1)', fontsize=12)
+        plt.title(f'Eigenstate {eigenstate} vs Theta (Normalized to 0-1 Range)', fontsize=14, fontweight='bold')
+        plt.grid(True, alpha=0.3)
+        plt.xlim(0, 360)
+        
+        # Add vertical lines at 90, 180, 270 degrees
+        for angle in [90, 180, 270]:
+            plt.axvline(x=angle, color='gray', linestyle='--', alpha=0.5)
+        
+        plt.tight_layout()
+        plt.savefig(f"{output_dir}/eigenstate{eigenstate}_vs_theta_normalized.png", dpi=300)
+        plt.close()
+        
+    # Also create the original plots for reference
+    plt.figure(figsize=(12, 8))
     
     for eigenstate, data in sorted(eigenstate_data.items()):
         theta = data[:, 0]
@@ -96,7 +195,7 @@ def plot_eigenstate_vs_theta(eigenstate_data, output_dir):
     
     plt.xlabel('Theta (degrees)', fontsize=12)
     plt.ylabel('Eigenvalue', fontsize=12)
-    plt.title('Eigenvalues vs Theta', fontsize=14, fontweight='bold')
+    plt.title('Eigenvalues vs Theta (Original Values)', fontsize=14, fontweight='bold')
     plt.legend(fontsize=10)
     plt.grid(True, alpha=0.3)
     plt.xlim(0, 360)
@@ -105,22 +204,34 @@ def plot_eigenstate_vs_theta(eigenstate_data, output_dir):
     for angle in [90, 180, 270]:
         plt.axvline(x=angle, color='gray', linestyle='--', alpha=0.5)
     
-    # Add a text box with information about the plot
-    info_text = (
-        "This plot shows the eigenvalues of the system\n"
-        "as a function of the parameter θ (theta).\n\n"
-        "Key features to observe:\n"
-        "- Crossing/avoided crossing points\n"
-        "- Periodicity of eigenvalues\n"
-        "- Symmetry around specific θ values"
-    )
-    plt.figtext(0.02, 0.02, info_text, fontsize=10,
-               bbox=dict(facecolor='white', alpha=0.8, boxstyle='round,pad=0.5'))
-    
-    os.makedirs(output_dir, exist_ok=True)
     plt.tight_layout()
     plt.savefig(f"{output_dir}/eigenvalues_vs_theta.png", dpi=300)
     plt.close()
+    
+    # Also create individual plots for each eigenstate (original values)
+    for eigenstate, data in sorted(eigenstate_data.items()):
+        plt.figure(figsize=(10, 6))
+        theta = data[:, 0]
+        values = data[:, 1]
+        color_idx = eigenstate % len(colors)
+        
+        plt.plot(theta, values, 
+                 color=colors[color_idx],
+                 linewidth=2)
+        
+        plt.xlabel('Theta (degrees)', fontsize=12)
+        plt.ylabel('Eigenvalue', fontsize=12)
+        plt.title(f'Eigenstate {eigenstate} vs Theta', fontsize=14, fontweight='bold')
+        plt.grid(True, alpha=0.3)
+        plt.xlim(0, 360)
+        
+        # Add vertical lines at 90, 180, 270 degrees
+        for angle in [90, 180, 270]:
+            plt.axvline(x=angle, color='gray', linestyle='--', alpha=0.5)
+        
+        plt.tight_layout()
+        plt.savefig(f"{output_dir}/eigenstate{eigenstate}_vs_theta.png", dpi=300)
+        plt.close()
 
 def plot_eigenstate_degeneracy(eigenstate_data, output_dir):
     """Plot the degeneracy between eigenstates."""
@@ -242,7 +353,7 @@ def plot_eigenstate_degeneracy(eigenstate_data, output_dir):
     plt.savefig(f"{output_dir}/eigenstate1_2_degeneracy.png", dpi=300)
     plt.close()
 
-def create_all_visualizations(results, theta_values, eigenvalues, output_dir):
+def create_all_visualizations(results, output_dir, theta_values=None, eigenvalues=None):
     """Create all visualizations for Berry phase analysis."""
     os.makedirs(output_dir, exist_ok=True)
     
@@ -266,11 +377,23 @@ def create_all_visualizations(results, theta_values, eigenvalues, output_dir):
     eigenstate_data = {}
     if theta_values is not None and eigenvalues is not None and len(theta_values) == len(eigenvalues):
         # Ensure theta values are in degrees for visualization
-        theta_degrees = theta_values.copy()
-        # If values are in radians (between 0 and 2π), convert to degrees
+        # Convert from numpy array to standard Python list if necessary
+        if isinstance(theta_values, np.ndarray):
+            theta_degrees = theta_values.copy()
+        else:
+            theta_degrees = np.array(theta_values)
+            
+        # Check if values are in radians (between 0 and 2π) or if they're file indices
         if np.max(theta_degrees) <= 2 * np.pi:
             print("Converting theta values from radians to degrees for visualization")
             theta_degrees = np.degrees(theta_degrees)
+        elif np.max(theta_degrees) <= 360 and np.min(theta_degrees) >= 0:
+            # Already in degrees, no conversion needed
+            print("Theta values already in degrees (0-360 range)")
+        else:
+            # Likely file indices, convert to degrees (0-360 range)
+            print("Converting theta values from file indices to degrees (0-360 range)")
+            theta_degrees = np.linspace(0, 360, len(theta_degrees))
         
         # Sort the data by theta values to ensure proper plotting
         sort_indices = np.argsort(theta_degrees)

@@ -12,6 +12,7 @@ import matplotlib.pyplot as plt
 from matplotlib.gridspec import GridSpec
 import re
 import time
+import glob
 
 # Add berry directory to path
 sys.path.append(os.path.join(os.path.dirname(__file__), 'berry'))
@@ -445,8 +446,12 @@ def extract_eigenstate_theta_data():
     eigenstate_files = []
     plots_dir = f"{OUTPUT_DIR}/plots/plots_x{OPTIMAL_PARAMS['x_shift']}_y{OPTIMAL_PARAMS['y_shift']}_d{OPTIMAL_PARAMS['d_param']}_w{OPTIMAL_PARAMS['omega']}_avx{OPTIMAL_PARAMS['a_vx']}_ava{OPTIMAL_PARAMS['a_va']}_step1"
     
-    if not os.path.exists(plots_dir):
-        print(f"Plots directory not found: {plots_dir}")
+    # Also look in the improved berry phase plots directory
+    improved_plots_dir = f"improved_berry_phase_plots_x{OPTIMAL_PARAMS['x_shift']}_y{OPTIMAL_PARAMS['y_shift']}_d{OPTIMAL_PARAMS['d_param']}_w{OPTIMAL_PARAMS['omega']}_avx{OPTIMAL_PARAMS['a_vx']}_ava{OPTIMAL_PARAMS['a_va']}"
+    
+    # Check if either directory exists
+    if not os.path.exists(plots_dir) and not os.path.exists(improved_plots_dir):
+        print(f"Plots directories not found: {plots_dir} or {improved_plots_dir}")
         # Try to find the plots directory with a pattern match
         for root, dirs, files in os.walk(OUTPUT_DIR):
             for d in dirs:
@@ -456,20 +461,70 @@ def extract_eigenstate_theta_data():
                     break
             if plots_dir != f"{OUTPUT_DIR}/plots/plots_x{OPTIMAL_PARAMS['x_shift']}_y{OPTIMAL_PARAMS['y_shift']}_d{OPTIMAL_PARAMS['d_param']}_w{OPTIMAL_PARAMS['omega']}_avx{OPTIMAL_PARAMS['a_vx']}_ava{OPTIMAL_PARAMS['a_va']}_step1":
                 break
+    elif os.path.exists(improved_plots_dir):
+        plots_dir = improved_plots_dir
+        print(f"Using improved berry phase plots directory: {plots_dir}")
     
     # Look for eigenstate data files
     eigenstate_data = {}
+    
+    # First try to find text files with data
     for i in range(4):  # Assuming 4 eigenstates (0, 1, 2, 3)
         data_file = f"{plots_dir}/eigenstate{i}_vs_theta.txt"
         if os.path.exists(data_file):
             eigenstate_data[i] = np.loadtxt(data_file)
             eigenstate_files.append(data_file)
     
+    # If no text files found, we'll need to generate the data from the eigenvector files
     if not eigenstate_data:
-        print("No eigenstate vs theta data files found.")
+        print("No eigenstate vs theta data files found. Attempting to generate from eigenvector files...")
+        
+        # Find the eigenvector files
+        eigenvector_dir = "/home/zoli/arrowhead/Arrowhead/generalized/example_use/arrowhead_matrix/results"
+        if os.path.exists(eigenvector_dir):
+            # Get the list of eigenvector files
+            eigenvector_files = sorted(glob.glob(os.path.join(eigenvector_dir, "eigenvectors_theta_*.npy")))
+            eigenvalue_files = sorted(glob.glob(os.path.join(eigenvector_dir, "eigenvalues_theta_*.npy")))
+            
+            if eigenvector_files and eigenvalue_files:
+                print(f"Found {len(eigenvector_files)} eigenvector files and {len(eigenvalue_files)} eigenvalue files")
+                
+                # Create theta values array (0 to 360 degrees)
+                theta_values = np.linspace(0, 360, len(eigenvector_files))
+                
+                # Load eigenvalues
+                eigenvalues = []
+                for file in eigenvalue_files:
+                    eigenvalues.append(np.load(file))
+                eigenvalues = np.array(eigenvalues)
+                
+                # Normalize eigenvalues for better visualization
+                # First, calculate the mean of each eigenstate
+                eigenvalue_means = np.mean(eigenvalues, axis=0)
+                
+                # Subtract the mean to center around zero
+                normalized_eigenvalues = eigenvalues - eigenvalue_means[np.newaxis, :]
+                
+                # Also save the original eigenvalues
+                original_eigenstate_data = {}
+                
+                # Create eigenstate data with normalized values
+                for i in range(eigenvalues.shape[1]):  # For each eigenstate
+                    eigenstate_data[i] = np.column_stack((theta_values, normalized_eigenvalues[:, i]))
+                    original_eigenstate_data[i] = np.column_stack((theta_values, eigenvalues[:, i]))
+                
+                # Save the data to text files for future use
+                os.makedirs(plots_dir, exist_ok=True)
+                for i, data in eigenstate_data.items():
+                    np.savetxt(f"{plots_dir}/eigenstate{i}_vs_theta_normalized.txt", data)
+                    np.savetxt(f"{plots_dir}/eigenstate{i}_vs_theta.txt", original_eigenstate_data[i])
+                    print(f"Saved eigenstate {i} data to {plots_dir}/eigenstate{i}_vs_theta.txt and normalized version")
+    
+    if not eigenstate_data:
+        print("No eigenstate vs theta data could be found or generated.")
         return None
     
-    print(f"Found eigenstate vs theta data files: {len(eigenstate_data)}")
+    print(f"Found eigenstate vs theta data for {len(eigenstate_data)} eigenstates")
     return eigenstate_data
 
 def analyze_eigenstate_degeneracy(eigenstate_data):

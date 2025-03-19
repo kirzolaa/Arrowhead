@@ -1,6 +1,12 @@
 Loaded 361 eigenvector files. Shape: (361, 4, 4)
 Loaded 361 eigenvalue files. Shape: (361, 4)
 
+Debugging Information:
+Theta values shape: (361,)
+Theta values range: 0.0 to 360.0
+Eigenvalues shape: (361, 4)
+Sample theta values: [  0.   1.  10. 100. 101.] ... [95. 96. 97. 98. 99.]
+
 Tracking eigenstates by maximum overlap...
   Step 30, Eigenstate 0: Tracked to index 0 (Overlap: 1.000000)
   Step 30, Eigenstate 1: Tracked to index 2 (Overlap: 1.000000)
@@ -72,6 +78,7 @@ Eigenstate Raw Phase (rad) Winding Number  Mod 2π Phase    Normalized      Quan
 1          0.000000        0               0.000000        0.000000        0.000000        0.000000   True           
 2          0.000000        0               3.141593        -3.141593       -3.141593       0.000000   True           
 3          0.000000        0               0.000000        0.000000        0.000000        0.000000   True           
+Theta values already in degrees (0-360 range)
 Results saved to improved_berry_phase_results/improved_berry_phase_summary.txt
 
 Improved Berry phase calculation complete!

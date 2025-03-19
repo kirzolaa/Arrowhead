@@ -16,6 +16,25 @@ Parity Flips:
 Total Parity Flips: 0
 Eigenstate 3 Parity Flips: N/A (Target: 0)
 
+Eigenstate Degeneracy Analysis:
+  Eigenstates 1-2 (Should be degenerate):
+    Mean Difference: 29.276595
+    Min Difference: 0.018750
+    Max Difference: 89.423914
+    Std Deviation: 33.508957
+
+  Other Eigenstate Pairs (Should NOT be degenerate):
+    Eigenstates 0-1:
+      Mean Difference: 60071.907090
+    Eigenstates 0-2:
+      Mean Difference: 60101.183685
+    Eigenstates 0-3:
+      Mean Difference: 60130.590061
+    Eigenstates 1-3:
+      Mean Difference: 58.682970
+    Eigenstates 2-3:
+      Mean Difference: 29.406376
+
 Files:
   Results: ./parameter_analysis/results/improved_berry_phase_summary_x22.5_y525.5_d0.005_w0.025_avx0.018_ava0.42.txt
   Plots: optimal_visualization/plots/

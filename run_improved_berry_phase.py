@@ -147,6 +147,10 @@ def main():
         if args.a_va is not None:
             plot_dir_with_params += f"_ava{args.a_va}"
             
+        # Ensure plot_dir_with_params is a string, not a numpy array
+        if isinstance(plot_dir_with_params, np.ndarray):
+            plot_dir_with_params = str(plot_dir_with_params)
+            
         os.makedirs(plot_dir_with_params, exist_ok=True)
         create_all_visualizations(results, plot_dir_with_params, theta_values, eigenvalues)
     else:
