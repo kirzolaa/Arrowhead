@@ -1,0 +1,25 @@
+Modified parameters: x_shift = 22.5, y_shift = 500.5
+Modified d parameter: 0.005
+Modified omega parameter: 0.025
+Modified VX curvature parameter: 0.018
+Modified VA curvature parameter: 0.42
+Modified theta step to 1 degrees
+
+=== Step 1: Generating Arrowhead Matrices ===
+Running: python3 /home/zoli/arrowhead/Arrowhead/generalized/example_use/arrowhead_matrix/generate_4x4_arrowhead.py
+Matrix generation completed. Log saved to /home/zoli/arrowhead/Arrowhead/logs/generation_x22.5_y500.5_d0.005_w0.025_avx0.018_ava0.42_step1.txt
+
+=== Step 2: Calculating Improved Berry Phases with Eigenstate Tracking ===
+Running: python3 /home/zoli/arrowhead/Arrowhead/run_improved_berry_phase.py --input_dir /home/zoli/arrowhead/Arrowhead/generalized/example_use/arrowhead_matrix/results --x_shift 22.5 --y_shift 500.5 --d_param 0.005 --omega 0.025 --a_vx 0.018 --a_va 0.42
+Improved Berry phase calculation completed. Log saved to /home/zoli/arrowhead/Arrowhead/logs/improved_berry_x22.5_y500.5_d0.005_w0.025_avx0.018_ava0.42_step1.txt
+
+=== Simulation Complete ===
+Parameters: x_shift=22.5, y_shift=500.5, theta_step=1
+d parameter: 0.005
+omega parameter: 0.025
+VX curvature parameter: 0.018
+VA curvature parameter: 0.42
+Used improved Berry phase calculation with eigenstate tracking
+Visualizations saved to improved_berry_phase_plots_x22.5_y500.5_d0.005_w0.025_avx0.018_ava0.42/
+Results saved to improved_berry_phase_results/ with filename improved_berry_phase_summary_x22.5_y500.5_d0.005_w0.025_avx0.018_ava0.42.txt
+All logs saved to /home/zoli/arrowhead/Arrowhead/logs

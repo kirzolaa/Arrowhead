@@ -1,0 +1,11 @@
+Best Configuration Summary
+========================
+
+Parameters:
+  x_shift: 22.5
+  y_shift: 525.5
+  d_param: 0.005
+  omega: 0.025
+  a_vx: 0.018
+  a_va: 0.42
+

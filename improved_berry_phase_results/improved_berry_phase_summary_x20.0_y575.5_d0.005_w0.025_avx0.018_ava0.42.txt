@@ -1,0 +1,19 @@
+Improved Berry Phase Analysis Results
+====================================
+
+Berry Phases:
+----------------------------------------------------------------------------------------------------
+Eigenstate Raw Phase (rad) Winding Number  Normalized      Quantized       Error      Full Cycle     
+----------------------------------------------------------------------------------------------------
+0          0.000000        0               0.000000        0.000000        0.000000   True           
+1          0.000000        0               0.000000        0.000000        0.000000   True           
+2          0.000000        0               -3.141593       -3.141593       0.000000   True           
+3          0.000000        0               0.000000        0.000000        0.000000   True           
+
+
+Parity Flip Summary:
+--------------------------------------------------
+Eigenstate 0: 0 parity flips
+Eigenstate 1: 19 parity flips
+Eigenstate 2: 131 parity flips
+Eigenstate 3: 0 parity flips
