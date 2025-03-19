@@ -217,10 +217,14 @@ class ArrowheadMatrix4x4:
         print(f"  D_00 = VXX + ħω = {vxx:.4f} + {hbar * self.omega} = {matrix[0, 0]}")
         print(f"  D_11 = VA(R0) + VX(R1) + VX(R2) = {va0:.4f} + {vx1:.4f} + {vx2:.4f} = {matrix[1, 1]}")
         print(f"  D_22 = VX(R0) + VA(R1) + VX(R2) = {vx0:.4f} + {va1:.4f} + {vx2:.4f} = {matrix[2, 2]}")
-        print(f"  D_33 = VX(R0) + VX(R1) + VA(R2) = {vx0:.4f} + {vx1:.4f} + {va2:.4f} = {matrix[3, 3]}")
+        print(f"  D_33 = VX(R0) + VX(R1) + VA(R2) = {vx0:.4f} + {vx1:.4f} + {va2:.4f} = {matrix[3, 3]:.16f}")
         
         print("\nArrowhead Matrix:")
+        # Set NumPy print options to show more decimal places
+        np.set_printoptions(precision=8)
         print(matrix)
+        # Reset NumPy print options to default
+        np.set_printoptions(precision=8, suppress=True)
     
     def calculate_eigenvalues_eigenvectors(self, matrix):
         """
@@ -527,6 +531,7 @@ def main():
         
         # Generate the matrix
         matrix = arrowhead.generate_matrix()
+        
         
         # Print the matrix details
         arrowhead.print_matrix_details(matrix)
