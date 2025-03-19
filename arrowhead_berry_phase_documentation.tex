@@ -74,14 +74,14 @@ The general form of a $4 \times 4$ Arrowhead matrix is:
 
 \begin{equation}
 A = \begin{pmatrix}
-a & b_1 & b_2 & b_3 \\
-b_1 & c_1 & 0 & 0 \\
-b_2 & 0 & c_2 & 0 \\
-b_3 & 0 & 0 & c_3
+D_{00} & c_1 & c_2 & c_3 \\
+c_1 & D_{11} & 0 & 0 \\
+c_2 & 0 & D_{22} & 0 \\
+c_3 & 0 & 0 & D_{33}
 \end{pmatrix}
 \end{equation}
 
-In our implementation, these elements depend on various parameters including $\theta$ (angle), $x\_shift$, $y\_shift$, $d\_param$, $\omega$, $a\_vx$, and $a\_va$.
+In our implementation, the diagonal elements $D_{ii}$ are constructed from the potentials $V_X$ and $V_A$ evaluated at different components of the R-vector, while the off-diagonal elements $c_1 = c_2 = c_3$ represent coupling constants with a fixed value of 0.1.
 
 \subsection{Implementation}
 
@@ -140,38 +140,38 @@ The off-diagonal elements (coupling constants) are set to a fixed value $c_1 = c
 
 \subsection{Theoretical Background}
 
-The Berry phase is a geometric phase acquired by a quantum state as it evolves adiabatically around a closed loop in parameter space \cite{Bernevig2013, Hasan2010}. For a quantum state $|\psi(\theta)\rangle$ evolving with parameter $\theta$, the Berry phase is given by:
+The Berry phase is a geometric phase acquired by a quantum state as it evolves adiabatically around a closed loop in parameter space \cite{Bernevig2013, Hasan2010}. For a quantum state $|\psi(\mathbf{R})\rangle$ evolving with parameter vector $\mathbf{R}$, the Berry phase is given by:
 
 \begin{equation}
-\gamma = i \oint \langle \psi(\theta) | \nabla_\theta | \psi(\theta) \rangle d\theta
+\gamma = i \oint \langle \psi(\mathbf{R}) | \nabla_{\mathbf{R}} | \psi(\mathbf{R}) \rangle \cdot d\mathbf{R}
 \end{equation}
 
-In discrete form, for a path divided into $N$ points, the Berry phase can be calculated as:
+In our implementation, we parameterize the path using the angle $\theta$, which generates different $\mathbf{R}$ vectors. For a path divided into $N$ points, the Berry phase can be calculated as:
 
 \begin{equation}
-\gamma = -\text{Im} \log \prod_{j=1}^{N} \langle \psi(\theta_j) | \psi(\theta_{j+1}) \rangle
+\gamma = -\text{Im} \log \prod_{j=1}^{N} \langle \psi(\mathbf{R}_j) | \psi(\mathbf{R}_{j+1}) \rangle
 \end{equation}
 
 Alternatively, this can be expressed as a sum:
 
 \begin{equation}
-\gamma = -\text{Im} \sum_{j=1}^{N} \log \langle \psi(\theta_j) | \psi(\theta_{j+1}) \rangle
+\gamma = -\text{Im} \sum_{j=1}^{N} \log \langle \psi(\mathbf{R}_j) | \psi(\mathbf{R}_{j+1}) \rangle
 \end{equation}
 
 Or in terms of the gradient of the wavefunction:
 
 \begin{equation}
-\gamma = \text{Im} \sum_{j=1}^{N} \langle \psi(\theta_j) | \nabla_\theta | \psi(\theta_j) \rangle \Delta\theta_j
+\gamma = \text{Im} \sum_{j=1}^{N} \langle \psi(\mathbf{R}_j) | \nabla_{\theta} | \psi(\mathbf{R}_j) \rangle \Delta\theta_j
 \end{equation}
 
-These formulations are equivalent for a discretized path in parameter space, with $\theta_{N+1} = \theta_1$ to ensure a closed loop.
+These formulations are equivalent for a discretized path in parameter space, with $\mathbf{R}_{N+1} = \mathbf{R}_1$ to ensure a closed loop.
 
 \subsection{The Role of the Logarithm in Berry Phase Calculations}
 
 The logarithm in the Berry phase formula serves a crucial mathematical purpose \cite{Xiao2010, Vanderbilt2018, Resta2000}:
 
 \begin{enumerate}
-    \item \textbf{Complex Inner Products}: The inner product $\langle \psi(\theta_j) | \psi(\theta_{j+1}) \rangle$ yields a complex number with both magnitude and phase information.
+    \item \textbf{Complex Inner Products}: The inner product $\langle \psi(\mathbf{R}_j) | \psi(\mathbf{R}_{j+1}) \rangle$ yields a complex number with both magnitude and phase information.
     
     \item \textbf{Phase Accumulation}: As we traverse a closed loop in parameter space, we need to accumulate the phase changes between consecutive states.
     
@@ -185,8 +185,8 @@ The logarithm in the Berry phase formula serves a crucial mathematical purpose \
 This explains why the two formulations are equivalent:
 
 \begin{align}
-\gamma &= -\text{Im} \log \prod_{j=1}^{N} \langle \psi(\theta_j) | \psi(\theta_{j+1}) \rangle \\
-&= -\text{Im} \sum_{j=1}^{N} \log \langle \psi(\theta_j) | \psi(\theta_{j+1}) \rangle
+\gamma &= -\text{Im} \log \prod_{j=1}^{N} \langle \psi(\mathbf{R}_j) | \psi(\mathbf{R}_{j+1}) \rangle \\
+&= -\text{Im} \sum_{j=1}^{N} \log \langle \psi(\mathbf{R}_j) | \psi(\mathbf{R}_{j+1}) \rangle
 \end{align}
 
 The logarithm converts the product of inner products (representing overlaps between consecutive states) into a sum of phases, and the imaginary part extracts just the phase information needed for the Berry phase \cite{Resta2000, Bohm2003}.
