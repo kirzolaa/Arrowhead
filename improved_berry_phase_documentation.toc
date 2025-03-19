@@ -14,8 +14,8 @@
 \contentsline {subsection}{\numberline {4.4}Analytical Berry Connection and Phase}{8}{subsection.4.4}%
 \contentsline {section}{\numberline {5}Results and Physical Interpretation}{9}{section.5}%
 \contentsline {section}{\numberline {6}Enhanced Analysis Features}{10}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Eigenstate Degeneracy Analysis}{10}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.1}Eigenstate Degeneracy Analysis}{11}{subsection.6.1}%
 \contentsline {subsection}{\numberline {6.2}Parity Flip Detection}{11}{subsection.6.2}%
 \contentsline {subsection}{\numberline {6.3}Comprehensive Reporting}{11}{subsection.6.3}%
-\contentsline {section}{\numberline {7}Conclusion}{11}{section.7}%
+\contentsline {section}{\numberline {7}Conclusion}{12}{section.7}%
 \contentsline {section}{\numberline {8}Future Work}{12}{section.8}%
