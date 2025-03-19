@@ -353,6 +353,139 @@ def plot_eigenstate_degeneracy(eigenstate_data, output_dir):
     plt.savefig(f"{output_dir}/eigenstate1_2_degeneracy.png", dpi=300)
     plt.close()
 
+def plot_phase_transition(parameter_values, berry_phases, winding_numbers, output_dir, param_name='y_shift'):
+    """Plot phase transition as a function of a system parameter.
+    
+    Parameters:
+    -----------
+    parameter_values : list or numpy.ndarray
+        Values of the parameter being varied
+    berry_phases : dict of dicts
+        Dictionary where keys are parameter values and values are dictionaries of Berry phases
+        for each eigenstate at that parameter value
+    winding_numbers : dict of dicts
+        Dictionary where keys are parameter values and values are dictionaries of winding numbers
+        for each eigenstate at that parameter value
+    output_dir : str
+        Directory to save the plots
+    param_name : str, optional
+        Name of the parameter being varied, default is 'y_shift'
+    """
+    # Create directory if it doesn't exist
+    os.makedirs(output_dir, exist_ok=True)
+    
+    # Get all eigenstates
+    all_eigenstates = set()
+    for param_val in parameter_values:
+        if param_val in berry_phases:
+            all_eigenstates.update(berry_phases[param_val].keys())
+    
+    eigenstates = sorted(all_eigenstates)
+    
+    # Create figure with two subplots
+    fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 10), sharex=True)
+    
+    # Plot Berry phases vs parameter
+    for eigenstate in eigenstates:
+        phases = [berry_phases.get(param_val, {}).get(eigenstate, np.nan) for param_val in parameter_values]
+        ax1.plot(parameter_values, phases, 'o-', label=f'Eigenstate {eigenstate}')
+    
+    ax1.axhline(y=0, color='gray', linestyle='--', alpha=0.5)
+    ax1.axhline(y=np.pi, color='gray', linestyle='--', alpha=0.5)
+    ax1.axhline(y=-np.pi, color='gray', linestyle='--', alpha=0.5)
+    ax1.text(parameter_values[0], np.pi, '$\pi$', va='center', ha='right')
+    ax1.text(parameter_values[0], -np.pi, '$-\pi$', va='center', ha='right')
+    
+    ax1.set_ylabel('Berry Phase (radians)')
+    ax1.set_title(f'Berry Phase vs {param_name}')
+    ax1.legend()
+    ax1.grid(True, alpha=0.3)
+    
+    # Plot winding numbers vs parameter
+    for eigenstate in eigenstates:
+        windings = [winding_numbers.get(param_val, {}).get(eigenstate, np.nan) for param_val in parameter_values]
+        ax2.plot(parameter_values, windings, 'o-', label=f'Eigenstate {eigenstate}')
+    
+    ax2.axhline(y=0, color='gray', linestyle='--', alpha=0.5)
+    ax2.axhline(y=0.5, color='gray', linestyle='--', alpha=0.5)
+    ax2.axhline(y=-0.5, color='gray', linestyle='--', alpha=0.5)
+    ax2.text(parameter_values[0], 0.5, '0.5', va='center', ha='right')
+    ax2.text(parameter_values[0], -0.5, '-0.5', va='center', ha='right')
+    
+    ax2.set_xlabel(param_name)
+    ax2.set_ylabel('Winding Number')
+    ax2.set_title(f'Winding Number vs {param_name}')
+    ax2.grid(True, alpha=0.3)
+    
+    # Highlight phase transition regions
+    for i in range(1, len(parameter_values)):
+        for eigenstate in eigenstates:
+            prev_winding = winding_numbers.get(parameter_values[i-1], {}).get(eigenstate, np.nan)
+            curr_winding = winding_numbers.get(parameter_values[i], {}).get(eigenstate, np.nan)
+            
+            # Check if there's a transition in winding number
+            if not np.isnan(prev_winding) and not np.isnan(curr_winding) and prev_winding != curr_winding:
+                # Highlight the transition region
+                ax2.axvspan(parameter_values[i-1], parameter_values[i], alpha=0.2, color='red')
+                ax1.axvspan(parameter_values[i-1], parameter_values[i], alpha=0.2, color='red')
+                
+                # Add annotation
+                mid_x = (parameter_values[i-1] + parameter_values[i]) / 2
+                ax2.annotate(f'Transition\nEigenstate {eigenstate}', 
+                             xy=(mid_x, (prev_winding + curr_winding) / 2),
+                             xytext=(mid_x, (prev_winding + curr_winding) / 2 + 0.2),
+                             arrowprops=dict(facecolor='black', shrink=0.05, width=1.5),
+                             ha='center')
+    
+    plt.tight_layout()
+    plt.savefig(f"{output_dir}/phase_transition_{param_name}.png", dpi=300)
+    plt.close()
+
+    # Create a more detailed plot for eigenstate 2
+    plt.figure(figsize=(12, 6))
+    
+    # Plot Berry phase and winding number for eigenstate 2
+    eigenstate = 2  # Focus on eigenstate 2
+    phases = [berry_phases.get(param_val, {}).get(eigenstate, np.nan) for param_val in parameter_values]
+    windings = [winding_numbers.get(param_val, {}).get(eigenstate, np.nan) for param_val in parameter_values]
+    
+    plt.plot(parameter_values, phases, 'o-', color='blue', label='Berry Phase')
+    plt.plot(parameter_values, [w * 2 * np.pi for w in windings], 's--', color='red', label='Winding Number × 2π')
+    
+    plt.axhline(y=0, color='gray', linestyle='--', alpha=0.5)
+    plt.axhline(y=np.pi, color='gray', linestyle='--', alpha=0.5)
+    plt.axhline(y=-np.pi, color='gray', linestyle='--', alpha=0.5)
+    plt.text(parameter_values[0], np.pi, '$\pi$', va='center', ha='right')
+    plt.text(parameter_values[0], -np.pi, '$-\pi$', va='center', ha='right')
+    
+    plt.xlabel(param_name)
+    plt.ylabel('Value')
+    plt.title(f'Eigenstate 2: Berry Phase and Winding Number vs {param_name}')
+    plt.legend()
+    plt.grid(True, alpha=0.3)
+    
+    # Highlight phase transition regions
+    for i in range(1, len(parameter_values)):
+        prev_winding = winding_numbers.get(parameter_values[i-1], {}).get(eigenstate, np.nan)
+        curr_winding = winding_numbers.get(parameter_values[i], {}).get(eigenstate, np.nan)
+        
+        # Check if there's a transition in winding number
+        if not np.isnan(prev_winding) and not np.isnan(curr_winding) and prev_winding != curr_winding:
+            # Highlight the transition region
+            plt.axvspan(parameter_values[i-1], parameter_values[i], alpha=0.2, color='red')
+            
+            # Add annotation
+            mid_x = (parameter_values[i-1] + parameter_values[i]) / 2
+            plt.annotate(f'Phase Transition\n{prev_winding} → {curr_winding}', 
+                         xy=(mid_x, (phases[i-1] + phases[i]) / 2),
+                         xytext=(mid_x, (phases[i-1] + phases[i]) / 2 + 1),
+                         arrowprops=dict(facecolor='black', shrink=0.05, width=1.5),
+                         ha='center')
+    
+    plt.tight_layout()
+    plt.savefig(f"{output_dir}/eigenstate2_phase_transition_{param_name}.png", dpi=300)
+    plt.close()
+
 def create_all_visualizations(results, output_dir, theta_values=None, eigenvalues=None):
     """Create all visualizations for Berry phase analysis."""
     os.makedirs(output_dir, exist_ok=True)
