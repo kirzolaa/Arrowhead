@@ -26,6 +26,7 @@ def load_eigenvectors_from_directory(directory):
 def compute_berry_phase(eigenvectors):
     """
     Compute the Berry phase from eigenvector overlaps across theta steps.
+    Handles parity changes in the wavefunction by tracking sign flips.
     """
     num_steps, num_states, _ = eigenvectors.shape  # (theta_steps, states, components)
     berry_phases = np.zeros(num_states)
@@ -42,13 +43,17 @@ def compute_berry_phase(eigenvectors):
                 print(f"Normalizing eigenvector {n} at step {i}. Original norm: {norm:.10f}")
                 eigenvectors[i, :, n] = eigenvectors[i, :, n] / norm
     
-    # Check if the first and last eigenvectors are the same (full cycle)
+    # Create a copy of eigenvectors that we'll modify to account for parity changes
+    adjusted_eigenvectors = eigenvectors.copy()
+    parity_flips = np.zeros((num_states, num_steps), dtype=bool)
+    
+    # Check if the first and last eigenvectors represent the same physical state (ignoring parity)
     is_full_cycle = [False] * num_states
     if num_steps > 1:
         for n in range(num_states):
-            # Calculate dot product between first and last eigenvectors
+            # Calculate dot product between first and last eigenvectors (absolute value to ignore parity)
             dot_product = np.abs(np.vdot(eigenvectors[0, :, n], eigenvectors[-1, :, n]))
-            is_full_cycle[n] = dot_product > 0.999  # If dot product is close to 1, they are aligned
+            is_full_cycle[n] = dot_product > 0.999  # If dot product is close to 1, they represent the same physical state
             print(f"Eigenstate {n} first-last dot product: {dot_product:.6f} (Full cycle: {is_full_cycle[n]})")
 
     # Store phase angles for each eigenstate at each step
@@ -57,22 +62,27 @@ def compute_berry_phase(eigenvectors):
     for n in range(num_states):  # Loop over eigenstates
         phase_sum = 0
         bad_overlaps = 0
+        total_parity_flips = 0
+        
+        # First pass: Adjust eigenvectors to account for parity changes
         for k in range(num_steps - 1):  # Loop over theta steps
             # Calculate overlap between consecutive eigenvectors
-            overlap = np.vdot(eigenvectors[k, :, n], eigenvectors[k + 1, :, n])  # Inner product
+            overlap = np.vdot(adjusted_eigenvectors[k, :, n], eigenvectors[k + 1, :, n])  # Inner product
+            
+            # Check if we need to flip the parity to maintain continuity
+            if np.real(overlap) < 0:  # Negative overlap suggests a parity flip is needed
+                # Flip the sign of the eigenvector to maintain continuity
+                adjusted_eigenvectors[k + 1, :, n] = -eigenvectors[k + 1, :, n]
+                parity_flips[n, k + 1] = True
+                total_parity_flips += 1
+                # Recalculate overlap with adjusted eigenvector
+                overlap = np.vdot(adjusted_eigenvectors[k, :, n], adjusted_eigenvectors[k + 1, :, n])
+            else:
+                adjusted_eigenvectors[k + 1, :, n] = eigenvectors[k + 1, :, n]
+            
             overlap_magnitudes[n, k] = np.abs(overlap)
             
-            # Check if overlap is too small (indicating potential crossing or discontinuity)
-            if overlap_magnitudes[n, k] < 0.1:
-                # Try to fix the phase by checking if -eigenvector gives better overlap
-                alt_overlap = np.vdot(eigenvectors[k, :, n], -eigenvectors[k + 1, :, n])
-                if np.abs(alt_overlap) > overlap_magnitudes[n, k]:
-                    # Use the alternative eigenvector with flipped sign
-                    eigenvectors[k + 1, :, n] = -eigenvectors[k + 1, :, n]
-                    overlap = alt_overlap
-                    overlap_magnitudes[n, k] = np.abs(overlap)
-            
-            # Extract phase angle
+            # Extract phase angle from the adjusted overlap
             phase_angle = np.angle(overlap)
             phase_angles[n, k] = phase_angle
             all_phase_angles[n].append(phase_angle)
@@ -87,10 +97,25 @@ def compute_berry_phase(eigenvectors):
                 elif warning_count == max_warnings:
                     print("Too many warnings, suppressing further overlap warnings...")
                     warning_count += 1
-                
+        
+        # Check if we have a full cycle in the physical sense (ignoring parity)
+        # Calculate overlap between first and adjusted last eigenvectors
+        final_overlap = np.vdot(adjusted_eigenvectors[0, :, n], adjusted_eigenvectors[-1, :, n])
+        final_overlap_magnitude = np.abs(final_overlap)
+        final_phase_angle = np.angle(final_overlap)
+        
+        # If we're close to a full cycle but with opposite parity, adjust the Berry phase
+        if final_overlap_magnitude > 0.999 and np.real(final_overlap) < 0:
+            print(f"Eigenstate {n} has a full cycle with a parity flip. Adjusting Berry phase.")
+            # Add π to the Berry phase to account for the parity flip
+            phase_sum += np.pi
+            # Mark this as a full cycle with parity flip
+            is_full_cycle[n] = True
+        
         berry_phases[n] = phase_sum
         if bad_overlaps > 0:
             print(f"Eigenstate {n} had {bad_overlaps}/{num_steps-1} problematic overlaps")
+        print(f"Eigenstate {n} had {total_parity_flips} parity flips during the cycle")
 
     # Calculate normalized Berry phases and winding numbers
     normalized_phases = []
@@ -190,7 +215,7 @@ def compute_berry_phase(eigenvectors):
     
     return berry_phases, normalized_phases, overlap_magnitudes, phase_angles, winding_numbers, all_phase_angles, quantized_values, quantization_errors, full_cycle_phases
 
-def plot_berry_phase_results(berry_phases, normalized_phases, overlap_magnitudes, phase_angles, num_steps, winding_numbers, all_phase_angles, quantized_values, quantization_errors):
+def plot_berry_phase_results(berry_phases, normalized_phases, overlap_magnitudes, phase_angles, num_steps, winding_numbers, all_phase_angles, quantized_values, quantization_errors, full_cycle_phases):
     """
     Plot comprehensive Berry phase results.
     """
@@ -450,7 +475,7 @@ def main():
         # Plot results with enhanced visualization
         plot_berry_phase_results(berry_phases, normalized_phases, overlap_magnitudes, phase_angles, 
                                eigenvectors.shape[0], winding_numbers, all_phase_angles,
-                               quantized_values, quantization_errors)
+                               quantized_values, quantization_errors, full_cycle_phases)
         
         # Save detailed results to file
         results_dir = 'berry_phase_results'
