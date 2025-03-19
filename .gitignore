@@ -19,6 +19,9 @@ ENV/
 *.swp
 *.swo
 
+# Repository folder
+Arrowhead/
+
 # OS specific files
 .DS_Store
 Thumbs.db
