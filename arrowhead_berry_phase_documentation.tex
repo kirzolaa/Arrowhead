@@ -89,19 +89,52 @@ The Arrowhead matrix generation is implemented in the \texttt{generate\_4x4\_arr
 
 \begin{enumerate}
     \item Define the parameter space, including $\theta$ values ranging from 0 to 360 degrees
-    \item For each $\theta$ value, calculate the matrix elements based on the parameters
-    \item Generate the Arrowhead matrix
+    \item Generate orthogonal R-vectors based on $\theta$
+    \item Calculate the VX and VA potentials for each component of the R-vector
+    \item Construct the Arrowhead matrix using these potentials
     \item Save the matrix to a file for later analysis
 \end{enumerate}
 
-The matrix elements are calculated using:
+\subsubsection{Potential Functions}
 
+The potentials are implemented as parabolic functions:
+
+\begin{equation}
+V_X(\mathbf{R}) = a \cdot ||\mathbf{R}||^2 + c
+\end{equation}
+
+where $a = 0.05$ is the curvature parameter, $||\mathbf{R}||$ is the magnitude of the position vector, and $c = 0$ is a constant offset.
+
+\begin{equation}
+V_A(\mathbf{R}) = a \cdot ||\mathbf{R} - \mathbf{R}_{shift}||^2 + c
+\end{equation}
+
+where $a = 0.2$ is the curvature parameter, $\mathbf{R}_{shift} = (x\_shift, y\_shift, 0)$ with $x\_shift = 22.5$ and $y\_shift = 567.72$ representing the spatial shift of the potential, and $c = 0$ is a constant offset.
+
+\subsubsection{Matrix Construction}
+
+The R-vector is decomposed into three components:
 \begin{align}
-V_X(\theta) &= a_{vx} \cdot \cos(\theta) \\
-V_A(\theta) &= a_{va} \cdot \sin(\theta)
+\mathbf{R}_0 &= (R_x, 0, 0) \quad \text{(x component)} \\
+\mathbf{R}_1 &= (0, R_y, 0) \quad \text{(y component)} \\
+\mathbf{R}_2 &= (0, 0, R_z) \quad \text{(z component)}
 \end{align}
 
-These potentials are then used to construct the Arrowhead matrix elements.
+The potentials are calculated for each component:
+\begin{align}
+v_{x0} &= V_X(\mathbf{R}_0) \quad v_{x1} = V_X(\mathbf{R}_1) \quad v_{x2} = V_X(\mathbf{R}_2) \\
+v_{a0} &= V_A(\mathbf{R}_0) \quad v_{a1} = V_A(\mathbf{R}_1) \quad v_{a2} = V_A(\mathbf{R}_2)
+\end{align}
+
+The diagonal elements of the matrix are then constructed as:
+\begin{align}
+D_{00} &= v_{x0} + v_{x1} + v_{x2} + \hbar\omega \\
+D_{11} &= v_{a0} + v_{x1} + v_{x2} \\
+D_{22} &= v_{x0} + v_{a1} + v_{x2} \\
+D_{33} &= v_{x0} + v_{x1} + v_{a2}
+\end{align}
+
+The off-diagonal elements (coupling constants) are set to a fixed value $c_1 = c_2 = c_3 = 0.1$.
 
 \section{Berry Phase Calculation}
 

@@ -2,27 +2,29 @@
 \contentsline {section}{\numberline {2}Arrowhead Matrix Generation}{2}{section.2}%
 \contentsline {subsection}{\numberline {2.1}Mathematical Background}{2}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Implementation}{3}{subsection.2.2}%
-\contentsline {section}{\numberline {3}Berry Phase Calculation}{3}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Theoretical Background}{3}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}The Role of the Logarithm in Berry Phase Calculations}{4}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Improved Berry Phase Calculation}{4}{subsection.3.3}%
-\contentsline {section}{\numberline {4}Optimal Visualization Script}{5}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Script Overview}{5}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Optimal Parameters}{5}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Visualization Components}{6}{subsection.4.3}%
-\contentsline {subsection}{\numberline {4.4}Summary File Generation}{6}{subsection.4.4}%
-\contentsline {subsection}{\numberline {4.5}Half-Integer Winding Numbers}{6}{subsection.4.5}%
-\contentsline {section}{\numberline {5}Topological Phase Transitions}{7}{section.5}%
-\contentsline {subsection}{\numberline {5.1}Phase Transition Analysis}{7}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}Visualization of Phase Transitions}{7}{subsection.5.2}%
-\contentsline {subsection}{\numberline {5.3}Physical Significance}{7}{subsection.5.3}%
-\contentsline {section}{\numberline {6}Code Implementation Details}{7}{section.6}%
-\contentsline {subsection}{\numberline {6.1}run\_optimal\_visualization.py}{7}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Berry Phase Visualization}{8}{subsection.6.2}%
-\contentsline {section}{\numberline {7}Results and Findings}{9}{section.7}%
-\contentsline {subsection}{\numberline {7.1}Berry Phase Analysis}{9}{subsection.7.1}%
-\contentsline {subsection}{\numberline {7.2}Parity Flip Analysis}{9}{subsection.7.2}%
-\contentsline {subsection}{\numberline {7.3}Topological Phase Transitions}{9}{subsection.7.3}%
-\contentsline {section}{\numberline {8}Conclusions}{9}{section.8}%
-\contentsline {section}{\numberline {9}References}{10}{section.9}%
-\contentsline {section}{\numberline {10}Future Work}{11}{section.10}%
+\contentsline {subsubsection}{\numberline {2.2.1}Potential Functions}{3}{subsubsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.2.2}Matrix Construction}{3}{subsubsection.2.2.2}%
+\contentsline {section}{\numberline {3}Berry Phase Calculation}{4}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Theoretical Background}{4}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}The Role of the Logarithm in Berry Phase Calculations}{5}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Improved Berry Phase Calculation}{5}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Optimal Visualization Script}{6}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Script Overview}{6}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Optimal Parameters}{6}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Visualization Components}{7}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Summary File Generation}{7}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Half-Integer Winding Numbers}{7}{subsection.4.5}%
+\contentsline {section}{\numberline {5}Topological Phase Transitions}{8}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Phase Transition Analysis}{8}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Visualization of Phase Transitions}{8}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Physical Significance}{8}{subsection.5.3}%
+\contentsline {section}{\numberline {6}Code Implementation Details}{8}{section.6}%
+\contentsline {subsection}{\numberline {6.1}run\_optimal\_visualization.py}{8}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Berry Phase Visualization}{9}{subsection.6.2}%
+\contentsline {section}{\numberline {7}Results and Findings}{10}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Berry Phase Analysis}{10}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Parity Flip Analysis}{10}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Topological Phase Transitions}{10}{subsection.7.3}%
+\contentsline {section}{\numberline {8}Conclusions}{10}{section.8}%
+\contentsline {section}{\numberline {9}References}{11}{section.9}%
+\contentsline {section}{\numberline {10}Future Work}{12}{section.10}%
