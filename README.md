@@ -1,19 +1,48 @@
-# Orthogonal Vectors Generator and Visualizer
+# Arrowhead Matrix and Berry Phase Calculation
 
-This project creates and visualizes three orthogonal vectors from a given origin point.
+This project implements and optimizes Arrowhead matrix generation and Berry phase calculations for quantum systems.
 
 ## Project Structure
 
-The project has two implementations:
+The project has several key components:
 
 1. **Basic Implementation** - The original implementation in the root directory
 2. **Generalized Implementation** - A more modular and configurable implementation in the `generalized` directory
+3. **Berry Phase Calculation** - Improved algorithms for calculating Berry phases with eigenstate tracking
+4. **Parameter Optimization** - Tools for optimizing VA potential parameters to minimize parity flips
 
 ## Requirements
 
 - Python 3.6+
 - numpy
 - matplotlib
+
+## Parameter Optimization
+
+The project includes several scripts for optimizing the parameters of the VA potential to minimize parity flips in eigenstate 3:
+
+### Key Scripts
+
+- `run_arrowhead_simulation.py` - Main script for running simulations with configurable parameters
+- `run_improved_berry_phase.py` - Script for calculating Berry phases with improved eigenstate tracking
+- `parameter_analysis.py` - Script for systematically exploring parameter combinations
+- `focused_parameter_analysis.py` - Script for fine-tuning parameters in a narrow range
+- `run_zero_flip_simulation.py` - Script for running a simulation with the optimal parameters
+
+### Optimal Parameters
+
+Through systematic parameter exploration, we found configurations that achieve 0 parity flips in eigenstate 3:
+
+```
+x_shift: 22.5
+y_shift: 547.7222222222222
+d_param: 0.005
+omega: 0.025
+a_vx: 0.018
+a_va: 0.42
+```
+
+Detailed results and visualizations are stored in the `parameter_analysis` directory.
 
 ## Setup
 
