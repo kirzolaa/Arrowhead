@@ -80,17 +80,20 @@ class ArrowheadMatrix4x4:
         float
             Potential value at position R
         """
-        # Parabolic potential: 0.5*x^2
-        a = 0.5
+        # Parabolic potential with reduced curvature to create smoother landscape
+        a = 0.1  # Reduced from 0.5 to create a gentler parabola
         b = 0
         c = 0
-        return a * R[0]**2 + b * R[0] + c
+        
+        # Use magnitude of R for a more isotropic potential
+        r_mag = np.linalg.norm(R)
+        return a * r_mag**2 + b * r_mag + c
     
     def potential_va(self, R):
         """
         Calculate the VA potential at position R.
-        This is a shifted parabolic potential: a*(x-x0)^2 + b*(x-x0) + c
-        with an additional y-axis shift
+        This is a shifted parabolic potential with a gentler curvature
+        and a smaller shift to reduce rapid phase accumulation
         
         Parameters:
         -----------
@@ -102,13 +105,20 @@ class ArrowheadMatrix4x4:
         float
             Potential value at position R
         """
+        a = 0.2  # Reduced from 0.5 to create a gentler parabola
+        b = 0.0  # Linear term coefficient
+        x0 = 0.1  # Reduced shift from 0.3 to create less dramatic shifts
+        c = 0.5   # Reduced vertical shift from 1.0
         
-        a = 0.5
-        b = 0
-        c = 0
-        x0 = 0.5  # x-axis shift parameter
-        y0 = 0.3  # y-axis shift parameter
-        return a * (R[0] - x0)**2 + b * (R[0] - x0) + y0
+        # Use a weighted combination of components for a smoother potential
+        r_mag = np.linalg.norm(R)
+        if r_mag > 1e-10:
+            # Create a smoother potential that depends on the magnitude and direction
+            # This helps reduce the rapid phase accumulation
+            return a * (r_mag - x0)**2 + b * (r_mag - x0) + c
+        
+        # If all components are zero
+        return c
     
     def generate_matrix(self):
         """
@@ -489,7 +499,8 @@ def main():
     omega = 1.0
     
     # Generate theta values in degrees, then convert to radians for calculations
-    theta_values_deg = np.arange(theta_start, theta_end, theta_step)
+    # Add 360 degrees to ensure we complete the full cycle
+    theta_values_deg = np.append(np.arange(theta_start, theta_end, theta_step), 360.0)
     theta_values = np.radians(theta_values_deg)  # Convert to radians for calculations
     
     # Create output directory

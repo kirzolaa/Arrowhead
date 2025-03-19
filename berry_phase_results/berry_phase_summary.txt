@@ -2,42 +2,42 @@ Berry Phase Calculation Results
 ============================
 
 Input directory: generalized/example_use/arrowhead_matrix/results
-Number of theta steps: 72
+Number of theta steps: 73
 Matrix size: 4x4
 
 Raw Berry Phases:
   Eigenstate 0: 0.000000 rad = 0.000000 deg
-  Eigenstate 1: 21.991149 rad = 1260.000000 deg
-  Eigenstate 2: 9.424778 rad = 540.000000 deg
-  Eigenstate 3: 56.548668 rad = 3240.000000 deg
+  Eigenstate 1: 34.557519 rad = 1980.000000 deg
+  Eigenstate 2: 47.123890 rad = 2700.000000 deg
+  Eigenstate 3: 0.000000 rad = 0.000000 deg
 
 Winding Numbers (number of 2π rotations):
   Eigenstate 0: 0 (Full cycle: True)
-  Eigenstate 1: 3 (Full cycle: False)
-  Eigenstate 2: 1 (Full cycle: False)
-  Eigenstate 3: 9 (Full cycle: True)
+  Eigenstate 1: 5 (Full cycle: False)
+  Eigenstate 2: 7 (Full cycle: False)
+  Eigenstate 3: 0 (Full cycle: True)
 
 Normalized Berry Phases (mod 2π):
   Eigenstate 0: 0.000000 rad = 0.000000 deg (Theoretical: 3.141593, Diff: 3.141593)
-  Eigenstate 1: -3.141593 rad = -180.000000 deg (Theoretical: 3.141593, Diff: 0.000000)
+  Eigenstate 1: 3.141593 rad = 180.000000 deg (Theoretical: 3.141593, Diff: 0.000000)
   Eigenstate 2: -3.141593 rad = -180.000000 deg (Theoretical: 3.141593, Diff: 0.000000)
-  Eigenstate 3: -3.141593 rad = -180.000000 deg (Theoretical: 3.141593, Diff: 0.000000)
+  Eigenstate 3: 0.000000 rad = 0.000000 deg (Theoretical: 3.141593, Diff: 3.141593)
 
 Quantized Berry Phases (multiples of π):
   Eigenstate 0: 0.000000 rad = 0π (Quantization error: 0.000000, Theoretical diff: 3.141593)
-  Eigenstate 1: -3.141593 rad = -1π (Quantization error: 0.000000, Theoretical diff: 6.283185)
+  Eigenstate 1: 3.141593 rad = 1π (Quantization error: 0.000000, Theoretical diff: 0.000000)
   Eigenstate 2: -3.141593 rad = -1π (Quantization error: 0.000000, Theoretical diff: 6.283185)
-  Eigenstate 3: 3.141593 rad = 1π (Quantization error: 0.000000, Theoretical diff: 0.000000)
+  Eigenstate 3: 0.000000 rad = 0π (Quantization error: 0.000000, Theoretical diff: 3.141593)
 
 Overlap Analysis:
-  Eigenstate 0: 11/71 problematic overlaps
-    Min overlap: 0.986464, Max overlap: 1.000000, Mean: 0.998684
-  Eigenstate 1: 22/71 problematic overlaps
-    Min overlap: 0.000000, Max overlap: 1.000000, Mean: 0.858515
-  Eigenstate 2: 18/71 problematic overlaps
-    Min overlap: 0.000000, Max overlap: 1.000000, Mean: 0.858455
-  Eigenstate 3: 29/71 problematic overlaps
-    Min overlap: 0.292680, Max overlap: 1.000000, Mean: 0.939832
+  Eigenstate 0: 0/72 problematic overlaps
+    Min overlap: 0.999999, Max overlap: 1.000000, Mean: 1.000000
+  Eigenstate 1: 41/72 problematic overlaps
+    Min overlap: 0.000000, Max overlap: 1.000000, Mean: 0.821369
+  Eigenstate 2: 41/72 problematic overlaps
+    Min overlap: 0.000000, Max overlap: 1.000000, Mean: 0.821290
+  Eigenstate 3: 2/72 problematic overlaps
+    Min overlap: 0.998329, Max overlap: 1.000000, Mean: 0.999843
 
 Interpretation of Berry Phase Results:
 -----------------------------------
@@ -55,17 +55,17 @@ Theoretical Model Expectations:
     Normalized phase (mod 2π): 0.000000
     This does not match the theoretical expectation.
     There may be numerical issues in the calculation.
-  Eigenstate 1: INCORRECT - Expected π phase, got -3.141593.
-    Raw phase: 21.991149 with winding number 3
-    Normalized phase (mod 2π): -3.141593
-    This does not match the theoretical expectation.
-    There may be numerical issues in the calculation.
-  Eigenstate 2: INCORRECT - Expected π phase, got -3.141593.
-    Raw phase: 9.424778 with winding number 1
-    Normalized phase (mod 2π): -3.141593
-    This does not match the theoretical expectation.
-    There may be numerical issues in the calculation.
-  Eigenstate 3: CORRECT - Has expected π phase.
-    Raw phase: 56.548668 with winding number 9
-    Normalized phase (mod 2π): -3.141593
+  Eigenstate 1: CORRECT - Has expected π phase.
+    Raw phase: 34.557519 with winding number 5
+    Normalized phase (mod 2π): 3.141593
     This matches the theoretical expectation for this eigenstate.
+  Eigenstate 2: INCORRECT - Expected π phase, got -3.141593.
+    Raw phase: 47.123890 with winding number 7
+    Normalized phase (mod 2π): -3.141593
+    This does not match the theoretical expectation.
+    There may be numerical issues in the calculation.
+  Eigenstate 3: INCORRECT - Expected π phase, got 0.000000.
+    Raw phase: 0.000000 with winding number 0
+    Normalized phase (mod 2π): 0.000000
+    This does not match the theoretical expectation.
+    There may be numerical issues in the calculation.

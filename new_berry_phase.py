@@ -41,6 +41,15 @@ def compute_berry_phase(eigenvectors):
             if abs(norm - 1.0) > 1e-10:
                 print(f"Normalizing eigenvector {n} at step {i}. Original norm: {norm:.10f}")
                 eigenvectors[i, :, n] = eigenvectors[i, :, n] / norm
+    
+    # Check if the first and last eigenvectors are the same (full cycle)
+    is_full_cycle = [False] * num_states
+    if num_steps > 1:
+        for n in range(num_states):
+            # Calculate dot product between first and last eigenvectors
+            dot_product = np.abs(np.vdot(eigenvectors[0, :, n], eigenvectors[-1, :, n]))
+            is_full_cycle[n] = dot_product > 0.999  # If dot product is close to 1, they are aligned
+            print(f"Eigenstate {n} first-last dot product: {dot_product:.6f} (Full cycle: {is_full_cycle[n]})")
 
     # Store phase angles for each eigenstate at each step
     all_phase_angles = [[] for _ in range(num_states)]
@@ -103,7 +112,11 @@ def compute_berry_phase(eigenvectors):
         mod_2pi = phase % (2 * np.pi)
         
         # Check if we're very close to a complete 2π cycle (within numerical precision)
-        is_full_cycle = abs(mod_2pi) < 1e-10 or abs(mod_2pi - 2*np.pi) < 1e-10
+        is_full_cycle_phase = abs(mod_2pi) < 1e-10 or abs(mod_2pi - 2*np.pi) < 1e-10
+        
+        # Use the previously calculated full cycle status based on eigenvector alignment
+        is_full_cycle_from_eigenvectors = is_full_cycle[i] if isinstance(is_full_cycle, list) and i < len(is_full_cycle) else False
+        is_full_cycle = is_full_cycle_phase or is_full_cycle_from_eigenvectors
         
         # Check if we're very close to π (within numerical precision)
         is_pi_cycle = abs(mod_2pi - np.pi) < 1e-10
@@ -181,7 +194,7 @@ def plot_berry_phase_results(berry_phases, normalized_phases, overlap_magnitudes
     """
     Plot comprehensive Berry phase results.
     """
-    theta_values = np.linspace(0, 2 * np.pi, num_steps, endpoint=False)
+    theta_values = np.linspace(0, 2 * np.pi, num_steps, endpoint=True)
     
     # Create output directory for plots
     plots_dir = 'berry_phase_plots'
@@ -194,7 +207,7 @@ def plot_berry_phase_results(berry_phases, normalized_phases, overlap_magnitudes
     plt.subplot(3, 1, 1)
     for i, phase in enumerate(berry_phases):
         plt.axhline(y=phase, color=f'C{i}', linestyle='--', alpha=0.5)
-        plt.plot(i, phase, 'o', markersize=10, label=f'Eigenstate {i}: {phase:.4f} rad (winding: {winding_numbers[i]})')
+        plt.plot(i, phase, 'o', markersize=10, label=f'Eigenstate {i}: {phase:.4f} rad (winding: {winding_numbers[i]}, full cycle: {full_cycle_phases[i]})')
     
     plt.title('Raw Berry Phases for Each Eigenstate')
     plt.ylabel('Berry Phase (radians)')
