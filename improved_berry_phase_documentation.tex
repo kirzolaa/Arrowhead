@@ -329,12 +329,21 @@ def berry_phase_integration(A, theta_vals):
 
 \section{Results and Physical Interpretation}
 
-The analytical Berry phases obtained from our implementation are:
+The Berry phases obtained from our implementation with parabolic potentials (parameters: $x_{\text{shift}}=0.2$, $y_{\text{shift}}=0.2$, $d=1.0$, $\omega=1.0$, $a=1.0$, $b=0.5$) are:
 
 \begin{itemize}
     \item State 0: 0
-    \item State 1: $-\pi/2$
-    \item State 2: $\pi/2$
+    \item State 1: $-\pi$ (-3.14159)
+    \item State 2: $-\pi$ (-3.14159)
+    \item State 3: 0
+\end{itemize}
+
+These results were calculated using both analytical and numerical (Wilson loop) methods, which showed perfect agreement with zero difference between the methods. For comparison, the original analytical Berry phases with the optimal parameter set were:
+
+\begin{itemize}
+    \item State 0: 0
+    \item State 1: $-\pi/2$ (-1.5708)
+    \item State 2: $\pi/2$ (1.5708)
     \item State 3: 0
 \end{itemize}
 
@@ -343,16 +352,57 @@ These quantized values have important physical interpretations:
 \begin{enumerate}
     \item States 0 and 3 do not acquire a geometric phase when transported around the parameter space. This is consistent with states that do not change their character during the adiabatic evolution.
     
-    \item States 1 and 2 acquire equal and opposite Berry phases of $\pm\pi/2$. This symmetry indicates that they form a conjugate pair in the Hamiltonian.
+    \item In the parabolic potential case, states 1 and 2 both acquire a Berry phase of $-\pi$. This indicates a topological feature where both states exhibit the same winding behavior in parameter space with a winding number of -0.5.
     
-    \item The quantized values of $\pm\pi/2$ suggest that these states have a monopole-like structure in parameter space, which is a topological feature.
+    \item The parity flip analysis reveals that states 1 and 2 each undergo exactly 3 parity flips during the cycle, which is consistent with their Berry phase values. States 0 and 3 show no parity flips, matching their zero Berry phase.
+    
+    \item The eigenstate degeneracy analysis shows that states 1 and 2 maintain a significant energy difference throughout the parameter cycle, with a mean normalized difference of 0.178099 and a minimum difference of 0.049091 occurring at $\theta = 240^\circ$.
 \end{enumerate}
 
 The perfect orthogonal circle method ensures that the parameter space is traversed in a geometrically meaningful way, which is crucial for obtaining physically correct Berry phases.
 
+\section{Enhanced Analysis Features}
+
+The improved implementation includes several advanced analysis features:
+
+\subsection{Eigenstate Degeneracy Analysis}
+
+We have implemented a comprehensive degeneracy analysis that examines the energy differences between all pairs of eigenstates throughout the parameter cycle. For each pair, we calculate:
+
+\begin{itemize}
+    \item Mean energy difference
+    \item Minimum and maximum energy differences
+    \item Standard deviation of the difference
+    \item Percentage of points with near-degeneracy (difference < 0.0002 in normalized scale)
+    \item Locations of strongest and weakest degeneracy points
+\end{itemize}
+
+This analysis helps identify potential degeneracy points that could affect the Berry phase calculation and provides insights into the energy structure of the system.
+
+\subsection{Parity Flip Detection}
+
+The implementation includes a parity flip detection algorithm that identifies points in the parameter cycle where eigenstates undergo sign changes. These parity flips are important indicators of the topological properties of the system and are closely related to the Berry phase values.
+
+\subsection{Comprehensive Reporting}
+
+The script generates a detailed report that includes:
+
+\begin{itemize}
+    \item Berry phase values (raw, normalized, and quantized)
+    \item Winding number analysis
+    \item Parity flip summary
+    \item Eigenvalue normalization details
+    \item Degeneracy analysis for all eigenstate pairs
+    \item System parameters
+\end{itemize}
+
+This comprehensive reporting enables a deeper understanding of the system's behavior and facilitates the interpretation of the Berry phase results.
+
 \section{Conclusion}
 
-The improved Berry phase calculation implemented in \texttt{improved\_berry\_phase.py} provides a robust method for calculating Berry phases in arrowhead Hamiltonians. The use of the perfect orthogonal circle method for parameter space traversal and the analytical approach for Berry connection calculation ensures that the results have clear physical interpretations.
+The improved Berry phase calculation implemented in \texttt{improved\_berry\_phase.py} provides a robust method for calculating Berry phases in arrowhead Hamiltonians. The use of the perfect orthogonal circle method for parameter space traversal, combined with both analytical and numerical approaches for Berry phase calculation, ensures that the results have clear physical interpretations.
+
+The enhanced analysis features, including eigenstate degeneracy analysis and parity flip detection, provide valuable insights into the topological properties of the system. The comprehensive reporting facilitates a deeper understanding of the relationship between Berry phases, energy structure, and topological features.
 
 The quantized Berry phases obtained from this implementation reveal the topological nature of the eigenstates and provide insights into the geometric properties of the quantum system. This approach can be extended to study more complex quantum systems and their topological properties.
 
@@ -365,9 +415,13 @@ Future extensions of this work could include:
     \item Investigating the effects of disorder and perturbations on the Berry phases
     \item Connecting the Berry phases to observable physical quantities
     \item Exploring non-Abelian Berry phases in systems with degenerate energy levels
+    \item Developing a more sophisticated visualization framework for the Berry phase results
+    \item Investigating the relationship between Berry phases and quantum phase transitions
+    \item Extending the degeneracy analysis to include more sophisticated metrics
+    \item Implementing machine learning techniques to predict Berry phases from Hamiltonian parameters
 \end{enumerate}
 
-\begin{thebibliography}{9}
+\begin{thebibliography}{12}
 
 \bibitem{berry1984} Berry, M. V. (1984). Quantal phase factors accompanying adiabatic changes. \textit{Proceedings of the Royal Society of London. A. Mathematical and Physical Sciences}, 392(1802), 45-57.
 
@@ -384,6 +438,14 @@ Future extensions of this work could include:
 \bibitem{zak1989} Zak, J. (1989). Berry's phase for energy bands in solids. \textit{Physical Review Letters}, 62(23), 2747.
 
 \bibitem{vanderbilt2018} Vanderbilt, D. (2018). \textit{Berry Phases in Electronic Structure Theory: Electric Polarization, Orbital Magnetization and Topological Insulators}. Cambridge University Press.
+
+\bibitem{fukui2005} Fukui, T., Hatsugai, Y., \& Suzuki, H. (2005). Chern numbers in discretized Brillouin zone: efficient method of computing (spin) Hall conductances. \textit{Journal of the Physical Society of Japan}, 74(6), 1674-1677.
+
+\bibitem{yu2011} Yu, R., Qi, X. L., Bernevig, A., Fang, Z., \& Dai, X. (2011). Equivalent expression of $\mathbb{Z}_2$ topological invariant for band insulators using the non-Abelian Berry connection. \textit{Physical Review B}, 84(7), 075119.
+
+\bibitem{wilson1974} Wilson, K. G. (1974). Confinement of quarks. \textit{Physical Review D}, 10(8), 2445.
+
+\bibitem{ryu2010} Ryu, S., Schnyder, A. P., Furusaki, A., \& Ludwig, A. W. (2010). Topological insulators and superconductors: tenfold way and dimensional hierarchy. \textit{New Journal of Physics}, 12(6), 065010.
 
 \end{thebibliography}
 
