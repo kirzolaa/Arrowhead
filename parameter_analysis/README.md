@@ -11,7 +11,25 @@ This directory contains a systematic analysis of parameter variations for the Ar
 
 ## Optimal Parameters
 
-### Best Configuration (1 parity flip in eigenstate 3)
+### Best Configuration (0 parity flips in eigenstate 3)
+
+- x_shift: 22.5
+- y_shift: 547.7222222222222
+- d_param: 0.005
+- omega: 0.025
+- a_vx: 0.018
+- a_va: 0.42
+
+### Alternative Zero-Flip Configuration
+
+- x_shift: 22.5
+- y_shift: 542.1666666666666
+- d_param: 0.005
+- omega: 0.025
+- a_vx: 0.018
+- a_va: 0.42
+
+### Previous Good Configuration (1 parity flip in eigenstate 3)
 
 - x_shift: 22.5
 - y_shift: 525.5
@@ -20,7 +38,7 @@ This directory contains a systematic analysis of parameter variations for the Ar
 - a_vx: 0.018
 - a_va: 0.42
 
-### Previous Good Configuration (2 parity flips in eigenstate 3)
+### Initial Configuration (2 parity flips in eigenstate 3)
 
 - x_shift: 25.0
 - y_shift: 550.5

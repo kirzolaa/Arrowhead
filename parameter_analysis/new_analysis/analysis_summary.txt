@@ -1,0 +1,36 @@
+Focused Parameter Analysis Summary
+================================
+
+Fixed Parameters:
+  x_shift: 22.5
+  d_param: 0.005
+  omega: 0.025
+  a_vx: 0.018
+  a_va: 0.42
+  theta_step: 1
+
+Results (sorted by eigenstate 3 parity flips):
+--------------------------------------------------------------------------------
+y_shift    E0 flips   E1 flips   E2 flips   E3 flips  
+--------------------------------------------------------------------------------
+525.50     N/A        N/A        N/A        N/A       
+528.28     N/A        N/A        N/A        N/A       
+531.06     N/A        N/A        N/A        N/A       
+533.83     N/A        N/A        N/A        N/A       
+536.61     N/A        N/A        N/A        N/A       
+539.39     N/A        N/A        N/A        N/A       
+542.17     N/A        N/A        N/A        N/A       
+544.94     N/A        N/A        N/A        N/A       
+547.72     N/A        N/A        N/A        N/A       
+550.50     N/A        N/A        N/A        N/A       
+
+
+Best Configuration:
+  x_shift: 22.5
+  y_shift: 525.5
+  Eigenstate 0 flips: None
+  Eigenstate 1 flips: None
+  Eigenstate 2 flips: None
+  Eigenstate 3 flips: None
+  Results file: parameter_analysis/new_analysis/results/improved_berry_phase_summary_x22.5_y525.5_d0.005_w0.025_avx0.018_ava0.42_step1.txt
+  Plots directory: parameter_analysis/new_analysis/plots/plots_x22.5_y525.5_d0.005_w0.025_avx0.018_ava0.42_step1

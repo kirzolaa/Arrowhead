@@ -106,7 +106,7 @@ class ArrowheadMatrix4x4:
         """
         a = 0.2  # Modified curvature parameter for VA
         x_shift = 22.5  # Modified x-shift value
-        y_shift = 525.5  # Modified y-shift value
+        y_shift = 547.7222222222222  # Modified y-shift value
         c = 0  # Same vertical shift as VX
         
         # Create a shifted version of VX

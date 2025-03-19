@@ -1,0 +1,11 @@
+Optimal Configuration Summary (0 Parity Flips in Eigenstate 3)
+==========================================================
+
+Parameters:
+  x_shift: 22.5
+  y_shift: 547.7222222222222
+  d_param: 0.005
+  omega: 0.025
+  a_vx: 0.018
+  a_va: 0.42
+
