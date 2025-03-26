@@ -1,5 +1,6 @@
 # Arrowhead Matrix and Berry Phase Calculation
-
+# Important note: This project is deprecated
+# use only the generalized folder if cloning to generate the vectors:D
 This project implements and optimizes Arrowhead matrix generation and Berry phase calculations for quantum systems.
 
 ## Project Structure
